@@ -13,7 +13,7 @@ public class CalculateTest {
     }
 
     @Test
-    public void whenSetNullInEchoReturnTwoSpaces() {//неправильный тест
+    public void whenSetNullInEchoReturnTwoSpaces() {
         Calculate cl = new Calculate();
         String result = cl.echo(null);
         assertThat(result, is("null null null"));
