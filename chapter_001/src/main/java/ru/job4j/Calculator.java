@@ -4,18 +4,39 @@ package ru.job4j;
  * @version 1
  */
 public class Calculator {
-    /**The field result (result is added after method add() will done).
+    /**The field result (result is added after methods will done).
     */
     private double result;
-    /**The main method.
+    /**
     *@param first is number
     *@param second is number
     */
     public void add(double first, double second) {
         this.result = first + second;
     }
-    /**The method is returned result after method add.
-    * @return result
+    /**
+    *@param first is number
+    *@param second is number
+    */
+    public void substruct(double first, double second) {
+        this.result = first - second;
+    }
+    /**
+    *@param first is number
+    *@param second is number
+    */
+    public void div(double first, double second) {
+        this.result = first / second;
+    }
+    /**
+    *@param first is number
+    *@param second is number
+    */
+    public void multiple(double first, double second) {
+        this.result = first * second;
+    }
+    /**The method is returned result after methods.
+    *@return result
     */
     public double getResult() {
         return this.result;

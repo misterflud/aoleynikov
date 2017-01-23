@@ -10,29 +10,23 @@ import static org.junit.Assert.assertThat;
  */
 public class CalculatorTest {
     /**
-     * Test1 add.
+     * Test add.
      */
     @Test
     public void whenSetFirst1AndSecond1ThenReturnResult1() {
         Calculator cl = new Calculator();
         final double first1 = 5;
         final double second1 = 5;
-        final double ten = 10;
+        final double fifteen = 15;
         cl.add(first1, second1);
-        double result = cl.getResult();
-        assertThat(result, is(ten));
-    }
-    /**
-     * Test2 add.
-     */
-    @Test
-    public void whenSetFirst2AndSecond2ThenReturnResult2() {
-        Calculator cl = new Calculator();
-        final double first2 = 4;
-        final double second2 = 4;
-        final double eight = 8;
-        cl.add(first2, second2);
-        double result = cl.getResult();
-        assertThat(result, is(eight));
+        double add = cl.getResult();
+        cl.div(add, second1);
+        double div = cl.getResult();
+        cl.substruct(second1, div);
+        double substruct = cl.getResult();
+        cl.multiple(substruct, second1);
+        double multiple = cl.getResult();
+        double result = multiple;
+        assertThat(result, is(fifteen));
     }
 }

@@ -27,7 +27,6 @@ public class TriangleTest {
         Point point3 = new Point(x3, y3);
         Triangle triangle = new Triangle(point1, point2, point3);
         double result = triangle.area();
-        System.out.println(result);
         assertThat(result, closeTo(right, magicNumber));
     }
 }
