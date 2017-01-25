@@ -31,9 +31,9 @@ public class Triangle {
      *@return result
      */
     public double area() {
-        double l1 = a.distanceTo(b);
-        double l2 = a.distanceTo(c);
-        double l3 = c.distanceTo(b);
+        double l1 = this.a.distanceTo(b);
+        double l2 = this.a.distanceTo(c);
+        double l3 = this.c.distanceTo(b);
         double p = (l1 + l2 + l3) / 2;
         double result;
         if ((l1 + l2 < l3) && (l2 + l3 < l1) && (l1 + l3 < l2)) {

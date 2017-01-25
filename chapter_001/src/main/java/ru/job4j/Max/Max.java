@@ -11,7 +11,7 @@ public class Max {
      *@return int
      */
     public int max(int first, int second) {
-        return (first < second) ? first : second;
+        return (first > second) ? first : second;
     }
     /**
      *@param first first
@@ -20,6 +20,6 @@ public class Max {
      *@return int
      */
     public int max(int first, int second, int third) {
-        return (third > max(first, second)) ? third : max(first, second);
+        return max(max(first, second), third);
     }
 }
