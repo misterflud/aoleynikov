@@ -1,4 +1,4 @@
-package ru.job4j.inheritance;
+package ru.job4j.models;
 
 /**It's counter items, created like singleton pattern.
  *@author Anton Oleynikov

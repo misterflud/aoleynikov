@@ -1,4 +1,4 @@
-package ru.job4j.inheritance;
+package ru.job4j.models;
 
 /**It's parent class.
  *@author Anton Oleynikov
@@ -30,5 +30,25 @@ public class Item {
      */
     public void printItem() {
 
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    public int getCount() {
+        return this.count;
+    }
+
+    public String getComment() {
+        return this.comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

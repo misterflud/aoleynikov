@@ -1,4 +1,4 @@
-package ru.job4j.inheritance;
+package ru.job4j.models;
 
 /**It's Bread.
  *@author Anton Oleynikov
@@ -21,6 +21,6 @@ public class Bread extends Item {
      */
     @Override
     public void printItem() {
-        System.out.println("Product: " + this.name + ". How mush you are going to buy: " + this.numbers + ". How much does it cost:" + this.price * this.numbers + "$. Number you item:" + this.count + ". WARNING!! Comment:" + this.comment);
+        System.out.println("Product: " + this.name + ". How much you are going to buy: " + this.numbers + ". How much does it cost:" + this.price * this.numbers + "$. Number you item:" + this.count + ". WARNING!! Comment:" + this.comment);
     }
 }
