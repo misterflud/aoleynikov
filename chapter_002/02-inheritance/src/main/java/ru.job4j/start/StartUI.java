@@ -6,7 +6,7 @@ package ru.job4j.start;
  *@version 1
  */
 public class StartUI {
-    private Input input;
+    private ru.job4j.start.Input input;
 
     public StartUI(Input input) {
         this.input = input;
