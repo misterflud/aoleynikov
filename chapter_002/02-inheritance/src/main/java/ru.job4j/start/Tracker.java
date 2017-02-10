@@ -1,92 +1,140 @@
 package ru.job4j.start;
 
-import ru.job4j.models.Bread;
 import ru.job4j.models.Item;
-import ru.job4j.models.Milk;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.Random;
 
-/**It's main class for action something; Methods use from StartUI.
+/**It's main class for action something.
  *@author Anton Oleynikov
  *@version 1
  */
 public class Tracker {
     /**
-     *@param items items
+     * Items length.
      */
-    private ArrayList<Item> items = new ArrayList<>();
+    private final int itemLength = 10;
     /**
-     *@param tracker tracker
+     * Array-storage for requests.
      */
-    public static Tracker tracker = new Tracker();
+    private Item[] items = new Item[itemLength];
     /**
-     *@param s s
+     * Index of request.
      */
-    public void add(String s) {
-        String[] separator = s.split(" ");
-        if (separator[0].equals("Milk")) {
-            tracker.items.add(new Milk(Integer.parseInt(separator[1])));
-        } else {
-            tracker.items.add(new Bread(Integer.parseInt(separator[1])));
-        }
+    private int position = 0;
+    /**
+     * Random.
+     */
+    private static final Random RN = new Random();
+
+    /**
+     * Add request to storage.
+     *
+     * @param item request.
+     * @return ref to request.
+     */
+    public Item add(Item item) {
+        item.setId(String.valueOf(System.currentTimeMillis() + RN.nextInt()));
+        this.items[position++] = item;
+        return item;
     }
+
     /**
-     *@param Number Number
+     *
+     * @param newItem newItem.
+     * @param oldId oldId.
      */
-    public void del(int Number) {
-        for (int i = 0; i < tracker.items.size(); i++) {
-            if (tracker.items.get(i).getCount() == Number) {
-                tracker.items.remove(i);
+    public void update(Item newItem, String oldId) {
+        for (Item item : this.items) {
+            if (item != null && item.getId().equals(oldId)) {
+                item.setName(newItem.getName());
+                item.setDescription(newItem.getDescription());
                 break;
             }
         }
     }
+
     /**
-     *@param s s
+     *
+     * @param item item.
      */
-    public void change(String s) {
-        String[] separator = s.split(" ");
-        for (int i = 0; i < tracker.items.size(); i++) {
-            if (tracker.items.get(i).getCount() == Integer.parseInt(separator[0])) {
-                if (separator[1].equals("Milk")) {
-                    tracker.items.set(i, new Milk(Integer.parseInt(separator[2])));
-                } else {
-                    tracker.items.set(i, new Bread(Integer.parseInt(separator[2])));
-                }
+    public void delete(Item item) {
+        int index = -1;
+        for (int i = 0; i <= this.position; i++) {
+            if (this.items[i] != null && this.items[i].getId().equals(item.getId())) {
+                index = i;
                 break;
             }
         }
+        this.items[index] = null;
+        this.position--;
     }
     /**
-     *Just print.
+     * Print all requests.
+     *
+     * @return all requests.
      */
-    public void printAll() {
-        for (Item it : tracker.items) {
-            it.printItem();
+    public Item[] findAll() {
+        Item[] result = new Item[this.position];
+        for (int i = 0; i != this.position; i++) {
+            result[i] = this.items[i];
         }
+        return result;
     }
+
     /**
-     *@param s s
+     *
+     * @param key key.
+     * @return Item[];
      */
-    public void filter(String s) {
-        for (Item it : tracker.items) {
-            if (it.getName().equals(s)) {
-                it.printItem();
+    public Item[] filterByName(String key) {
+        int count = 0;
+        for (Item item : this.items) {
+            if (item != null && item.getName().equals(key)) {
+                count++;
             }
         }
+
+        int count2 = 0;
+        Item[] result = new Item[count];
+        for (Item item : this.items) {
+            if (item != null && item.getName().equals(key)) {
+                result[count2++] = item;
+            }
+        }
+        return result;
     }
     /**
-     *@param s s
+     *
+     * @param id id.
+     * @return Item.
      */
-    public void addComment(String s) {
-        String[] separator = s.split(" ");
-        for (int i = 0; i < tracker.items.size(); i++) {
-            if (tracker.items.get(i).getCount() == Integer.parseInt(separator[0])) {
-                tracker.items.get(i).setComment(s.substring(2));
+    protected Item findById(String id) {
+        Item result = null;
+        for (Item item : this.items) {
+            if (item != null && item.getId().equals(id)) {
+                result = item;
                 break;
             }
         }
+        return result;
     }
+
+    /**
+     *
+     * @param items items.
+     */
+    public void print(Item[] items) {
+        for (Item item : items) {
+            System.out.println(item.getName() + " " + item.getDescription() + " " + item.getId());
+        }
+    }
+
+    /**
+     *
+     * @param item item.
+     */
+    public void print(Item item) {
+        System.out.println(item.getName() + " " + item.getDescription() + " " + item.getId());
+    }
+
 }

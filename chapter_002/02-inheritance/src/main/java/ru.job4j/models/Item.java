@@ -8,47 +8,99 @@ public class Item {
     /**
      *@param name name
      */
-    protected String name;
+    private String name;
     /**
      *@param price price
      */
-    protected int price;
+    private int count;
     /**
-     *@param numbers numbers
+     * Request description.
      */
-    protected int numbers;
+    private String description;
     /**
-     *@param count count
+     *@param comments comment
      */
-    protected int count;
+    private String[] comments;
     /**
-     *@param comment comment
+     * Request create date.
      */
-    protected String comment;
+    private long create;
     /**
-     *Method for children classes.
+     * Unique id.
      */
-    public void printItem() {
+    private String id;
 
+    /**
+     * Class constructor.
+     *
+     * @param name        name bug.
+     * @param description short description.
+     */
+    public Item(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
+    /**
+     * Constructor.
+     */
+    public Item() {
+
+    }
+    /**
+     * @return name.
+     */
     public String getName() {
-        return this.name;
+        return name;
     }
 
-    public int getPrice() {
-        return this.price;
+    /**
+     * @param name set.
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getCount() {
-        return this.count;
+    /**
+     * @return description.
+     */
+    public String getDescription() {
+        return description;
     }
 
-    public String getComment() {
-        return this.comment;
+    /**
+     * @param description set.
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    /**
+     * @return create date.
+     */
+    public long getCreate() {
+        return create;
     }
+
+    /**
+     * @param create set.
+     */
+    public void setCreate(long create) {
+        this.create = create;
+    }
+
+    /**
+     * @return id.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param id set id.
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

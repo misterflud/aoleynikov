@@ -5,13 +5,40 @@ package ru.job4j.start;
  *@version 1
  */
 public class StubInput implements Input {
+    /**
+     * Array.
+     */
     private String[] answers;
-    private int position = 0;
 
+    /**
+     * Iterator.
+     */
+    private int position = 0;
+    /**
+     * Constructor.
+     * @param answers array.
+     */
     public StubInput(String[] answers) {
         this.answers = answers;
     }
+
+    /**
+     *
+     * @param question question.
+     * @return String
+     */
     public String ask(String question) {
         return answers[position++];
+    }
+
+    /**
+     *
+     * @param question question.
+     * @param range range.
+     * @return int
+     */
+    public int ask(String question, int[] range) {
+
+        return Integer.valueOf(this.answers[position++]);
     }
 }
