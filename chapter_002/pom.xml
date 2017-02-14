@@ -11,6 +11,8 @@
 
     <modules>
         <module>02-inheritance</module>
+        <module>chess</module>
+        <module>professions</module>
     </modules>
 
 </project>
