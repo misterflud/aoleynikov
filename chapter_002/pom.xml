@@ -13,6 +13,7 @@
         <module>02-inheritance</module>
         <module>chess</module>
         <module>professions</module>
+        <module>shapes</module>
     </modules>
 
 </project>
