@@ -97,24 +97,18 @@ public class Board {
      */
     public void moveRight(int vertical1, int horizontal1, int vertical2, int horizontal2) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         Figure figureBegin;
-        try { //изменить
-            figureBegin = this.cells[vertical1][horizontal1].getFigure();
-        } catch (NullPointerException e) {
+        if (this.cells[vertical1][horizontal1].getFigure() == null) {// ИСПРАВИЛ
             throw new FigureNotFoundException();
+        } else {
+            figureBegin = this.cells[vertical1][horizontal1].getFigure();
         }
-        //System.out.println(this.cells[vertical1][horizontal1].figure.getName() + " " +  this.cells[vertical1][horizontal1].horizontal + " " + this.cells[vertical1][horizontal1].vertical);
         Cell[] way = figureBegin.way(this.cells[vertical1][horizontal1], this.cells[vertical2][horizontal2], this);
         for (int i = 1; i < way.length; i++) {
-            try {
-                if (!way[i].getFigure().equals(null)) {
-                    throw new OccupiedWayException();
-                }
-            } catch (NullPointerException e) {
-
+            if (way[i].getFigure() != null) { // ИСПРАВИЛ
+                throw new OccupiedWayException();
             }
         }
         way[way.length - 1].setFigure(figureBegin);
-        //System.out.println(way[way.length - 1].figure.getName() + " " + way[way.length - 1].vertical + " " + way[way.length - 1].horizontal);
         way[0].setFigure(null);
     }
 }

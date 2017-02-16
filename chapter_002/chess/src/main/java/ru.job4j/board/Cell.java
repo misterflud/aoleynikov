@@ -30,12 +30,28 @@ public class Cell {
      * Print Cell or Figure.
      */
     public void print() {
+        /**
         if (figure instanceof Figure) {
             System.out.print(figure.getName() + " ");
         } else {
             System.out.print("*" + " ");
         }
+         */
+        /**
+        try { // исправил 3й пункт. По моему это не лучшее решение))
+            System.out.print(figure.getName() + " ");
+        } catch (NullPointerException n) {
+            System.out.print("*" + " ");
+        }
+         */
+        if (figure != null) { // все, я понял что ты имел ввиду
+            System.out.print(figure.getName() + " ");
+        } else {
+            System.out.print("*" + " ");
+        }
     }
+
+
     /**Get horizontal.
      * @return  horizontal
      */
