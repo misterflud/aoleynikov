@@ -1,0 +1,16 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>chapter_003</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+    <parent>
+        <groupId>ru.oleynikov</groupId>
+        <artifactId>aoleynikov</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <modules>
+        <module>streems</module>
+    </modules>
+
+</project>
