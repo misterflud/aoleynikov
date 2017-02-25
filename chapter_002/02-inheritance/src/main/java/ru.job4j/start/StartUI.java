@@ -1,4 +1,5 @@
 package ru.job4j.start;
+import ru.job4j.models.Item;
 import ru.job4j.models.Task;
 
 /**StartUI -- It is for manage the program.
@@ -37,8 +38,8 @@ public class StartUI {
      */
     public void init() throws Exception {
         while (true) {
-            //System.out.printf("1 Add %n 2 update %n 3 delete %n 4 findAll %n 5 filterByName %n 6 findById %n 7 End");
-            System.out.printf("1 Add %n 2 update %n 3 delete %n 7 End");
+            System.out.printf("1 Add %n 2 update %n 3 delete %n 4 findAll %n 5 filterByName %n 6 findById %n 7 End");
+            //System.out.printf("1 Add %n 2 update %n 3 delete %n 7 End");
             String answer = input.ask("Write number ");
             if (answer.equals("1")) {
                 this.tracker.add(new Task(input.ask("enter the task's name: "), input.ask("enter description: ")));
@@ -46,17 +47,34 @@ public class StartUI {
                 this.tracker.update(new Task(input.ask("enter the task's name: "), input.ask("enter description: ")), input.ask("write id: "));
             } else if (answer.equals("3")) {
                 this.tracker.delete(this.tracker.findById(input.ask("write id: ")));
-             /**
+
             } else if (answer.equals("4")) {
-                this.tracker.print(this.tracker.findAll());
+                print(this.tracker.findAll());
             } else if (answer.equals("5")) {
-                this.tracker.print(this.tracker.filterByName(input.ask("write name: ")));
+                print(this.tracker.filterByName(input.ask("write name: ")));
             } else if (answer.equals("6")) {
-                this.tracker.print(this.tracker.findById(input.ask("write id: ")));
-             */
+                print(this.tracker.findById(input.ask("write id: ")));
+
             } else if (answer.equals("7")) {
                 break;
             }
         }
+    }
+    /**
+     *
+     * @param items items.
+     */
+    public void print(Item[] items) {
+        for (Item item : items) {
+            System.out.println(item.getName() + " " + item.getDescription() + " " + item.getId());
+        }
+    }
+
+    /**
+     *
+     * @param item item.
+     */
+    public void print(Item item) {
+        System.out.println(item.getName() + " " + item.getDescription() + " " + item.getId());
     }
 }
