@@ -23,7 +23,7 @@ public class Sort {
     /**
      * sizeOfArray.
      */
-    private final int sizeOfArray = 10; //размер массива можно менять
+    private final int sizeOfArray = 9; //размер массива можно менять, сейчас максимум 10
     /**
      * pathFile1.
      */
@@ -57,6 +57,7 @@ public class Sort {
                 break;
             }
             if (lines.size() == sizeOfArray) { //размер выделим в 10 строк
+                lines.add(line);
                 sortArray(lines);
                 lines.clear();
             } else {
@@ -111,9 +112,9 @@ public class Sort {
         int i = 0; //счетчик прочитанных строк из массива
         s = read.readLine();
         while (true) {
-            if (i == sizeOfArray && s == null) { //дошли до конца массива и в файле чтения больше нет строк
+            if (i == lines.size() && s == null) { //дошли до конца массива и в файле чтения больше нет строк
                 break;
-            } else if (i == sizeOfArray) { //дошли до конца массива поэтому добавляем оставшиеся строки из файла чтения
+            } else if (i == lines.size()) { //дошли до конца массива поэтому добавляем оставшиеся строки из файла чтения
                 write.writeBytes(s + "\r\n");
                 s = read.readLine();
             } else if (s == null) { //дошли до конца файла чтения поэтому добавляем оставшиеся строки из массива
