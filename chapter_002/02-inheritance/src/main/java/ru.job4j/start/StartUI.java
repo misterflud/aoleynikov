@@ -17,6 +17,34 @@ public class StartUI {
      */
     private Tracker tracker;
     /**
+     * one.
+     */
+    static final String one = "1";
+    /**
+     * two.
+     */
+    static final String two = "2";
+    /**
+     * three.
+     */
+    static final String three = "3";
+    /**
+     * four.
+     */
+    static final String four = "4";
+    /**
+     * five.
+     */
+    static final String five = "5";
+    /**
+     * six.
+     */
+    static final String six = "6";
+    /**
+     * seven.
+     */
+    static final String seven = "7";
+    /**
      *Constructor.
      * @param input input
      * @param tracker tracker
@@ -37,25 +65,26 @@ public class StartUI {
      *@exception Exception Exception
      */
     public void init() throws Exception {
+
         while (true) {
             System.out.printf("1 Add %n 2 update %n 3 delete %n 4 findAll %n 5 filterByName %n 6 findById %n 7 End");
             //System.out.printf("1 Add %n 2 update %n 3 delete %n 7 End");
             String answer = input.ask("Write number ");
-            if (answer.equals("1")) {
+            if (one.equals(answer)) {
                 this.tracker.add(new Task(input.ask("enter the task's name: "), input.ask("enter description: ")));
-            } else if (answer.equals("2")) {
+            } else if (two.equals(answer)) {
                 this.tracker.update(new Task(input.ask("enter the task's name: "), input.ask("enter description: ")), input.ask("write id: "));
-            } else if (answer.equals("3")) {
+            } else if (three.equals(answer)) {
                 this.tracker.delete(this.tracker.findById(input.ask("write id: ")));
 
-            } else if (answer.equals("4")) {
+            } else if (four.equals(answer)) {
                 print(this.tracker.findAll());
-            } else if (answer.equals("5")) {
+            } else if (five.equals(answer)) {
                 print(this.tracker.filterByName(input.ask("write name: ")));
-            } else if (answer.equals("6")) {
+            } else if (six.equals(answer)) {
                 print(this.tracker.findById(input.ask("write id: ")));
 
-            } else if (answer.equals("7")) {
+            } else if (seven.equals(answer)) {
                 break;
             }
         }
