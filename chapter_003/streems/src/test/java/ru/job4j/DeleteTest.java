@@ -17,9 +17,9 @@ public class DeleteTest {
      */
     @Test
     public void whenSetStreamThenDeleteWorld() throws Exception {
-        final String s = "one\r\ntwo\nthree\nfour\nfive\nsix\nseven\neight\nnine\nten\n";
+        final String s = "one\r\ntwo sada\nthree\nasdad four\nfive\nsix\nseven\neight\nnine\nten\n";
         final String[] words = {"two", "four"};
-        final String expected = "one\ncensor\nthree\ncensor\nfive\nsix\nseven\neight\nnine\nten\n";
+        final String expected = "one\ncensor sada\nthree\nasdad censor\nfive\nsix\nseven\neight\nnine\nten\n";
         byte[] bytes1 = s.getBytes();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes1);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
