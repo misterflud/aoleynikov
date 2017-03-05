@@ -26,15 +26,23 @@ public class Delete {
             ww += ss;
         }
         while ((line = buf.readLine()) != null) {
-            if (ww.contains(line)) {
-                //write.write(line + "\n");
-                out.write("censor".getBytes());
-                out.write("\n".getBytes());
-            } else {
-                //write.write("censor" + "\n");
-                out.write(line.getBytes());
-                out.write("\n".getBytes());
+            String[] word = line.split(" ");
+            String line2 = "";
+            for (int i = 0; i < word.length; i++) {
+                if (ww.contains(word[i])) {
+                    word[i] = "censor";
+                }
             }
+            if (word.length == 1) {
+                line2 = word[0];
+            } else {
+                for (int i = 0; i < word.length - 1; i++) {
+                    line2 += word[i] + " ";
+                }
+                line2 += word[word.length - 1];
+            }
+            out.write((line2 + "\n").getBytes());
+            //write.write(line2 + "\n");
         }
     }
 }
