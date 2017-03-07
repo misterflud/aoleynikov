@@ -21,7 +21,7 @@ public class Zip {
     /**
      * all files.
      */
-    private static ArrayList<File> collectFiles = new ArrayList<>();
+    private ArrayList<File> collectFiles = new ArrayList<>();
 
     /**
      *
@@ -29,6 +29,7 @@ public class Zip {
      * @throws Exception Exception
      */
     public static void main(String[] args) throws Exception { //static
+        Zip zip = new Zip();
         String path = "";
         String extensionFiles = "";
         String nameZip = "";
@@ -45,10 +46,10 @@ public class Zip {
         path.replace("\\", "/");
 
         File[] files = new File(path).listFiles();
-        getFiles(files);
-        selectNecessaryFiles(extensionFiles2);
+        zip.getFiles(files);
+        zip.selectNecessaryFiles(extensionFiles2);
         ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(path + nameZip));
-        for (File file : collectFiles) { //пробегаем по всем файлам из списка и записываем в архив, НО путь получается от C, как удалить лишние папки -- неясно
+        for (File file : zip.collectFiles) { //пробегаем по всем файлам из списка и записываем в архив, НО путь получается от C, как удалить лишние папки -- неясно
             FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath());
             ZipEntry entry = new ZipEntry(file.getAbsolutePath());
             zipOutputStream.putNextEntry(entry);
@@ -65,7 +66,7 @@ public class Zip {
      * @param files files
      * @throws Exception Exception
      */
-    public static void getFiles(File[] files) throws Exception { // получение всех файлов из дериктории
+    public void getFiles(File[] files) throws Exception { // получение всех файлов из дериктории
         for (File file : files) {
             if (file.isDirectory()) {
                 //System.out.println("Directory: " + file.getCanonicalPath() + " "  + file.getName());
@@ -81,7 +82,7 @@ public class Zip {
      *
      * @param extensionFiles2 extensionFiles2
      */
-    public static void selectNecessaryFiles(String[] extensionFiles2) { //удаление из списка дериктории -- файлов с ненужным расширением
+    public void selectNecessaryFiles(String[] extensionFiles2) { //удаление из списка дериктории -- файлов с ненужным расширением
         boolean flag;
         for (int i = 0; i < collectFiles.size(); i++) {
             String[] afterPoint1 = collectFiles.get(i).getName().split("\\."); //получение расширения
