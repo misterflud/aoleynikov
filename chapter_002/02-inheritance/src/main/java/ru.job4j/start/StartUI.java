@@ -65,7 +65,15 @@ public class StartUI {
      *@exception Exception Exception
      */
     public void init() throws Exception {
-
+        Tracker tracker = new Tracker();
+        MenuTracker menu = new MenuTracker(this.input, tracker);
+        menu.fillAction();
+        do {
+            menu.show();
+            int key = Integer.parseInt(input.ask("Select: "));
+            menu.select(key);
+        } while (!"y".equals(this.input.ask("Exit?(y):")));
+        /**
         while (true) {
             System.out.printf("1 Add %n 2 update %n 3 delete %n 4 findAll %n 5 filterByName %n 6 findById %n 7 End");
             //System.out.printf("1 Add %n 2 update %n 3 delete %n 7 End");
@@ -76,18 +84,17 @@ public class StartUI {
                 this.tracker.update(new Task(input.ask("enter the task's name: "), input.ask("enter description: ")), input.ask("write id: "));
             } else if (three.equals(answer)) {
                 this.tracker.delete(this.tracker.findById(input.ask("write id: ")));
-
             } else if (four.equals(answer)) {
                 print(this.tracker.findAll());
             } else if (five.equals(answer)) {
                 print(this.tracker.filterByName(input.ask("write name: ")));
             } else if (six.equals(answer)) {
                 print(this.tracker.findById(input.ask("write id: ")));
-
             } else if (seven.equals(answer)) {
                 break;
             }
         }
+        */
     }
     /**
      *

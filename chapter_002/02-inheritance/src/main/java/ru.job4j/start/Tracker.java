@@ -121,20 +121,13 @@ public class Tracker {
 
     /**
      *
-     * @param items items.
-
-    public void print(Item[] items) {
-        for (Item item : items) {
-            System.out.println(item.getName() + " " + item.getDescription() + " " + item.getId());
+     * @return Item[].
+     */
+    public Item[] getAll() {
+        Item[] result = new Item[this.position];
+        for (int index = 0; index != this.position; index++) {
+            result[index] = this.items[index];
         }
+        return result;
     }
-
-    /**
-     *
-     * @param item item.
-
-    public void print(Item item) {
-        System.out.println(item.getName() + " " + item.getDescription() + " " + item.getId());
-    }
-    */
 }
