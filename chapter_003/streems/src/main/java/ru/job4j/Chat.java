@@ -1,6 +1,10 @@
 package ru.job4j;
 
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
@@ -43,7 +47,6 @@ public class Chat {
      */
     public void chatting() throws Exception {
         String s;
-
         sizeLine = paramsOfFile(); //хранятся кол-во слов в строках
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             while (!(s = reader.readLine()).equals("закончить")) {
@@ -84,11 +87,12 @@ public class Chat {
                 s = readerFromFile.readLine();
             }
             String[] words = s.split(" ");
-            String fraze = "";
+            StringBuilder fraze = new StringBuilder();
             for (int i = randomStartWord; i < randomStartWord + randomCountWords; i++) {
-                fraze += words[i] + " ";
+                fraze.append(words[i]);
+                fraze.append(" ");
             }
-            System.out.println(fraze);
+            System.out.println(fraze.toString());
         }
     }
 
