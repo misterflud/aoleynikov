@@ -65,7 +65,7 @@ public class MenuTracker {
      */
     public void print(Item[] items) {
         for (Item item : items) {
-            System.out.println(item.getName() + " " + item.getDescription() + " " + item.getId());
+            System.out.println(String.format("%s %s %s", item.getName(), item.getDescription(), item.getId()));
         }
     }
 
