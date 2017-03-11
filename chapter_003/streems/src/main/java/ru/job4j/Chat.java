@@ -1,9 +1,8 @@
 package ru.job4j;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Random;
 
 /**
@@ -14,6 +13,7 @@ public class Chat {
      * Size of lines in txt file.
      */
     private ArrayList<Integer> sizeLine;
+
     /**
      *
      * @param args args
@@ -23,21 +23,37 @@ public class Chat {
         Chat chat = new Chat();
         chat.chatting();
     }
+
+    /**
+     *
+     * @return path
+     * @throws Exception Exception
+     */
+    public String getFile() throws Exception {
+        final Properties prs = new Properties();
+        ClassLoader load = Chat.class.getClassLoader(); // иснтересное решение получение пути вначале к классу, а потом через него к properties
+        try (InputStream inputStream = load.getResourceAsStream("config.properties")) {
+           prs.load(inputStream);
+        }
+        return prs.getProperty("file1");
+    }
     /**
      *
      * @throws Exception Exception
      */
     public void chatting() throws Exception {
         String s;
-        sizeLine = paramsOfFile(); //хранятся кол-во слов в строках
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        while (!(s = reader.readLine()).equals("закончить")) {
-            if (s.equals("стоп")) {
-                while (!(reader.readLine()).equals("продолжить")) {
 
+        sizeLine = paramsOfFile(); //хранятся кол-во слов в строках
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            while (!(s = reader.readLine()).equals("закончить")) {
+                if ("стоп".equals(s)) {
+                    while (!(reader.readLine()).equals("продолжить")) {
+
+                    }
+                } else {
+                    answer();
                 }
-            } else {
-                answer();
             }
         }
     }
@@ -53,22 +69,27 @@ public class Chat {
         int randomStartWord; //откуда начало фразы
         int randomCountWords;
         final int ten = 10;
-        while ((randomCountWords = random.nextInt(ten) + 1) + (randomStartWord = random.nextInt(sizeLine.get(randomLine))) > sizeLine.get(randomLine) - 1) { //чтобы не вышли за пределы длины строки
 
+        randomCountWords = random.nextInt(ten) + 1;
+        randomStartWord = random.nextInt(sizeLine.get(randomLine));
+        while (randomCountWords + randomStartWord > sizeLine.get(randomLine) - 1) { //Мы рандомно выбираем начало фразы и ее длину, НО проблема может быть в том что длина (рандомной строки + начало строки) превышает длину существующей строки в файле. Этот блок кода предотвращает это.
+            randomCountWords = random.nextInt(ten) + 1;
+            randomStartWord = random.nextInt(sizeLine.get(randomLine));
         }
-        BufferedReader readerFromFile = new BufferedReader(new FileReader("C:/java/for_tests/Answer.txt"));
-        int count = 0;
-        while (count < randomLine + 1) {
-            count++;
-            s = readerFromFile.readLine();
+
+        try (BufferedReader readerFromFile = new BufferedReader(new FileReader(getFile()))) {
+            int count = 0;
+            while (count < randomLine + 1) {
+                count++;
+                s = readerFromFile.readLine();
+            }
+            String[] words = s.split(" ");
+            String fraze = "";
+            for (int i = randomStartWord; i < randomStartWord + randomCountWords; i++) {
+                fraze += words[i] + " ";
+            }
+            System.out.println(fraze);
         }
-        readerFromFile.close();
-        String[] words = s.split(" ");
-        String fraze = "";
-        for (int i = randomStartWord; i < randomStartWord + randomCountWords; i++) {
-            fraze += words[i] + " ";
-        }
-        System.out.println(fraze);
     }
 
     /**
@@ -77,13 +98,13 @@ public class Chat {
      * @throws Exception Exception
      */
     public ArrayList<Integer> paramsOfFile() throws Exception { //чтобы 100 раз не загружать одно и тоже
-        BufferedReader readerFromFile = new BufferedReader(new FileReader("C:/java/for_tests/Answer.txt"));
-        String s;
-        ArrayList<Integer> sizeLine2 = new ArrayList<>(); //храняться кол-во слов в строках
-        while ((s = readerFromFile.readLine()) != null) {
-            sizeLine2.add(s.split(" ").length);
+        try (BufferedReader readerFromFile = new BufferedReader(new FileReader(getFile()))) {
+            String s;
+            ArrayList<Integer> sizeLine2 = new ArrayList<>(); //храняться кол-во слов в строках
+            while ((s = readerFromFile.readLine()) != null) {
+                sizeLine2.add(s.split(" ").length);
+            }
+            return sizeLine2;
         }
-        readerFromFile.close();
-        return sizeLine2;
     }
 }
