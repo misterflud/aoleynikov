@@ -47,15 +47,14 @@ public class Chat {
      */
     public void chatting() throws Exception {
         String s;
-        sizeLine = paramsOfFile(); //хранятся кол-во слов в строках
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            while (!(s = reader.readLine()).equals("закончить")) {
+            while (!"закончить".equals(s = reader.readLine())) {
                 if ("стоп".equals(s)) {
-                    while (!(reader.readLine()).equals("продолжить")) {
+                    while (!"продолжить".equals(reader.readLine())) {
 
                     }
                 } else {
-                    answer();
+                    System.out.println(answer());
                 }
             }
         }
@@ -64,8 +63,10 @@ public class Chat {
     /**
      * Print random answers from file.
      * @throws Exception Exception
+     * @return String Answer
      */
-    public void answer() throws Exception { //система рандомного ответа
+    public String answer() throws Exception { //система рандомного ответа
+        sizeLine = paramsOfFile(); //хранятся кол-во слов в строках
         String s = "";
         final Random random = new Random();
         int randomLine = random.nextInt(sizeLine.size()); //какая строка
@@ -92,7 +93,7 @@ public class Chat {
                 fraze.append(words[i]);
                 fraze.append(" ");
             }
-            System.out.println(fraze.toString());
+            return fraze.toString();
         }
     }
 
