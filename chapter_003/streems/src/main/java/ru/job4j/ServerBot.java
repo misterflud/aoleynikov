@@ -47,31 +47,25 @@ public class ServerBot {
      */
     public void connect() throws Exception {
         getDate();
-        Socket socket =  new ServerSocket(port).accept();
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        Chat chat = new Chat(); //ДЛЯ ответов используем программу консольный чат.
-        String ask;
-        String answer;
-
-        do {
-            ask = in.readLine();
-            System.out.println(String.format("from client: %s", ask));
-            if ("hello".equals(ask)) {
-                answer = "Hello, dear friend, I'm a oracle.";
-                out.println(answer);
-                System.out.println(String.format("Sent: %s", answer));
-                out.println(); //пустые строки
-            } else {
-                answer = chat.answer();
-                out.println(answer);
-                System.out.println(String.format("Sent: %s", answer));
-                out.println();
-            }
-        } while (!"exit".equals(ask)); // while ("exit".equals(ask)) ну зачем так делать ?? Зачем ошибки подсоывывать, петр
-
-        socket.close();
-        out.close();
-        in.close();
+        try (Socket socket =  new ServerSocket(port).accept(); PrintWriter out = new PrintWriter(socket.getOutputStream(), true); BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) {
+            Chat chat = new Chat(); //ДЛЯ ответов используем программу консольный чат.
+            String ask;
+            String answer;
+            do {
+                ask = in.readLine();
+                System.out.println(String.format("from client: %s", ask));
+                if ("hello".equals(ask)) {
+                    answer = "Hello, dear friend, I'm a oracle.";
+                    out.println(answer);
+                    System.out.println(String.format("Sent: %s", answer));
+                    out.println(); //пустые строки
+                } else {
+                    answer = chat.answer();
+                    out.println(answer);
+                    System.out.println(String.format("Sent: %s", answer));
+                    out.println();
+                }
+            } while (!"exit".equals(ask));
+        }
     }
 }

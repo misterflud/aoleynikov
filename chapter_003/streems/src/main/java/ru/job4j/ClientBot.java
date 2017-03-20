@@ -52,27 +52,20 @@ public class ClientBot {
      */
     public void chatting() throws Exception {
         getDate();
-        Socket socket = new Socket(InetAddress.getByName(ip), port);
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true); //на сервер идет
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); //информация с сервера
-        Scanner console = new Scanner(System.in);
-        String str;
-        String serverAnswer;
+        try (Socket socket = new Socket(InetAddress.getByName(ip), port); PrintWriter out = new PrintWriter(socket.getOutputStream(), true); BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); Scanner console = new Scanner(System.in);) {
+            String str;
+            String serverAnswer;
+            out.println("hello");
+            System.out.println(String.format("From server: %s", in.readLine())); //считываем приветствие в одну строку
+            do {
+                str = console.nextLine();
+                out.println(str);
+                while (!(serverAnswer = in.readLine()).isEmpty()) {
+                    System.out.println(String.format("From server: %s", serverAnswer));
+                }
+                serverAnswer = null;
+            } while (!"exit".equals(str));
 
-        out.println("hello");
-        System.out.println(String.format("From server: %s", in.readLine())); //считываем приветствие в одну строку
-        do {
-            str = console.nextLine();
-            out.println(str);
-            while (!(serverAnswer = in.readLine()).isEmpty()) {
-                System.out.println(String.format("From server: %s", serverAnswer));
-            }
-            serverAnswer = null;
-        } while (!"exit".equals(str));
-
-        socket.close();
-        out.close();
-        in.close();
-        console.close();
+        }
     }
 }
