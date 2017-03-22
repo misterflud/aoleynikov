@@ -63,7 +63,7 @@ public class MenuTracker {
      *
      * @param items items
      */
-    public void print(Item[] items) {
+    public void print(Item[] items) { //этот метод лишний, так как есть ShowItems(). Разобраться кто его использует
         for (Item item : items) {
             System.out.println(String.format("%s %s %s", item.getName(), item.getDescription(), item.getId()));
         }
@@ -128,7 +128,7 @@ public class MenuTracker {
          */
         public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.getAll()) {
-                System.out.println(String.format("%s. %s", item.getId(), item.getName()));
+                System.out.println(String.format("%s. %s %s", item.getId(), item.getName(), item.getDescription()));
             }
         }
 
