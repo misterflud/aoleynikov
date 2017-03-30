@@ -34,13 +34,14 @@ public class ServerNetFileManager implements ServerManager {
      * in.
      */
     private BufferedReader reader; //поток с клиента
-
+    /**
+     * in.
+     */
     private InputStream in;
     /**
      * directory.
      */
     private String directory;
-
     /**
      *
      * @param args args
@@ -48,17 +49,16 @@ public class ServerNetFileManager implements ServerManager {
      */
     public static void main(String[] args) throws Exception {
         ServerNetFileManager serverNetFileManager = new ServerNetFileManager();
-        serverNetFileManager.menuStart("C:\\java\\for_tests"); //куда залить файл
+        serverNetFileManager.menuStart(); //куда залить файл
     }
 
     /**
      *
-     * @param defaultDir defaultDir
+     * start program.
      * @throws Exception Exception
      */
     @Override
-    public void menuStart(String defaultDir) throws Exception {
-        directory = defaultDir;
+    public void menuStart() throws Exception {
         getProperties();
         connect();
         sendMessage("From server: Connect is done"); //как обнулить выходящий поток???????????
@@ -144,6 +144,7 @@ public class ServerNetFileManager implements ServerManager {
             prs.load(inputStream);
         }
         port = Integer.parseInt(prs.getProperty("port"));
+        directory = prs.getProperty("startDirForServer");
     }
 
     /**

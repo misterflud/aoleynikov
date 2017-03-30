@@ -6,10 +6,10 @@ package ru.job4j;
 public interface ServerManager extends ConnectManager  {
     /**
      *
-     * @param defaultDir beginning directory
+     * start program.
      * @throws Exception Exception
      */
-    void menuStart(String defaultDir) throws Exception;
+    void menuStart() throws Exception;
 
     /**
      *

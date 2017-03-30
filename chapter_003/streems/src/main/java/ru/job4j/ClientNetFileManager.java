@@ -40,7 +40,7 @@ public class ClientNetFileManager implements ClientManager {
      */
     private String directory;
     /**
-     * out.
+     * Start directory.
      */
     private OutputStream out;
     /**
@@ -55,17 +55,16 @@ public class ClientNetFileManager implements ClientManager {
      */
     public static void main(String[] args) throws Exception {
         ClientNetFileManager clientNetFileManager = new ClientNetFileManager();
-        clientNetFileManager.manage("C:\\java\\for_tests2"); //директория куда скачивается файл
+        clientNetFileManager.manage();
     }
 
     /**
      *
-     * @param defaultDir defaultDir
+     * start program.
      * @throws Exception Exception
      */
     @Override
-    public void manage(String defaultDir) throws Exception {
-        directory = defaultDir;
+    public void manage() throws Exception {
         getProperties();
         connect();
         System.out.println(takeMessage());
@@ -120,6 +119,8 @@ public class ClientNetFileManager implements ClientManager {
         }
         port = Integer.parseInt(prs.getProperty("port"));
         ip = prs.getProperty("ip");
+        directory = prs.getProperty("startDirForClient");
+
     }
 
     /**

@@ -6,9 +6,9 @@ package ru.job4j;
 public interface ClientManager extends ConnectManager {
     /**
      *
-     * @param defaultDir defaultDir
+     *
      * @throws Exception Exception
      */
-    void manage(String defaultDir) throws Exception; //фактически методы симметричные и этот интерфейс можно убрать, и все объединить в один.
+    void manage() throws Exception; //фактически методы симметричные и этот интерфейс можно убрать, и все объединить в один.
 
 }

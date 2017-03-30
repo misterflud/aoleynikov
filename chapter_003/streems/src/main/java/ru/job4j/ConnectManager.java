@@ -5,7 +5,7 @@ package ru.job4j;
  */
 public interface ConnectManager {
     /**
-     *
+     * start program.
      * @throws Exception Exception
      */
     void getProperties() throws Exception;
