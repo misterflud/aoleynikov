@@ -1,13 +1,6 @@
 package ru.job4j;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Properties;
@@ -40,7 +33,9 @@ public class ServerNetFileManager implements ServerManager {
     /**
      * in.
      */
-    private BufferedReader in; //поток с клиента
+    private BufferedReader reader; //поток с клиента
+
+    private InputStream in;
     /**
      * directory.
      */
@@ -68,32 +63,31 @@ public class ServerNetFileManager implements ServerManager {
         connect();
         sendMessage("From server: Connect is done"); //как обнулить выходящий поток???????????
         System.out.println(takeMessage());
-        sendMessage(String.format("%s\n %s\n %s\n %s\n %s", "1 получить список корневого каталога", "2 перейти в подкаталог", "3 спуститься в родительский каталог", "4 скачать файл с сервера", "5 загрузить файл на сервер"));
+        sendMessage(String.format("%s\n %s\n %s\n %s\n %s\n %s", "1 получить список корневого каталога", "2 перейти в подкаталог", "3 спуститься в родительский каталог", "4 скачать файл с сервера", "5 загрузить файл на сервер", "напишите <exit> для выхода из программы"));
         String s;
          do { //можно было упростить меню убрав текстовые команды в методы
             s = takeMessage();
-            if ("1".equals(s)) {
-                sendMessage(listDir(directory));
-            } else if ("2".equals(s)) {
+            if ("1".equals(s)) { //получить список корневого каталога
+                sendMessage(listDir(directory)); //постоянно отправляем данные об директории
+            } else if ("2".equals(s)) { //2 перейти в подкаталог
                 sendMessage("напишите путь подкаталога");
                 changeDir(takeMessage());
                 sendMessage(listDir(directory));
-            } else if ("3".equals(s)) {
+            } else if ("3".equals(s)) { //3 спуститься в родительский каталог
                 sendMessage("спускаюсь в родительский подкаталог");
                 parentDir();
                 sendMessage(listDir(directory));
-            } else if ("4".equals(s)) {
+            } else if ("4".equals(s)) { //4 скачать файл с сервера
                 sendMessage("напишите название файла из этой дирктории"); //выбираем на сревере файл по имени и отрпавляем файл клиенту
                 sendFile(takeMessage());
-            } else if ("5".equals(s)) {
-                sendMessage("скачиваю файл в данную директорию. Напишите название файла");
-                takeFileMessage(takeMessage());
+            } else if ("5".equals(s)) { //5 загрузить файл на сервер (новое)
+                sendMessage("скачиваю файл в данную директорию. Напишите название файла с расширением");
+                takeFileMessage(takeMessage()); //начинаем принимать файл
                 sendMessage(listDir(directory));
-
             }
         } while (!"exit".equals(s));
         serverSocket.close();
-        in.close();
+        reader.close();
         out.close();
         printWriter.close();
     }
@@ -160,7 +154,8 @@ public class ServerNetFileManager implements ServerManager {
     public void connect() throws Exception { //соединяемся
         serverSocket = new ServerSocket(port);
         socket = serverSocket.accept();
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        in = socket.getInputStream();
+        reader = new BufferedReader(new InputStreamReader(in));
         out = socket.getOutputStream(); // на более низкий уровень перейдем, ибо это понадобится для передачи файлов
         printWriter = new PrintWriter(out, true); //почему при закрытии out закрывается serverSocket???
         //dataOutputStream = new DataOutputStream(out); //тоже самое закрываем поток -- закрывается и сокет((( ПРИ ЧЕМ если передавать данные через dataOutputStream а принимать
@@ -173,7 +168,8 @@ public class ServerNetFileManager implements ServerManager {
      */
     public void connect2() throws Exception { //перезапускаем сокет (серверный сокет остается прежним)
         socket = serverSocket.accept();
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        in = socket.getInputStream();
+        reader = new BufferedReader(new InputStreamReader(in));
         out = socket.getOutputStream();
         printWriter = new PrintWriter(out, true);
     }
@@ -214,7 +210,7 @@ public class ServerNetFileManager implements ServerManager {
      */
     @Override
     public String takeMessage() throws Exception { //получаем сообщение
-        return in.readLine();
+        return reader.readLine();
     }
 
     /**
@@ -223,8 +219,27 @@ public class ServerNetFileManager implements ServerManager {
      * @throws Exception Exception
      */
     @Override
-    public void takeFileMessage(String fileName) throws Exception { //взять из дериктории
+    public void takeFileMessage(String fileName) throws Exception {
+        File file = new File(directory  + "\\" +  fileName);
+        final int fileSize = 6022386;
+        byte[] fileByteArray  = new byte[fileSize];
+        int current;
+        int bytesRead;
+        try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file))) {
+            bytesRead = in.read(fileByteArray, 0, fileByteArray.length);
+            current = bytesRead;
+            do {
+                bytesRead = in.read(fileByteArray, current, (fileByteArray.length - current));
+                if (bytesRead >= 0) {
+                    current += bytesRead;
+                }
+            } while (bytesRead > -1);
 
+            bufferedOutputStream.write(fileByteArray, 0, current);
+            bufferedOutputStream.flush();
+        }
+        closeStreams(); //закроем потоки, хотя некоторые или все должны были уже закрыться
+        connect2();
     }
 
     /**
@@ -235,6 +250,7 @@ public class ServerNetFileManager implements ServerManager {
     public void closeStreams() throws Exception { //закрываем часть потоков (для перезапуска соединения)
         socket.close();
         in.close();
+        reader.close();
         out.close();
         printWriter.close();
     }

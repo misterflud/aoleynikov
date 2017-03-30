@@ -1,14 +1,7 @@
 package ru.job4j;
 
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.InputStreamReader;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.File;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Properties;
@@ -16,8 +9,8 @@ import java.util.Scanner;
 
 /**
  * Created by Anton on 15.03.2017.
- * C:\java\for_tests2
  * C:\java\for_tests\Sour.txt
+ * C:\java\for_tests2\sfsf.txt
  * Client.txt
  * Sour.txt
  */
@@ -79,34 +72,37 @@ public class ClientNetFileManager implements ClientManager {
         sendMessage("From client: Connect is done");
         System.out.println(takeMessage());
         String s; //Почему мы не можем использвоать 2ва BufferedReader??? Я же создаю 2объекта этого класса
-        try (Scanner reader = new Scanner(System.in)) { //можно конечно вызов доп параметров с сервера (или с клиента) перенести в каждый метод
+        try (Scanner reader = new Scanner(System.in)) { //можно конечно вызов доп параметров с сервера (или с клиента) перенести в каждый метод, но на мой взгляд так сложнее
             do {
                 s = reader.nextLine();
-                if ("1".equals(s)) {
+                if ("1".equals(s)) { //получить список корневого каталога
                     sendMessage(s);
                     System.out.println(takeMessage());
-                } else if ("2".equals(s)) {
+                } else if ("2".equals(s)) { //2 перейти в подкаталог
                     sendMessage(s);
                     System.out.println(takeMessage());
                     sendMessage(reader.nextLine());
                     System.out.println(takeMessage());
-                } else if ("3".equals(s)) {
+                } else if ("3".equals(s)) { //3 спуститься в родительский каталог
                     sendMessage(s);
                     System.out.println(takeMessage());
                     System.out.println(takeMessage());
-                } else if ("4".equals(s)) {
+                } else if ("4".equals(s)) { //4 скачать файл с сервера
                     sendMessage(s);
                     System.out.println(takeMessage());
                     String fileName = reader.nextLine(); //отправляем название нужного файла
                     sendMessage(fileName);
-                    takeFileMessage(fileName); //создаем его копию уже на клинетском компе и скачиваем в него данные
-                } else if ("5".equals(s)) {
+                    takeFileMessage(fileName);
+                } else if ("5".equals(s)) { //5 загрузить файл на сервер
                     sendMessage(s);
                     System.out.println(takeMessage());
-                    sendMessage(reader.nextLine()); //название файла отправляем
+                    sendMessage(reader.nextLine()); //название файла отправляем вместе с расширением
+                    System.out.println("Напишите полный путь к файлу, который хотите скачать");
+                    sendFile(reader.nextLine()); //вызываем клиентский метод и пишем полный путь к файлу
                     System.out.println(takeMessage());
                 }
             } while (!"exit".equals(s));
+            sendMessage(s); //отправляем exit слиенту
         }
         closeStreams();
     }
@@ -156,7 +152,15 @@ public class ClientNetFileManager implements ClientManager {
      */
     @Override
     public void sendFile(String filePath) throws Exception {
-
+        File file = new File(filePath);
+        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file))) {
+            byte[] fileByteArray = new byte[(int) file.length()];
+            bufferedInputStream.read(fileByteArray, 0, fileByteArray.length);
+            out.write(fileByteArray, 0, fileByteArray.length);
+            out.flush();
+        }
+        closeStreams();
+        connect(); //заново соединяемся с клиентом
     }
 
     /**
