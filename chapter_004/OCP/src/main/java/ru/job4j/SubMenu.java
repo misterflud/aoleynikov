@@ -18,23 +18,18 @@ public class SubMenu {
     /**
      * Saving result after calculate.
      */
-    private double result = 0;
+    protected double result = 0;
     /**
      * It's contenting all our action.
      */
-    private ArrayList<Action> actionList = new ArrayList<>();
-    /**
-     * Class Calculator (Math operation).
-     */
-    private Calculator calculator;
+    protected ArrayList<Action> actionList = new ArrayList<>();
 
     /**
      *
-     * @param calculator we can add any calculator and after that modify our SubMenu.
+     * Constructor.
      */
-    public SubMenu(Calculator calculator) {
+    public SubMenu() {
         fillActionList();
-        this.calculator = calculator;
     }
 
     /**
@@ -59,7 +54,7 @@ public class SubMenu {
     /**
      * adding action in ArrayList.
      */
-    private void fillActionList() {
+    protected void fillActionList() {
         actionList.add(new SaveResultInMemory());
         actionList.add(new Sum());
         actionList.add(new Substruct());
@@ -71,9 +66,9 @@ public class SubMenu {
      * It gets numbers from user.
      * @return what entered user.
      */
-    private double fillParameter() { //для заполнения параметров
+    protected double fillParameter() { //для заполнения параметров
         String answer = ask.ask("Введите число или напишите <m>: ");
-        double param = -1;
+        double param;
         if ("m".equals(answer)) {
             param = memory;
         } else {
@@ -110,6 +105,7 @@ public class SubMenu {
 
         @Override
         public void execute() {
+            Calculator calculator = new Calculator(); //занесем клькулятор в каждый класс-действие
             calculator.add(fillParameter(), fillParameter());
             result = calculator.getResult();
         }
@@ -126,6 +122,7 @@ public class SubMenu {
 
         @Override
         public void execute() {
+            Calculator calculator = new Calculator();
             calculator.substruct(fillParameter(), fillParameter());
             result = calculator.getResult();
         }
@@ -142,6 +139,7 @@ public class SubMenu {
 
         @Override
         public void execute() {
+            Calculator calculator = new Calculator();
             calculator.div(fillParameter(), fillParameter());
             result = calculator.getResult();
         }
@@ -151,6 +149,7 @@ public class SubMenu {
      * Multiple.
      */
     public class Multiple implements Action {
+
         @Override
         public String information() {
             return "Умножение";
@@ -158,6 +157,7 @@ public class SubMenu {
 
         @Override
         public void execute() {
+            Calculator calculator = new Calculator();
             calculator.multiple(fillParameter(), fillParameter());
             result = calculator.getResult();
         }

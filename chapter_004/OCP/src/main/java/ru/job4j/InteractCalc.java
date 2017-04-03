@@ -19,7 +19,7 @@ public class InteractCalc {
      * Second start point.
      */
     public void startProgram() {
-        SubMenu subMenu = new SubMenu(new Calculator());
+        SubMenu2 subMenu = new SubMenu2();
         Ask ask = new Ask();
         do {
             subMenu.printAction();

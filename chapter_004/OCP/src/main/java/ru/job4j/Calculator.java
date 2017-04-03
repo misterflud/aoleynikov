@@ -8,7 +8,7 @@ public class Calculator {
     /**
      * The field result (result is added after methods will done).
     */
-    private double result;
+    protected double result;
     /**
      *@param first is number
      *@param second is number
