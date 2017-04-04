@@ -24,6 +24,7 @@ public class MenuTracker {
      * UserAction[].
      */
     private UserAction[] actions = new UserAction[seven];
+    private int position = 0;
 
     /**
      *
@@ -33,21 +34,22 @@ public class MenuTracker {
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
-        fillAction();
     }
 
     /**
      * fillAction.
      */
     public void fillAction() {
-        this.actions[0] = new AddItem();
-        this.actions[1] = new MenuTracker.ShowItems();
-        this.actions[2] = new EditItem();
-        this.actions[3] = new DeleteItem();
-        this.actions[4] = new Filter();
-
+        this.actions[position++] = new AddItem();
+        this.actions[position++] = new MenuTracker.ShowItems();
+        this.actions[position++] = new EditItem();
+        //this.actions[position++] = new DeleteItem();
+        this.actions[position++] = new Filter();
     }
 
+    public void addAction(UserAction action) {
+        this.actions[position++] = action;
+    }
     /**
      * show.
      */
@@ -80,7 +82,13 @@ public class MenuTracker {
     /**
      * Class AddItem 1.
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction{
+        /**
+         * Constructor.
+         */
+        public AddItem() {
+            super("Add the new Item");
+        }
         /**
          *
          * @return int
@@ -99,20 +107,18 @@ public class MenuTracker {
             String desc = input.ask("enter the description: ");
             tracker.add(new Task(name, desc));
         }
-
-        /**
-         *
-         * @return String.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add the new Item");
-        }
     }
 
     /**
      * ShowItems 2.
      */
-    private static class ShowItems implements UserAction {
+    private static class ShowItems extends BaseAction {
+        /**
+         * Constructor.
+         */
+        public ShowItems() {
+            super("Show all Item");
+        }
         /**
          *
          * @return int
@@ -131,20 +137,22 @@ public class MenuTracker {
                 System.out.println(String.format("%s. %s %s", item.getId(), item.getName(), item.getDescription()));
             }
         }
-
-        /**
-         *
-         * @return String.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Show all Item");
-        }
     }
 
     /**
      * ChangeItem 4.
      */
-    private class DeleteItem implements UserAction {
+    private class DeleteItem extends BaseAction {
+        /**
+         * Constructor.
+         */
+        public DeleteItem() {
+            super("Delete Item");
+        }
+        /**
+         *
+         * @return int
+         */
         /**
          *
          * @return int
@@ -162,20 +170,18 @@ public class MenuTracker {
             String id = input.ask("Please, enter the task's id: ");
             tracker.delete(tracker.findById(id));
         }
-
-        /**
-         *
-         * @return String.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Delete Item");
-        }
     }
 
     /**
      * Filter 5.
      */
-    private class Filter implements UserAction {
+    private class Filter extends BaseAction {
+        /**
+         * Constructor.
+         */
+        public Filter() {
+            super("Filter Item");
+        }
         /**
          *
          * @return int
@@ -193,19 +199,16 @@ public class MenuTracker {
             String name = input.ask("Please, enter the item's name: ");
             print(tracker.filterByName(name));
         }
-
-        /**
-         *
-         * @return String.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Filter Item");
-        }
     }
 }
 
-class EditItem implements UserAction {
-
+class EditItem extends BaseAction {
+    /**
+     * Constructor.
+     */
+    public EditItem() {
+        super("Edit the new item");
+    }
     @Override
     public int key() {
         return 2;
@@ -219,8 +222,4 @@ class EditItem implements UserAction {
         tracker.update(new Task(name, desc), id);
     }
 
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Edit the new item");
-    }
 }
