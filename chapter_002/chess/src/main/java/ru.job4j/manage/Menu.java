@@ -38,7 +38,7 @@ public class Menu {
             System.out.println("You turn(1 1 1 2) OR write exit");
             board.printBoard();
             s = reader.readLine();
-            if (s.equals("exit")) {
+            if ("exit".equals(s)) {
                 break;
             } else {
                 ss = s.split(" ");

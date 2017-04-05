@@ -1,6 +1,5 @@
-package ru.job4j.start;
-import ru.job4j.models.Item;
-import ru.job4j.models.Task;
+package ru.job4j;
+import ru.job4j.start.*;
 
 /**StartUI -- It is for manage the program.
  *Example '<Milk> + <12>', it's mean that you should write: Milk 12
@@ -43,6 +42,22 @@ public class StartUI {
         tracker = new Tracker();
         MenuTracker menu = new MenuTracker(this.input, tracker);
         menu.fillAction();
+        UserAction deleteAction = new BaseAction("Delete") { //анонимный класс
+            /**
+             * @return int.
+             */
+            public int key() {
+                return 4;
+            }
+            /**
+             * @param input input.
+             * @param tracker tracker.
+             */
+            public void execute(Input input, Tracker tracker){
+                //
+            }
+        };
+        menu.addAction(deleteAction);
         do {
             menu.show();
             menu.select(input.ask("select: ", ranges));
