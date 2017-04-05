@@ -16,6 +16,26 @@ import java.util.Scanner;
  */
 public class ClientNetFileManager implements ClientManager {
     /**
+     * Just one.
+     */
+    private final String one = "1";
+    /**
+     * Just two.
+     */
+    private final String two = "2";
+    /**
+     * Just three.
+     */
+    private final String three = "3";
+    /**
+     * Just four.
+     */
+    private final String four = "4";
+    /**
+     * Just five.
+     */
+    private final String five = "5";
+    /**
      * port.
      */
     private int port;
@@ -74,25 +94,25 @@ public class ClientNetFileManager implements ClientManager {
         try (Scanner reader = new Scanner(System.in)) { //можно конечно вызов доп параметров с сервера (или с клиента) перенести в каждый метод, но на мой взгляд так сложнее
             do {
                 s = reader.nextLine();
-                if ("1".equals(s)) { //получить список корневого каталога
+                if (one.equals(s)) { //получить список корневого каталога
                     sendMessage(s);
                     System.out.println(takeMessage());
-                } else if ("2".equals(s)) { //2 перейти в подкаталог
+                } else if (two.equals(s)) { //2 перейти в подкаталог
                     sendMessage(s);
                     System.out.println(takeMessage());
                     sendMessage(reader.nextLine());
                     System.out.println(takeMessage());
-                } else if ("3".equals(s)) { //3 спуститься в родительский каталог
+                } else if (three.equals(s)) { //3 спуститься в родительский каталог
                     sendMessage(s);
                     System.out.println(takeMessage());
                     System.out.println(takeMessage());
-                } else if ("4".equals(s)) { //4 скачать файл с сервера
+                } else if (four.equals(s)) { //4 скачать файл с сервера
                     sendMessage(s);
                     System.out.println(takeMessage());
                     String fileName = reader.nextLine(); //отправляем название нужного файла
                     sendMessage(fileName);
                     takeFileMessage(fileName);
-                } else if ("5".equals(s)) { //5 загрузить файл на сервер
+                } else if (five.equals(s)) { //5 загрузить файл на сервер
                     sendMessage(s);
                     System.out.println(takeMessage());
                     sendMessage(reader.nextLine()); //название файла отправляем вместе с расширением

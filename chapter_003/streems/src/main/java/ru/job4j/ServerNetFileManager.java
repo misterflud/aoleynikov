@@ -7,9 +7,29 @@ import java.util.Properties;
 
 /**
  * Created by Anton on 15.03.2017.
- *
+ * Нужно было использовать паттерны проектирвоания)) -- а так каша получилась
  */
 public class ServerNetFileManager implements ServerManager {
+    /**
+     * Just one.
+     */
+    private final String one = "1";
+    /**
+     * Just two.
+     */
+    private final String two = "2";
+    /**
+     * Just three.
+     */
+    private final String three = "3";
+    /**
+     * Just four.
+     */
+    private final String four = "4";
+    /**
+     * Just five.
+     */
+    private final String five = "5";
     /**
      * port.
      */
@@ -67,20 +87,20 @@ public class ServerNetFileManager implements ServerManager {
         String s;
          do { //можно было упростить меню убрав текстовые команды в методы
             s = takeMessage();
-            if ("1".equals(s)) { //получить список корневого каталога
+            if (one.equals(s)) { //получить список корневого каталога
                 sendMessage(listDir(directory)); //постоянно отправляем данные об директории
-            } else if ("2".equals(s)) { //2 перейти в подкаталог
+            } else if (two.equals(s)) { //2 перейти в подкаталог
                 sendMessage("напишите путь подкаталога");
                 changeDir(takeMessage());
                 sendMessage(listDir(directory));
-            } else if ("3".equals(s)) { //3 спуститься в родительский каталог
+            } else if (three.equals(s)) { //3 спуститься в родительский каталог
                 sendMessage("спускаюсь в родительский подкаталог");
                 parentDir();
                 sendMessage(listDir(directory));
-            } else if ("4".equals(s)) { //4 скачать файл с сервера
+            } else if (four.equals(s)) { //4 скачать файл с сервера
                 sendMessage("напишите название файла из этой дирктории"); //выбираем на сревере файл по имени и отрпавляем файл клиенту
                 sendFile(takeMessage());
-            } else if ("5".equals(s)) { //5 загрузить файл на сервер (новое)
+            } else if (five.equals(s)) { //5 загрузить файл на сервер (новое)
                 sendMessage("скачиваю файл в данную директорию. Напишите название файла с расширением");
                 takeFileMessage(takeMessage()); //начинаем принимать файл
                 sendMessage(listDir(directory));
