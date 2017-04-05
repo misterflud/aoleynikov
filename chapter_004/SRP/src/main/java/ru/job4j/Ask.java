@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 
 /**
  * Created by Anton on 01.04.2017.
- * Communicateing with user.
+ * Communicating with user.
  */
 public class Ask {
     /**
