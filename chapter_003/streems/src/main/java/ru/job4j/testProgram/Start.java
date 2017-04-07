@@ -18,15 +18,35 @@ import java.util.ArrayList;
  sfsf.txt
  C:\java\for_tests
  -d C:\java\for_tests -n sfsf.txt
+ -d C:/java/for_tests -n sfsf.txt -f -o log.txt
  */
 public class Start {
+    private String directory;
+    private String argumentOfTypeOfFilter;
+    private String fileSearched;
+    private String fileWithResult;
+
     public static void main(String[] args) {
 
         //new Validation();
-        ManagerOfSearch managerOfSearch = new ManagerOfSearch(args); //следует весь массив передать
+        Start start = new Start();
+        start.parser(args);
+        start.manage();
+
+    }
+
+
+    public void manage() {
+        ManagerOfSearch managerOfSearch = new ManagerOfSearch(directory, argumentOfTypeOfFilter, fileSearched); //следует весь массив передать
         ArrayList<String> files = managerOfSearch.start();
         for(String iter : files) {
             System.out.println(iter);
         }
+    }
+    public void parser(String[] args) { //здесь же и проведем валидацию // но потом //и кстати это тоже всякие действия можно использовать стратегию
+        directory = args[1];
+        fileSearched = args[3];
+        argumentOfTypeOfFilter = args[4];
+        fileWithResult = args[5];
     }
 }
