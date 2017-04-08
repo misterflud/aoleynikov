@@ -140,7 +140,6 @@ public class ClientNetFileManager implements ClientManager {
         port = Integer.parseInt(prs.getProperty("port"));
         ip = prs.getProperty("ip");
         directory = prs.getProperty("startDirForClient");
-
     }
 
     /**
