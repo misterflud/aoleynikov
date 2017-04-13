@@ -12,33 +12,51 @@ import java.util.ArrayList;
  * Created by Anton on 12.04.2017.
  */
 public class ControlQuality {
-
+    /**
+     * Food list.
+     */
     private ArrayList<Food> foods;
+    /**
+     * Stores list.
+     */
     private ArrayList<Store> stores = new ArrayList<>();
 
+    /**
+     * Constructor.
+     */
     public ControlQuality() {
         setStoreList();
     }
 
+    /**
+     * Create Stores list.
+     */
     public void setStoreList() {
         stores.add(new Trash());
         stores.add(new Shop());
         stores.add(new Warehouse());
     }
 
+    /**
+     * Take food list.
+     * @param foods foods
+     */
     public void setFoods(ArrayList<Food> foods) {
         this.foods = foods;
     }
     public void control() { //добавление по хранилищам
-        for(Food iter1 : foods) {
-            for(Store iter2 : stores) {
+        for (Food iter1 : foods) {
+            for (Store iter2 : stores) {
                 iter2.itIsMyProductOrNot(iter1);
             }
         }
     }
 
+    /**
+     * Print all product in all Stores.
+     */
     public void printWhatWeHave() {
-        for(Store iter : stores) {
+        for (Store iter : stores) {
             iter.printAllProduct();
         }
     }

@@ -23,7 +23,10 @@ package ru.job4j;
  Нельзя использовать instanceOf или if ("Shop".equals(storage.getName())
  */
 public class Start {
-
+    /**
+     * Start program.
+     * @param args args
+     */
     public static void main(String[] args) {
         GenerateFood generateFood = new GenerateFood();
         ControlQuality controlQuality = new ControlQuality();
