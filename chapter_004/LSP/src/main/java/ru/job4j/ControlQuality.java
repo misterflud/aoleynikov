@@ -47,7 +47,7 @@ public class ControlQuality {
     public void control() { //добавление по хранилищам
         for (Food iter1 : foods) {
             for (Store iter2 : stores) {
-                iter2.itIsMyProductOrNot(iter1);
+                iter2.takingProduct(iter1);
             }
         }
     }

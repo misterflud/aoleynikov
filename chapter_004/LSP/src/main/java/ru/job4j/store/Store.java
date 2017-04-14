@@ -12,7 +12,7 @@ public abstract class Store { //можно сделать как интерфе�
      * Analyze which food belong me (It dependents from type of Store).
      * @param food type from Food
      */
-    public abstract void itIsMyProductOrNot(Food food);
+    public abstract void takingProduct(Food food);
 
     /**
      *  Manage logic into Store.

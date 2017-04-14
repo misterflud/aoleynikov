@@ -39,7 +39,7 @@ public class Trash extends Store {
      * @param food type from Food
      */
     @Override
-    public void itIsMyProductOrNot(Food food) {
+    public void takingProduct(Food food) {
         if (food.getFresh() > 1) {
             this.food = food;
             setParametersAndAddInList();

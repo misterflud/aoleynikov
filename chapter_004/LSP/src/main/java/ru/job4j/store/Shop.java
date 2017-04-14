@@ -40,7 +40,7 @@ public class Shop extends Store {
      * @param food type from Food
      */
     @Override
-    public void itIsMyProductOrNot(Food food) {
+    public void takingProduct(Food food) {
         if (food.getFresh() > 0.25 && food.getFresh() <= 0.75) {
             this.food = food;
             setParametersAndAddInList();
