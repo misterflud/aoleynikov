@@ -12,7 +12,7 @@ public class ConvertList {
      * @param array array
      * @return List
      */
-    public ArrayList<Integer> toList (int[][] array) {
+    public List<Integer> toList (int[][] array) {
         ArrayList<Integer> list = new ArrayList<>();
         for (int[] it1 : array) {
             for (int it2 : it1) {
