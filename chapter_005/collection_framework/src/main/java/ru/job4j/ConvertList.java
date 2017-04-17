@@ -1,5 +1,6 @@
 package ru.job4j;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,4 +48,20 @@ public class ConvertList {
         }
         return mass;
     }
+
+    /**
+     * Convert.
+     * @param list with massifs
+     * @return List of int
+     */
+    public List<Integer> convert (List<int[]> list) {
+        ArrayList<Integer> l = new ArrayList<Integer>();
+        for (int[] iterator : list) {
+            for (int iterator2 : iterator) {
+                l.add(iterator2);
+            }
+        }
+        return l;
+    }
+
 }
