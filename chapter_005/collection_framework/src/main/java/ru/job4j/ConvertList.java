@@ -34,9 +34,6 @@ public class ConvertList {
             count++;
         }
         int[][] mass = new int[count / rows][rows];
-        for( int jj = 0; jj < mass[mass.length - 1].length; jj++) {
-            mass[mass.length - 1][jj] = 0;
-        }
 
         int i = 0;
         for (int j = 0; j < mass.length; j++) {
