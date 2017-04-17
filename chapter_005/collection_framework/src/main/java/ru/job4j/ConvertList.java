@@ -2,6 +2,7 @@ package ru.job4j;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -37,13 +38,14 @@ public class ConvertList {
         int[][] mass = new int[count / rows][rows];
 
         int i = 0;
+        Iterator<Integer> iterator = list.iterator();
         for (int j = 0; j < mass.length; j++) {
             for (int jj = 0; jj < mass[j].length; jj++) {
-                if (i == list.size()) {
+                if (iterator.hasNext()) {
+                    mass[j][jj] = iterator.next();
+                } else {
                     break;
                 }
-                mass[j][jj] = list.get(i);
-                i++;
             }
         }
         return mass;
