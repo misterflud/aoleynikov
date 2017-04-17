@@ -21,7 +21,7 @@ public class SpeedCollection {
      */
     public void speedTest(Collection<String>... collection) {
         int n = 1000; //для удаления первых 1000 строк
-        String[] strings = new String[100000];
+        String[] strings = new String[1000000];
         for (int i = 0; i < strings.length; i++) { //генерация строк
             strings[i] = i + "";
         }
@@ -41,9 +41,12 @@ public class SpeedCollection {
         System.out.println("Замер времени удаления: ");
         for (Collection<String> iter : collection) {
             System.out.println(iter.getClass().getName());
+            Iterator<String> iterator = iter.iterator();
             Date date1 = new Date();
-            for (int i = 0; i < n; i++) {
-                iter.remove(i + "");
+            while (iterator.hasNext() && n > -1) {
+                iterator.next();
+                iterator.remove();
+                n--;
             }
             Date date2 = new Date();
             System.out.println((int) (date2.getTime() - date1.getTime()) + " Миллисекунд");
