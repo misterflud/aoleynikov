@@ -48,4 +48,37 @@ public class SortUserTest {
 
         assertThat(result, is(should));
     }
+
+    /**
+     * Test2.
+     */
+    @Test
+    public void whenThen() {
+        ArrayList<User> list = new ArrayList<>();
+        final User user1 = new User("1", 1);
+        final User user2 = new User("33", 3);
+        final User user3 = new User("2242", 2);
+        final User user4 = new User("512132", 5);
+        final User user5 = new User("1", 1);
+        final User user6 = new User("62", 6);
+        list.add(user1);
+        list.add(user2);
+        list.add(user3);
+        list.add(user4);
+        list.add(user5);
+        list.add(user6);
+        SortUser sortUser = new SortUser();
+
+        System.out.println("");
+        ArrayList<User> result1 = (ArrayList) sortUser.sortLength(list);
+        for(User iter : result1) {
+            System.out.println(iter.getName());
+        }
+        System.out.println("");
+        ArrayList<User> result2 = (ArrayList) sortUser.sortHash(list);
+        for(User iter : result2) {
+            System.out.println(iter.hashCode());
+        }
+    }
+
 }

@@ -1,8 +1,6 @@
 package ru.job4j;
 
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by Anton on 19.04.2017.
@@ -14,11 +12,46 @@ public class SortUser {
      * @return TreeSet
      */
     public Set<User> sort(List<User> list) {
-        //list.sort(User::compareTo); можно по идее так отсортировать, если реализовать Comparator
         TreeSet<User> tree = new TreeSet<>();
         for (User iter : list) {
             tree.add(iter);
         }
         return tree;
     }
+
+    /**
+     *
+     * Sorts.
+     * @param list list
+     * @return sorted list
+     */
+    public List<User> sortHash (List<User> list) {
+        ArrayList<User> arrayList = new ArrayList<>();
+        arrayList.addAll(list);
+        arrayList.sort(new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return Integer.compare(o1.hashCode(), o2.hashCode());
+            }
+        });
+        return arrayList;
+    }
+
+    /**
+     * Sorts.
+     * @param list list
+     * @return sorted list
+     */
+    public List<User> sortLength (List<User> list) {
+        ArrayList<User> arrayList = new ArrayList<>();
+        arrayList.addAll(list);
+        arrayList.sort(new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return Integer.compare(o1.getLengthOfName(), o2.getLengthOfName());
+            }
+        });
+        return arrayList;
+    }
+
 }

@@ -1,11 +1,9 @@
 package ru.job4j;
 
-import java.util.Comparator;
-
 /**
  * Created by Anton on 19.04.2017.
  */
-public class User implements Comparable<User>, Comparator {
+public class User implements Comparable<User> {
     /**
      * Name.
      */
@@ -25,8 +23,28 @@ public class User implements Comparable<User>, Comparator {
         this.age = age;
     }
 
+    /**
+     * Gets age.
+     * @return age
+     */
     public int getAge() {
         return this.age;
+    }
+
+    /**
+     * Gets name.
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Gets length of name;
+     * @return length of name
+     */
+    public int getLengthOfName() {
+        return name.length();
     }
 
     /**
@@ -37,25 +55,6 @@ public class User implements Comparable<User>, Comparator {
      */
     @Override
     public int compareTo(User o) {
-        int result;
-        if (this.age > o.getAge()) {
-            result = 1;
-        } else if (this.age < o.getAge()) {
-            result = -1;
-        } else {
-            result = 0;
-        }
-        return result;
-    }
-
-    /**
-     * Compare.
-     * @param o1 o1
-     * @param o2 o2
-     * @return -1, 0, 1
-     */
-    @Override
-    public int compare(Object o1, Object o2) {
-        return 0;
+        return Integer.compare(this.age, o.getAge());
     }
 }
