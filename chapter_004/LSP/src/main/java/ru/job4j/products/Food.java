@@ -70,7 +70,7 @@ public abstract class Food {
     }
 
     /**
-     *
+     * Condition.
      * @return %
      */
     public double getFresh() {

@@ -44,6 +44,10 @@ public class ControlQuality {
     public void setFoods(ArrayList<Food> foods) {
         this.foods = foods;
     }
+
+    /**
+     * Control.
+     */
     public void control() { //добавление по хранилищам
         for (Food iter1 : foods) {
             for (Store iter2 : stores) {
