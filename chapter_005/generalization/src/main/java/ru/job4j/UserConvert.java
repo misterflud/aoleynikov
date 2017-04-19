@@ -10,19 +10,6 @@ import java.util.List;
  */
 public class UserConvert {
     /**
-     * Start program.
-     * @param args args.
-     */
-    public static void main(String[] args) {
-        UserConvert userConvert = new UserConvert();
-        LinkedList<User> list = new LinkedList<User>();
-        for (int i = 0; i < 10; i++) {
-            list.add(new User(i, ((Integer) i).toString(), ((Integer) i).toString()));
-        }
-        System.out.println(userConvert.process(list).size());
-    }
-
-    /**
      * Adds User in map.
      * @param list of Users
      * @return Map of Users
