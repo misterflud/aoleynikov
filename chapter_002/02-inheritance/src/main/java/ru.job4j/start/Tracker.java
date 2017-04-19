@@ -108,7 +108,7 @@ public class Tracker {
      * @param id id.
      * @return Item.
      */
-    protected Item findById(String id) {
+    public Item findById(String id) {
         Item result = null;
         for (Item item : this.items) {
             if (item != null && item.getId().equals(id)) {

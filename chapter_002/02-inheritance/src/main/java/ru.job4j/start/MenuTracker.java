@@ -3,6 +3,8 @@ package ru.job4j.start;
 import ru.job4j.models.Item;
 import ru.job4j.models.Task;
 
+import java.util.ArrayList;
+
 /**MenuTracker.
  *@author Anton Oleynikov
  *@version 1
@@ -23,7 +25,12 @@ public class MenuTracker {
     /**
      * UserAction[].
      */
-    private UserAction[] actions = new UserAction[seven];
+    //private UserAction[] actions = new UserAction[seven];
+
+    ArrayList<UserAction> actions = new ArrayList<>();
+    /**
+     * Position.
+     */
     private int position = 0;
 
     /**
@@ -40,15 +47,18 @@ public class MenuTracker {
      * fillAction.
      */
     public void fillAction() {
-        this.actions[position++] = new AddItem();
-        this.actions[position++] = new MenuTracker.ShowItems();
-        this.actions[position++] = new EditItem();
-        //this.actions[position++] = new DeleteItem();
-        this.actions[position++] = new Filter();
+        UserAction action1 = new AddItem();
+        UserAction action2 = new MenuTracker.ShowItems();
+        UserAction action3 = new EditItem();
+        UserAction action4 = new Filter();
+        this.actions.add(action1.key(), action1);
+        this.actions.add(action2.key(), action2);
+        this.actions.add(action3.key(), action3);
+        this.actions.add(action4.key(), action4);
     }
 
     public void addAction(UserAction action) {
-        this.actions[position++] = action;
+        this.actions.add(action.key(), action);
     }
     /**
      * show.
@@ -76,7 +86,7 @@ public class MenuTracker {
      * @param key key.
      */
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /**
@@ -187,7 +197,7 @@ public class MenuTracker {
          * @return int
          */
         public int key() {
-            return 4;
+            return 3;
         }
 
         /**

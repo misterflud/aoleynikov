@@ -54,7 +54,8 @@ public class StartUI {
              * @param tracker tracker.
              */
             public void execute(Input input, Tracker tracker){
-                //
+                String id = input.ask("Please, enter the task's id: ");
+                tracker.delete(tracker.findById(id));
             }
         };
         menu.addAction(deleteAction);
