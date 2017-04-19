@@ -18,20 +18,12 @@ public class MenuTracker {
      * Tracker.
      */
     private Tracker tracker;
-    /**
-     * final.
-     */
-    private final int seven = 7;
-    /**
-     * UserAction[].
-     */
-    //private UserAction[] actions = new UserAction[seven];
 
-    ArrayList<UserAction> actions = new ArrayList<>();
     /**
-     * Position.
+     * UserAction.
      */
-    private int position = 0;
+    ArrayList<UserAction> actions = new ArrayList<>();
+
 
     /**
      *
@@ -75,7 +67,7 @@ public class MenuTracker {
      *
      * @param items items
      */
-    public void print(Item[] items) { //этот метод лишний, так как есть ShowItems(). Разобраться кто его использует
+    public void print(ArrayList<Item> items) { //этот метод лишний, так как есть ShowItems(). Разобраться кто его использует
         for (Item item : items) {
             System.out.println(String.format("%s %s %s", item.getName(), item.getDescription(), item.getId()));
         }
@@ -217,7 +209,7 @@ class EditItem extends BaseAction {
      * Constructor.
      */
     public EditItem() {
-        super("Edit the new item");
+        super("Edit the item");
     }
     @Override
     public int key() {

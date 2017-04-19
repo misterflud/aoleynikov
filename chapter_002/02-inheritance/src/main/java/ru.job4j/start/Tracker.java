@@ -2,6 +2,7 @@ package ru.job4j.start;
 
 import ru.job4j.models.Item;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**It's main class for action something.
@@ -9,18 +10,17 @@ import java.util.Random;
  *@version 1
  */
 public class Tracker {
+
     /**
      * Items length.
      */
     private final int itemLength = 10;
+
     /**
      * Array-storage for requests.
      */
-    private Item[] items = new Item[itemLength];
-    /**
-     * Index of request.
-     */
-    private int position = 0;
+    private ArrayList<Item> items = new ArrayList<>();
+
     /**
      * Random.
      */
@@ -34,7 +34,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(String.valueOf(System.currentTimeMillis() + RN.nextInt()));
-        this.items[position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -44,7 +44,7 @@ public class Tracker {
      * @param oldId oldId.
      */
     public void update(Item newItem, String oldId) {
-        for (Item item : this.items) {
+        for (Item item : this.items) { //по идее не должно работать, хотя будет -- ссылка не меняется, мы напрямую обращаемся к каждому Item в памяти
             if (item != null && item.getId().equals(oldId)) {
                 item.setName(newItem.getName());
                 item.setDescription(newItem.getDescription());
@@ -58,47 +58,19 @@ public class Tracker {
      * @param item item.
      */
     public void delete(Item item) {
-        int index = -1;
-        for (int i = 0; i <= this.position; i++) {
-            if (this.items[i] != null && this.items[i].getId().equals(item.getId())) {
-                index = i;
-                break;
-            }
-        }
-        this.items[index] = null;
-        this.position--;
-    }
-    /**
-     * Print all requests.
-     *
-     * @return all requests.
-     */
-    public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        for (int i = 0; i != this.position; i++) {
-            result[i] = this.items[i];
-        }
-        return result;
+        items.remove(item);
     }
 
     /**
      *
-     * @param key key.
+     * @param name name.
      * @return Item[];
      */
-    public Item[] filterByName(String key) {
-        int count = 0;
+    public ArrayList<Item> filterByName(String name) {
+        ArrayList<Item> result = new ArrayList<>();
         for (Item item : this.items) {
-            if (item != null && item.getName().equals(key)) {
-                count++;
-            }
-        }
-
-        int count2 = 0;
-        Item[] result = new Item[count];
-        for (Item item : this.items) {
-            if (item != null && item.getName().equals(key)) {
-                result[count2++] = item;
+            if (item.getName().equals(name)) {
+                result.add(item);
             }
         }
         return result;
@@ -123,11 +95,7 @@ public class Tracker {
      *
      * @return Item[].
      */
-    public Item[] getAll() {
-        Item[] result = new Item[this.position];
-        for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
-        }
-        return result;
+    public ArrayList<Item> getAll() {
+        return items;
     }
 }
