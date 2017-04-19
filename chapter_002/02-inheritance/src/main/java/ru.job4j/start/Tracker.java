@@ -12,11 +12,6 @@ import java.util.Random;
 public class Tracker {
 
     /**
-     * Items length.
-     */
-    private final int itemLength = 10;
-
-    /**
      * Array-storage for requests.
      */
     private ArrayList<Item> items = new ArrayList<>();
