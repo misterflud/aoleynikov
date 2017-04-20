@@ -26,15 +26,13 @@ public class SortUser {
      * @return sorted list
      */
     public List<User> sortHash (List<User> list) {
-        ArrayList<User> arrayList = new ArrayList<>();
-        arrayList.addAll(list);
-        arrayList.sort(new Comparator<User>() {
+        list.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
                 return Integer.compare(o1.hashCode(), o2.hashCode());
             }
         });
-        return arrayList;
+        return list;
     }
 
     /**
@@ -43,15 +41,13 @@ public class SortUser {
      * @return sorted list
      */
     public List<User> sortLength (List<User> list) {
-        ArrayList<User> arrayList = new ArrayList<>();
-        arrayList.addAll(list);
-        arrayList.sort(new Comparator<User>() {
+        list.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
                 return Integer.compare(o1.getLengthOfName(), o2.getLengthOfName());
             }
         });
-        return arrayList;
+        return list;
     }
 
 }
