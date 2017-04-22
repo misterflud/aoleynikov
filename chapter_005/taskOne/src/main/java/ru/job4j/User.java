@@ -29,21 +29,37 @@ package ru.job4j;
 
  */
 public class User {
-
+    /**
+     * Name.
+     */
     private String name;
-
+    /**
+     * Passport.
+     */
     private int passport;
 
+    /**
+     * Constrictor.
+     * @param name name
+     * @param passport passport
+     */
     public User(String name, int passport) {
         this.name = name;
         this.passport = passport;
     }
 
-
+    /**
+     * Getter.
+     * @return name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Getter.
+     * @return passport
+     */
     public int getPassport() {
         return this.passport;
     }

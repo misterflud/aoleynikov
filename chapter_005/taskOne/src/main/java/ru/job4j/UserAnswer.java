@@ -7,7 +7,9 @@ import java.io.InputStreamReader;
  * Created by Anton on 20.04.2017.
  */
 public class UserAnswer implements Input {
-
+    /**
+     * Console asker.
+     */
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     @Override
     public String askAnswer(String s) {
@@ -19,10 +21,5 @@ public class UserAnswer implements Input {
             System.out.println(e.toString());
         }
         return answer;
-    }
-
-    @Override
-    public void ask(String s) {
-        System.out.println(s);
     }
 }
