@@ -12,11 +12,6 @@ public class LogicAction {
      * Save our users and their accounts.
      */
     private HashMap<User, ArrayList<Account>> accountsOfUsers = new HashMap<>();
-    /**
-     * List of users.
-     */
-    private ArrayList<User> users = new ArrayList<>(); //нам необходимо не просто оперировать данными аккаунт-юзер но и просто иметь список юзеров без аккаунтов,
-    // который мы можем передать кому угодно или использовать для получения объекта user
 
     /**
      * Adds user.
@@ -24,7 +19,6 @@ public class LogicAction {
      */
     public void addUser(User user) {
         accountsOfUsers.put(user, new ArrayList<>());
-        users.add(user); //могут быть проблемы -- в памяти объект юзер то один
     }
 
     /**
@@ -33,7 +27,6 @@ public class LogicAction {
      */
     public void deleteUser(User user) {
         accountsOfUsers.remove(user);
-        users.remove(user);
     }
 
     /**
@@ -98,14 +91,8 @@ public class LogicAction {
      * @return object User.
      */
     public User getUser(String name, int passport) throws Exception { //получение юзера из списка
-        User user = null;
-        for (User it : users) {
-            if (it.getName().equals(name) && it.getPassport() == passport) {
-                user = it;
-                break;
-            }
-        }
-        if (user == null) {
+        User user = new User(name, passport);
+        if (!accountsOfUsers.containsKey(user)) {
             throw new NotFoundException("User");
         }
         return user;
