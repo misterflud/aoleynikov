@@ -63,4 +63,33 @@ public class User {
     public int getPassport() {
         return this.passport;
     }
+
+    /**
+     * Equals.
+     * @param user User
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object user) {
+
+        if (this == user) {
+            return true;
+        }
+        if (user == null) {
+            return false;
+        }
+        if (!this.name.equals(((User) user).name) || this.passport != ((User) user).passport) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Hashcode.
+     * @return hashcode
+     */
+    @Override
+    public int hashCode() {
+        return passport * name.hashCode();
+    }
 }

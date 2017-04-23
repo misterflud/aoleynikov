@@ -32,13 +32,6 @@ public class Account {
     }
 
     /**
-     * Constructor.
-     */
-    public Account() { //пустой аккаунт нужен для хранения других аккаунтов
-        this.requisites = requisites;
-    }
-
-    /**
      * Getter.
      * @return value
      */
@@ -59,6 +52,35 @@ public class Account {
      * @return requisites
      */
     public int getRequisites() {
+        return requisites;
+    }
+
+    /**
+     * Equals.
+     * @param account Account
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object account) {
+
+        if (this == account) {
+            return true;
+        }
+        if (account == null) {
+            return false;
+        }
+        if (((Account) account).requisites != this.requisites) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Hashcode.
+     * @return hashcode
+     */
+    @Override
+    public int hashCode() {
         return requisites;
     }
 }

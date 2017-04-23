@@ -77,13 +77,16 @@ public class LogicAction {
      * @param requisites of account
      * @return Account
      */
-    public Account getUserAccount(User user, int requisites) { // не хватает пары методов, поэтому добавлю
+    public Account getUserAccount(User user, int requisites) throws Exception { // не хватает пары методов, поэтому добавлю
         ArrayList<Account> list = accountsOfUsers.get(user); // получаем список аккаунтов. Возможно будут проблемы с памятью -- мы всегда передаем один и тот же элемент
-        Account account2 = new Account();
+        Account account2 = null;
         for (Account it : list) {
             if (it.getRequisites() == requisites) {
                 account2 = it;
             }
+        }
+        if (account2 == null) {
+            throw new NotFoundException("Account");
         }
         return account2;
     }
@@ -94,13 +97,16 @@ public class LogicAction {
      * @param passport of user
      * @return object User.
      */
-    public User getUser(String name, int passport) { //получение юзера из списка
+    public User getUser(String name, int passport) throws Exception { //получение юзера из списка
         User user = null;
         for (User it : users) {
             if (it.getName().equals(name) && it.getPassport() == passport) {
                 user = it;
                 break;
             }
+        }
+        if (user == null) {
+            throw new NotFoundException("User");
         }
         return user;
     }

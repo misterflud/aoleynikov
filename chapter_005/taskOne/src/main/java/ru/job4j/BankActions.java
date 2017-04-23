@@ -93,7 +93,12 @@ public class BankActions {
         public void execute() {
             String name = input.askAnswer("Write name");
             int passport = Integer.parseInt(input.askAnswer("Write passport"));
-            logicAction.deleteUser(logicAction.getUser(name, passport));
+            try {
+                logicAction.deleteUser(logicAction.getUser(name, passport));
+            } catch (Exception e) {
+
+            }
+
         }
         /**
          * Gets information.
@@ -118,8 +123,11 @@ public class BankActions {
             int passport = Integer.parseInt(input.askAnswer("Write passport"));
             double value = Double.parseDouble(input.askAnswer("Write sum"));
             int requisites = Integer.parseInt(input.askAnswer("Write requisites"));
+            try {
+                logicAction.addAccountToUser(logicAction.getUser(name, passport), new Account(value, requisites));
+            } catch (Exception e) {
 
-            logicAction.addAccountToUser(logicAction.getUser(name, passport), new Account(value, requisites));
+            }
         }
         /**
          * Gets information.
@@ -143,8 +151,13 @@ public class BankActions {
             String name = input.askAnswer("Write name");
             int passport = Integer.parseInt(input.askAnswer("Write passport"));
             int requisites = Integer.parseInt(input.askAnswer("Write requisites"));
-            User user = logicAction.getUser(name, passport);
-            logicAction.deleteAccountFromUser(user, logicAction.getUserAccount(user, requisites));
+            try {
+                User user = logicAction.getUser(name, passport);
+                logicAction.deleteAccountFromUser(user, logicAction.getUserAccount(user, requisites));
+            } catch (Exception e) {
+
+            }
+
         }
         /**
          * Gets information.
@@ -169,18 +182,23 @@ public class BankActions {
             int passport1 = Integer.parseInt(input.askAnswer("Write passport"));
             int requisites1 = Integer.parseInt(input.askAnswer("Write requisites"));
             double sum = Integer.parseInt(input.askAnswer("Write sum"));
-            User user1 = logicAction.getUser(name1, passport1);
+            try {
+                User user1 = logicAction.getUser(name1, passport1);
 
-            String name2 = input.askAnswer("Write name, witch you want to send money");
-            int passport2 = Integer.parseInt(input.askAnswer("Write passport"));
-            int requisites2 = Integer.parseInt(input.askAnswer("Write requisites"));
-            User user2 = logicAction.getUser(name2, passport2);
-            boolean b = logicAction.transferMoney(user1, logicAction.getUserAccount(user1, requisites1), user2, logicAction.getUserAccount(user2, requisites2), sum);
-            if (b) {
-                System.out.println("-----Done-----");
-            } else {
-                System.out.println("-----Error-----");
+                String name2 = input.askAnswer("Write name, witch you want to send money");
+                int passport2 = Integer.parseInt(input.askAnswer("Write passport"));
+                int requisites2 = Integer.parseInt(input.askAnswer("Write requisites"));
+                User user2 = logicAction.getUser(name2, passport2);
+                boolean b = logicAction.transferMoney(user1, logicAction.getUserAccount(user1, requisites1), user2, logicAction.getUserAccount(user2, requisites2), sum);
+                if (b) {
+                    System.out.println("-----Done-----");
+                } else {
+                    System.out.println("-----Error-----");
+                }
+            } catch (Exception e) {
+
             }
+
 
         }
         /**
