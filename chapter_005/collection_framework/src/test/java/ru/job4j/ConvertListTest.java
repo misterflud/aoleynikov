@@ -2,6 +2,7 @@ package ru.job4j;
 
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.hamcrest.core.Is.is;
@@ -25,17 +26,13 @@ public class ConvertListTest {
                 list.add(it2);
             }
         }
-        ArrayList<Integer> result1 = convertList.toList(mass);
+        ArrayList<Integer> result1 = (ArrayList) convertList.toList(mass);
         assertThat(result1, is(list));
 
 
 
-        list.remove(list.size() - 1); //удаляем нули
+        list.remove(list.size() - 1); //удаляем 2 последних нуля
         list.remove(list.size() - 1);
-        for (Integer it : list) {
-            System.out.print(it + " ");
-        }
-
 
         final int[][] result2 = convertList.toArray(list, rows);
         assertThat(result2, is(mass));

@@ -14,7 +14,7 @@ public class TaskTwoTest {
      */
     @Test
     public void whenThen() {
-        final int[] mass = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        final int[] mass = {1, 1, 1, 4, 1, 1, 1, 3, 2};
         TaskTwo taskTwo = new TaskTwo(mass);
         final int wait = 10;
         //while(taskTwo.hasNext()) {

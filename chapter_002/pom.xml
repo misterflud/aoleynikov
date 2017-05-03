@@ -14,6 +14,7 @@
         <module>chess</module>
         <module>professions</module>
         <module>shape2</module>
+        <module>additionalTask</module>
     </modules>
 
 </project>

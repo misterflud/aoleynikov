@@ -11,5 +11,9 @@
 
     <modules>
         <module>collection_framework</module>
+        <module>generalization</module>
+        <module>sort</module>
+        <module>taskOne</module>
+        <module>iterator</module>
     </modules>
 </project>
