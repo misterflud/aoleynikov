@@ -40,7 +40,6 @@ public class IteratorOfIterators implements Converter, Iterator {
         if (!itInteger.hasNext()) {
             if (it.hasNext()) {
                 itInteger = it.next();
-                result = itInteger.next();
             }
         }
         return result;
