@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 /**
  * Created by Anton on 07.05.2017.
+ * @param <E> E
  */
 public class Container<E> implements SimpleContainer<E> {
 
@@ -26,6 +27,7 @@ public class Container<E> implements SimpleContainer<E> {
     }
     /**
      * Constructor.
+     * @param size size
      */
     public Container(int size) {
         ob = new Object[size];
@@ -37,7 +39,7 @@ public class Container<E> implements SimpleContainer<E> {
      */
     @Override
     public void add(E value) {
-        if(this.index == ob.length - 1) {
+        if (this.index == ob.length - 1) {
             createBigger();
             ob[this.index++] = value;
         } else {
@@ -72,7 +74,7 @@ public class Container<E> implements SimpleContainer<E> {
         @Override
         public boolean hasNext() {
             int it2 = it + 1;
-            if(it2 > index) {
+            if (it2 > index) {
                 return false;
             }
             return true;

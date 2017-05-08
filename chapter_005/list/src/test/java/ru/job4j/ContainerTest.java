@@ -30,7 +30,7 @@ public class ContainerTest {
 
         Iterator iterator = container.iterator();
 
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
 
