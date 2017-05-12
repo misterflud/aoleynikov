@@ -54,7 +54,7 @@ public class Container<E> implements SimpleContainer<E> {
      */
     @Override
     public E get(int index) {
-        return (E) ob[index]; //опять
+        return (E) ob[index];
     }
 
     /**
