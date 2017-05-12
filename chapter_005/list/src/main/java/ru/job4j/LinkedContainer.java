@@ -51,7 +51,42 @@ public class LinkedContainer<E> implements SimpleContainer<E> {
         }
 
         return (E) x.item;
+    }
 
+    /**
+     * Delete last element.
+     * @return E
+     */
+    public E deleteLast() {
+        final E element = last.item;
+        final Node<E> prev = last.prev;
+        last.item = null;
+        last.prev = null; // help GC
+        last = prev;
+        if (prev == null)
+            first = null;
+        else
+            prev.next = null;
+        size--;
+        return element;
+    }
+
+    /**
+     * Delete first element.
+     * @return E
+     */
+    public E deleteFirst() {
+        final E element = first.item;
+        final Node<E> next = first.next;
+        first.item = null;
+        first.next = null; // help GC
+        first = next;
+        if (next == null)
+            last = null;
+        else
+            next.prev = null;
+        size--;
+        return element;
     }
 
     /**
