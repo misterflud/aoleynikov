@@ -18,6 +18,11 @@ public class MapTests {
         Map<User, Object> map = new HashMap<User, Object>();
         map.put(user1, "first");
         map.put(user2, "second");
+        System.out.println(user1.equals(user2));
+
+        System.out.println(user1.hashCode());
+        System.out.println(user1.hashCode());
+
         for (Object ob : map.values()) {
             System.out.println(ob.toString());
         }
