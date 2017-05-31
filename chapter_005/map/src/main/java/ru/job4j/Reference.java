@@ -4,49 +4,82 @@ import java.util.Iterator;
 
 /**
  * Created by Anton on 30.05.2017.
+ * @param <K> key
+ * @param <V> value
  */
-public class Reference<K, V> implements MyMap <K, V>, Iterable<K> {
+public class Reference<K, V> implements MyMap<K, V>, Iterable<V> {
 
-    private Position[] mass = new Position[100]; // generic array creation что это?? не ясно. Еще есть проблема -- данный массив всегда увеличивается..
+    //private Position[] mass = new Position[100]; // generic array creation что это?? не ясно. Еще есть проблема -- данный массив всегда увеличивается..
 
     /**
      * Container of hashSum.
      */
     private Node[][] massIter = new Node[100][100];
     /**
-     * Index.
+     * Last added Node.
+     */
+    private Node lastNode;
+    /**
+     * Counts adds.
      */
     private int index = 0;
-
+    /**
+     * Adds elements.
+     * @param key key
+     * @param value value
+     * @return boolean
+     */
     @Override
     public boolean insert(K key, V value) {
         Position position = getPosition(key);
         int firstPosition = position.firstPosition;
         int lastPosition = position.lastPosition;
-        if (index == mass.length - 1) {
-            massBigger();
-        }
         if (checkDuplicate(firstPosition, lastPosition)) {
-            mass[index++] = new Position(firstPosition, lastPosition);
-            massIter[firstPosition][lastPosition] = new Node(key, value, index);
+            Node newNode = new Node(key, value);
+            //если первое добавление
+            if (lastNode != null) {
+                lastNode.nextNode = newNode;
+                newNode.previousNode = lastNode;
+            }
+            massIter[firstPosition][lastPosition] = newNode;
+            lastNode = newNode;
+            index++;
         } else {
             return false;
         }
         return true;
     }
 
+    /**
+     * Gets elements.
+     * @param key key
+     * @return generic V
+     */
     @Override
     public V get(K key) {
         Position position = getPosition(key);
-        return (V) massIter[position.firstPosition][position.lastPosition].value ;
+        return (V) massIter[position.firstPosition][position.lastPosition].value;
     }
-
+    /**
+     * Deletes elements.
+     * @param key key
+     * @return boolean
+     */
     @Override
     public boolean delete(K key) {
         Position position = getPosition(key);
-        int indexRemoved = massIter[position.firstPosition][position.lastPosition].positionInMas;
+        if (massIter[position.firstPosition][position.lastPosition].equals(lastNode)) {
+            lastNode = lastNode.previousNode;
+        }
+        if (massIter[position.firstPosition][position.lastPosition].nextNode != null) {
+            massIter[position.firstPosition][position.lastPosition].nextNode.previousNode = massIter[position.firstPosition][position.lastPosition].previousNode;
+        }
+        if (massIter[position.firstPosition][position.lastPosition].previousNode != null) {
+            massIter[position.firstPosition][position.lastPosition].previousNode.nextNode = massIter[position.firstPosition][position.lastPosition].nextNode;
+        }
+
         massIter[position.firstPosition][position.lastPosition] = null;
-        mass[indexRemoved] = null;
+        index--;
         return true;
     }
 
@@ -64,20 +97,31 @@ public class Reference<K, V> implements MyMap <K, V>, Iterable<K> {
     }
 
     /**
-     * Getter.
+     * Getter Iterator.
      * @return Iterator
      */
     @Override
-    public Iterator<K> iterator() {
-        return new Iterator<K>() {
+    public Iterator<V> iterator() {
+        return new Iterator<V>() {
+
+            private Node node = lastNode;
+
+            private int index2 = index;
+
             @Override
             public boolean hasNext() {
+                if (index2 != 0) {
+                    return true;
+                }
                 return false;
             }
 
             @Override
-            public K next() {
-                return null;
+            public V next() {
+                V value = (V) node.value;
+                index2--;
+                node = node.previousNode;
+                return value;
             }
         };
     }
@@ -88,21 +132,45 @@ public class Reference<K, V> implements MyMap <K, V>, Iterable<K> {
      * @param <V> value
      */
     private class Node<K, V> {
+        /**
+         * Key.
+         */
         K key;
+        /**
+         * Value.
+         */
         V value;
-        int positionInMas;
+        /**
+         * Next Node.
+         */
+        Node nextNode;
+        /**
+         * Previous Node.
+         */
+        Node previousNode;
 
-        public Node(K key, V value, int positionInMass) {
+        /**
+         * Constructor.
+         * @param key key
+         * @param value value
+         */
+        public Node(K key, V value) {
             this.key = key;
             this.value = value;
-            this.positionInMas = positionInMass;
         }
 
+        /**
+         * Equals.
+         * @param o o
+         * @return boolean
+         */
         @Override
         public boolean equals(Object o) {
-            Node node2 = (Node) o;
-            if (this.key.equals(node2.key) && this.value.equals(node2.value)) {
-                return true;
+            if (o instanceof Node) {
+                Node node2 = (Node) o;
+                if (this.key.equals(node2.key) && this.value.equals(node2.value)) {
+                    return true;
+                }
             }
             return false;
         }
@@ -113,25 +181,24 @@ public class Reference<K, V> implements MyMap <K, V>, Iterable<K> {
      * @param <D> null
      */
     private class Position<D> { //приходится использовать какие то дженерики чтобы избежать generic array creation
+        /**
+         * Position.
+         */
         int firstPosition;
-
+        /**
+         * Position.
+         */
         int lastPosition;
 
+        /**
+         * Constructor.
+         * @param firstPosition firstPosition
+         * @param lastPosition lastPosition
+         */
         public Position(int firstPosition, int lastPosition) {
             this.firstPosition = firstPosition;
             this.lastPosition = lastPosition;
         }
-    }
-
-    /**
-     * Creates mass bigger.
-     */
-    private void massBigger() {
-        Position[] mass2 = new Position[mass.length * 2];
-        for (int i = 0; i < mass.length; i++) {
-            mass2[i] = mass[i];
-        }
-        mass = mass2;
     }
 
 
