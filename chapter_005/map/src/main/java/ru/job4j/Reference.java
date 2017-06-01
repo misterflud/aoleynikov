@@ -34,6 +34,7 @@ public class Reference<K, V> implements MyMap<K, V>, Iterable<V> {
         Position position = getPosition(key);
         int firstPosition = position.firstPosition;
         int lastPosition = position.lastPosition;
+        checkLength(firstPosition);
         if (checkDuplicate(firstPosition, lastPosition)) {
             Node newNode = new Node(key, value);
             //если первое добавление
@@ -211,9 +212,6 @@ public class Reference<K, V> implements MyMap<K, V>, Iterable<V> {
      * @return boolean
      */
     private boolean checkDuplicate(int firstPosition, int lastPosition) {
-        if (firstPosition > massIter.length) {
-            massIterBigger(firstPosition);
-        }
         if (massIter[firstPosition][lastPosition] != null) { //поменять местами true false
             return false;
         }
@@ -221,11 +219,22 @@ public class Reference<K, V> implements MyMap<K, V>, Iterable<V> {
     }
 
     /**
+     * Check length.
+     * @param firstPosition firstPosition
+     */
+    private void checkLength(int firstPosition) {
+        if (firstPosition >= massIter.length) {
+            massIterBigger(firstPosition);
+            checkLength(firstPosition);
+        }
+    }
+
+    /**
      * Creates massIter bigger.
      * @param firstPosition [firstPosition][lastPosition]
      */
     private void massIterBigger(int firstPosition) {
-        Node[][] massIter2 = new Node[firstPosition][100];
+        Node[][] massIter2 = new Node[massIter.length * 2][100];
         for (int i = 0; i < massIter.length; i++) {
             for (int j = 0; j < 100; j++) {
                 massIter2[i][j] = massIter[i][j];

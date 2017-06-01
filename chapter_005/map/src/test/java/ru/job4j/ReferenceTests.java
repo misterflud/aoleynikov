@@ -43,7 +43,7 @@ public class ReferenceTests {
         HashMap<EasyHash, Integer> hashMap = new HashMap<EasyHash, Integer>();
 
         Date date1 = new Date();
-        for(int i = 0; i < 9999; i++) {
+        for(int i = 0; i < 1000000; i++) {
             try{
                 map2.insert(new EasyHash(i), i);
             } catch (Exception e) {
@@ -58,7 +58,7 @@ public class ReferenceTests {
 
 
         Date date3 = new Date();
-        for(int i = 0; i < 9999; i++) {
+        for(int i = 0; i < 1000000; i++) {
             hashMap.put(new EasyHash(i), i);
         }
         Date date4 = new Date();
