@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
 
 
 /**
@@ -37,7 +38,7 @@ public class ReferenceTests {
             System.out.println(iterator.next());
         }
 
-        //--------------------------------- SpeedTest---------------------------------------------
+        //--------------------------------- SpeedTest1---------------------------------------------
 
         Reference<EasyHash, Integer> map2 = new Reference<EasyHash, Integer>();
         HashMap<EasyHash, Integer> hashMap = new HashMap<EasyHash, Integer>();
@@ -63,6 +64,27 @@ public class ReferenceTests {
         }
         Date date4 = new Date();
         System.out.println((int) (date4.getTime() - date3.getTime()) + " Миллисекунд");
+
+
+        //--------------------------------- SpeedTest2---------------------------------------------
+        Iterator<Integer> iterator1 = map2.iterator();
+        Date date5 = new Date();
+        while (iterator1.hasNext()) {
+            iterator1.next();
+        }
+        Date date6 = new Date();
+        System.out.println((int) (date6.getTime() - date5.getTime()) + " Миллисекунд");
+
+
+
+        Set entrySet = hashMap.entrySet();
+        Iterator iterator2 = entrySet.iterator();
+        Date date7 = new Date();
+        while (iterator2.hasNext()) {
+            iterator2.next();
+        }
+        Date date8 = new Date();
+        System.out.println((int) (date8.getTime() - date7.getTime()) + " Миллисекунд");
     }
 
 }
