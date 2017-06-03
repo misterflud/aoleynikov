@@ -13,11 +13,11 @@ public class SimpleIterator<T> implements Iterator<T> {
     /**
      * Iterator.
      */
-    int it = 0;
+    private int it = 0;
     /**
      * Length of mass.
      */
-    int len;
+    private int len;
 
     /**
      * Constructor.

@@ -12,7 +12,7 @@ public class StoresTest {
     @Test
     public void whenThen() {
         UserStore userStore = new UserStore(5);
-        userStore.add(new User()); // тут тоже самое -- ведь в классах я явно указываю что за параметр T, почему unchecked assignment??
+        userStore.add(new User()); // тут тоже самое -- ведь в классах я явно указываю что за параметр T и он base, почему unchecked assignment??
         userStore.add(new User());
         userStore.add(new User());
         userStore.add(new User());

@@ -10,7 +10,7 @@ import static org.junit.Assert.assertThat;
  */
 public class TaskTwoTest {
     /**
-     * Test/
+     * Test.
      */
     @Test
     public void whenThen() {
