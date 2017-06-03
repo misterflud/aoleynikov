@@ -36,5 +36,8 @@ public class TreeTest {
             System.out.println(iterator.next());
         }
 
+        System.out.println("*********************************");
+
+        System.out.println(tree.isBinary());
     }
 }

@@ -27,6 +27,10 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      * For iteration.
      */
     private ArrayList<Node<E>> iteratorArray;
+    /**
+     * Flag, because we use recursion.....
+     */
+    private boolean binary = true;
 
     /**
      * Node.
@@ -138,4 +142,33 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             }
         }
     }
+
+    /**
+     * Is binary tree?
+     * @return boolean
+     */
+    public boolean isBinary() {
+        //isBinaryInsideLogic(rootNode);
+        //return binary;
+        return isBinaryInsideLogic(rootNode);
+    }
+
+    /**
+     * Recursion logic for bypassing Tree.
+     * @param startNode start Node
+     */
+    private boolean isBinaryInsideLogic(Node<E> startNode) {
+        for (Node<E> e : startNode.children) {
+            if (startNode.children.size() > 2) {
+                //binary = false;
+                //break;
+                return false;
+            }
+            if (e.children.size() > 0) {
+                bypassTree(e);
+            }
+        }
+        return true;
+    }
+
 }
