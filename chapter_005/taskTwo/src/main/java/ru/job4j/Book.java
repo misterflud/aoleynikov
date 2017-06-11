@@ -6,6 +6,8 @@ import java.util.TreeSet;
 
 /**
  * Created by Anton on 10.06.2017.
+ * BID -- sell
+ * Ask -- buy
  * 1760855
  */
 public class Book {
@@ -21,11 +23,16 @@ public class Book {
      * Save order BUY by price.
      */
     private HashMap<Double, Line> lineAskInGlass = new HashMap<>(100);
-
+    /**
+     * For taking order from orderAgregator (when deleting).
+     */
     private Action actionTemp;
 
+    /**
+     * Adds or Deletes in SELL or BUY.
+     * @param action action
+     */
     public void bookManage(Action action) {
-
         if (action.addOrDel) {
             if (action.bOrA) {
                 addBid(action);
@@ -41,23 +48,12 @@ public class Book {
                 deleteAsk(action);
             }
         }
-        /*
-        if (action.bOrA) {
-            if (action.addOrDel) {
-                addBid(action);
-            } else {
-                deleteBid(action);
-            }
-        } else {
-            if (action.addOrDel) {
-                addAsk(action);
-            } else {
-                deleteAsk(action);
-            }
-        }
-        */
     }
 
+    /**
+     * Adds BID.
+     * @param action action
+     */
     public void addBid(Action action) {
         orderAgregator.put(action.orderId, action);
         if (lineBidInGlass.containsKey(action.price)) {
@@ -67,13 +63,19 @@ public class Book {
         }
     }
 
-
+    /**
+     * Deletes BID
+     * @param action action
+     */
     public void deleteBid(Action action) {
         lineBidInGlass.get(actionTemp.price).volume -= actionTemp.volume;
         orderAgregator.remove(action.orderId);
     }
 
-
+    /**
+     * Adds ASK.
+     * @param action action
+     */
     public void addAsk(Action action) {
         orderAgregator.put(action.orderId, action);
         if (lineAskInGlass.containsKey(action.price)) {
@@ -83,12 +85,18 @@ public class Book {
         }
     }
 
-
-    public void deleteAsk(Action deleteAction) {
+    /**
+     * Deletes ASK.
+     * @param action deleteAction
+     */
+    public void deleteAsk(Action action) {
         lineAskInGlass.get(actionTemp.price).volume -= actionTemp.volume;
-        orderAgregator.remove(deleteAction.orderId);
+        orderAgregator.remove(action.orderId);
     }
 
+    /**
+     * Prints.
+     */
     public void print() {
         System.out.println("Size    BID    ASK    Size");
         TreeSet<Line> treeSetBid = new TreeSet<>();

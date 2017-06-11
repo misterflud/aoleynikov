@@ -14,17 +14,32 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class Manage {
 
-
+    /**
+     * Book1.
+     */
     private Book book1 = new Book();
+    /**
+     * Book2.
+     */
     private Book book2 = new Book();
+    /**
+     * Book3.
+     */
     private Book book3 = new Book();
 
-
+    /**
+     * Start.
+     * @param path pathFile
+     * @throws Exception Exception
+     */
     public void startGlass(String path) throws Exception {
         takeXmlLine(path);
         print();
     }
 
+    /**
+     * Handler for xml parser.
+     */
     private DefaultHandler handler = new DefaultHandler() {
 
         String tagAdd = "AddOrder";
@@ -46,7 +61,11 @@ public class Manage {
         }
     };
 
-    public Action takeXmlLine(String path) {
+    /**
+     * Xml parser.
+     * @param path path
+     */
+    public void takeXmlLine(String path) {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -57,11 +76,12 @@ public class Manage {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return null;
     }
 
-
+    /**
+     * Manager.
+     * @param action action
+     */
     private void manage(Action action) {
 
         if (action.book.equals("book-1")) {
@@ -72,6 +92,10 @@ public class Manage {
             book3.bookManage(action);
         }
     }
+
+    /**
+     * Print book.
+     */
     private void print() {
         book1.print();
         book2.print();
