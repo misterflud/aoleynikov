@@ -1,6 +1,8 @@
 package ru.job4j;
 
 import java.io.File;
+import java.util.HashMap;
+
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -15,24 +17,18 @@ import org.xml.sax.helpers.DefaultHandler;
 public class Manage {
 
     /**
-     * Book1.
+     * Books.
      */
-    private Book book1 = new Book();
-    /**
-     * Book2.
-     */
-    private Book book2 = new Book();
-    /**
-     * Book3.
-     */
-    private Book book3 = new Book();
+    private HashMap<String, Book> books;
+
 
     /**
      * Start.
      * @param path pathFile
      * @throws Exception Exception
      */
-    public void startGlass(String path) throws Exception {
+    public void startGlass(String path, HashMap<String, Book> books) throws Exception {
+        this.books = books;
         takeXmlLine(path);
         print();
     }
@@ -83,22 +79,13 @@ public class Manage {
      * @param action action
      */
     private void manage(Action action) {
-
-        if (action.book.equals("book-1")) {
-            book1.bookManage(action);
-        } else if (action.book.equals("book-2")) {
-            book2.bookManage(action);
-        } else {
-            book3.bookManage(action);
-        }
-    }
+        books.get(action.book).bookManage(action);
+}
 
     /**
      * Print book.
      */
     private void print() {
-        book1.print();
-        book2.print();
-        book3.print();
+        books.forEach((k,v) -> v.print());
     }
 }

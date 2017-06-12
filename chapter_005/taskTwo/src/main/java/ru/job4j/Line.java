@@ -29,4 +29,16 @@ public abstract class Line implements Comparable<Line> {
     public void printField() {
         System.out.print(String.format(" %s     %s", volume, price));
     }
+
+    /**
+     * Takes string.
+     * @return string
+     */
+    public String takeString() {
+        StringBuilder str1 = new StringBuilder(" " + volume);
+        str1.setLength(10);
+        StringBuilder str2 = new StringBuilder(" " + price);
+        str2.setLength(10);
+        return str1.toString() + str2.toString();
+    }
 }

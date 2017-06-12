@@ -28,6 +28,17 @@ public class LineAsk extends Line {
         return 0;
     }
 
-
+    /**
+     * Takes string.
+     * @return string
+     */
+    @Override
+    public String takeString() {
+        StringBuilder str1 = new StringBuilder(" " + price);
+        str1.setLength(10);
+        StringBuilder str2 = new StringBuilder(" " + volume);
+        str2.setLength(10);
+        return str1.toString() + str2.toString();
+    }
 
 }

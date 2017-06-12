@@ -11,6 +11,7 @@ import java.util.TreeSet;
  * 1760855
  */
 public class Book {
+
     /**
      * Save order by order.
      */
@@ -27,6 +28,7 @@ public class Book {
      * For taking order from orderAgregator (when deleting).
      */
     private Action actionTemp;
+
 
     /**
      * Adds or Deletes in SELL or BUY.
@@ -98,7 +100,9 @@ public class Book {
      * Prints.
      */
     public void print() {
-        System.out.println("Size    BID    ASK    Size");
+        String str = "";
+
+        System.out.println("   Size       BID      ASK     Size");
         TreeSet<Line> treeSetBid = new TreeSet<>();
         TreeSet<Line> treeSetAsk = new TreeSet<>();
         lineBidInGlass.forEach((k,v) -> treeSetBid.add(v));
@@ -109,13 +113,17 @@ public class Book {
 
         while (iteratorBid.hasNext() || iteratorAsk.hasNext()) {
             if (iteratorBid.hasNext()) {
-                iteratorBid.next().printField();
+                str = iteratorBid.next().takeString();
             }
             System.out.print("   ");
             if (iteratorAsk.hasNext()) {
-                iteratorAsk.next().printField();
+                StringBuilder stringBuilder = new StringBuilder(str);
+                stringBuilder.setLength(21);
+                str = stringBuilder.toString() + iteratorAsk.next().takeString();
             }
-            System.out.println("");
+            System.out.println(str);
+            str = "";
         }
     }
+
 }

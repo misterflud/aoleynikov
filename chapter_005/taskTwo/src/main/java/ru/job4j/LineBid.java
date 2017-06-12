@@ -27,5 +27,4 @@ public class LineBid extends Line {
         return 0;
     }
 
-
 }
