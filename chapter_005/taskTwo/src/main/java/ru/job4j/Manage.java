@@ -38,9 +38,9 @@ public class Manage {
      */
     private DefaultHandler handler = new DefaultHandler() {
 
-        String tagAdd = "AddOrder";
+        final String tagAdd = "AddOrder";
 
-        String tagDelete = "DeleteOrder";
+        final String tagDelete = "DeleteOrder";
 
 
         /**
@@ -49,10 +49,10 @@ public class Manage {
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes)
                 throws SAXException {
-            if (qName.equals(tagAdd)) {
-                manage(new Action(attributes.getValue(0), attributes.getValue(1), attributes.getValue(2) , attributes.getValue(3), attributes.getValue(4)));
-            } else if (qName.equals(tagDelete)) {
-                manage(new Action(attributes.getValue(0), attributes.getValue(1)));
+            if (tagAdd.equals(qName)) {
+                manage(new Action(attributes.getValue("book"), attributes.getValue("operation"), attributes.getValue("price") , attributes.getValue("volume"), attributes.getValue("orderId")));
+            } else if (tagDelete.equals(qName)) {
+                manage(new Action(attributes.getValue("book"), attributes.getValue("orderId")));
             }
         }
     };

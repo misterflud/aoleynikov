@@ -40,7 +40,7 @@ public class Action {
     public Action(String book, String operation, String price, String volume, String orderId) {
         this.book = book;
 
-        if (operation.equals("BUY")) {
+        if ("BUY".equals(operation)) {
             this.bOrA = true;
         } else {
             this.bOrA = false;
