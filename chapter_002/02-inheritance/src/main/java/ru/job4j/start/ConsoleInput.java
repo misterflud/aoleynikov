@@ -3,9 +3,10 @@ package ru.job4j.start;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**ConsoleInput prints questions from StartUI and takes information from console.
- *@author Anton Oleynikov
- *@version 1
+/**
+ * ConsoleInput prints questions from StartUI and takes information from console.
+ * @author Anton Oleynikov
+ * @version 1
  */
 public class ConsoleInput implements Input {
     /**
@@ -14,7 +15,7 @@ public class ConsoleInput implements Input {
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     /**
-     *
+     * Asks.
      * @param question question.
      * @return String
      */
@@ -30,7 +31,7 @@ public class ConsoleInput implements Input {
     }
 
     /**
-     *
+     * Asks.
      * @param question question.
      * @param range range.
      * @return int

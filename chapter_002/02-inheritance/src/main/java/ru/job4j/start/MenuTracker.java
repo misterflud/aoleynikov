@@ -49,6 +49,10 @@ public class MenuTracker {
         this.actions.add(action4.key(), action4);
     }
 
+    /**
+     * Adds action.
+     * @param action action
+     */
     public void addAction(UserAction action) {
         this.actions.add(action.key(), action);
     }
@@ -67,9 +71,9 @@ public class MenuTracker {
      *
      * @param items items
      */
-    public void print(ArrayList<Item> items) { //этот метод лишний, так как есть ShowItems(). Разобраться кто его использует
+    public void print(ArrayList<Item> items) {
         for (Item item : items) {
-            System.out.println(String.format("%s %s %s", item.getName(), item.getDescription(), item.getId()));
+            System.out.println(String.format("%s %s %s", item.getId(), item.getName(), item.getDescription()));
         }
     }
 

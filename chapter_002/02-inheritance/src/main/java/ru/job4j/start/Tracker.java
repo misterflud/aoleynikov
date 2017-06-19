@@ -1,15 +1,15 @@
 package ru.job4j.start;
 
 import ru.job4j.models.Item;
-
 import java.util.ArrayList;
 import java.util.Random;
 
-/**It's main class for action something.
- *@author Anton Oleynikov
- *@version 1
+/**
+ * It's main class for action something.
+ * @author Anton Oleynikov
+ * @version 2
  */
-public class Tracker {
+public class Tracker implements AutoCloseable  {
 
     /**
      * Array-storage for requests.
@@ -23,20 +23,19 @@ public class Tracker {
 
     /**
      * Add request to storage.
-     *
      * @param item request.
      * @return ref to request.
      */
-    public Item add(Item item) {
+    public Item add(Item item){
         item.setId(String.valueOf(System.currentTimeMillis() + RN.nextInt()));
         this.items.add(item);
         return item;
     }
 
     /**
-     *
-     * @param newItem newItem.
-     * @param oldId oldId.
+     * Updates item.
+     * @param newItem newItem
+     * @param oldId oldId
      */
     public void update(Item newItem, String oldId) {
         for (Item item : this.items) { //по идее не должно работать, хотя будет -- ссылка не меняется, мы напрямую обращаемся к каждому Item в памяти
@@ -49,17 +48,17 @@ public class Tracker {
     }
 
     /**
-     *
-     * @param item item.
+     * Deletes.
+     * @param item item
      */
     public void delete(Item item) {
         items.remove(item);
     }
 
     /**
-     *
-     * @param name name.
-     * @return Item[];
+     * Filter.
+     * @param name name
+     * @return Item[]
      */
     public ArrayList<Item> filterByName(String name) {
         ArrayList<Item> result = new ArrayList<>();
@@ -71,9 +70,9 @@ public class Tracker {
         return result;
     }
     /**
-     *
-     * @param id id.
-     * @return Item.
+     * Finds item.
+     * @param id id
+     * @return Item
      */
     public Item findById(String id) {
         Item result = null;
@@ -87,10 +86,19 @@ public class Tracker {
     }
 
     /**
-     *
-     * @return Item[].
+     *  Gets list.
+     * @return Item[]
      */
     public ArrayList<Item> getAll() {
         return items;
+    }
+
+    /**
+     * Closes.
+     * @throws Exception e
+     */
+    @Override
+    public void close() throws Exception {
+
     }
 }

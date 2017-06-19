@@ -1,6 +1,9 @@
 package ru.job4j;
 import ru.job4j.start.*;
 
+import java.io.InputStream;
+import java.util.Properties;
+
 /**StartUI -- It is for manage the program.
  *Example '<Milk> + <12>', it's mean that you should write: Milk 12
  *@author Anton Oleynikov
@@ -31,15 +34,27 @@ public class StartUI {
      *@exception Exception Exception
      */
     public static void main(String[] args) throws Exception {
-        //Input input = new ConsoleInput();
-        Input input = new ValidateInput();
-        new StartUI(input, new Tracker()).init();
+        Input input = new ConsoleInput();
+        //Input input = new ValidateInput();
+        //new StartUI(input, new Tracker()).init();
+
+
+
+        final Properties prs = new Properties();
+        ClassLoader load = StartUI.class.getClassLoader();
+        try (InputStream inputStream = load.getResourceAsStream("config.properties")) {
+            prs.load(inputStream);
+        }
+
+        try (Tracker trackerSQL = new TrackerSQL(prs.getProperty("username"), prs.getProperty("password"), prs.getProperty("url"))) {
+            new StartUI(input, trackerSQL).init();
+        }
     }
     /**
      *@exception Exception Exception
      */
     public void init() throws Exception {
-        tracker = new Tracker();
+
         MenuTracker menu = new MenuTracker(this.input, tracker);
         menu.fillAction();
         UserAction deleteAction = new BaseAction("Delete") { //анонимный класс
