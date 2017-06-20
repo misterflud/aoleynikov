@@ -9,14 +9,24 @@ import java.io.InputStreamReader;
  */
 public class ConnectionWithUser implements Connect {
 
+    /**
+     * Stream.
+     */
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-
+    /**
+     * Sends message.
+     * @param s s
+     */
     @Override
     public void sendAnswer(String s) {
         System.out.println(s);
     }
 
+    /**
+     * Takes message.
+     * @return string
+     */
     @Override
     public String takeAnswer() {
         try {
@@ -28,12 +38,27 @@ public class ConnectionWithUser implements Connect {
         return "";
     }
 
+    /**
+     * Sends and takes message.
+     * @param s s
+     * @return string
+     */
     @Override
     public String sendTakeAnswer(String s) {
+        try {
+            System.out.println(s);
+            return bufferedReader.readLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        return null;
+        return "";
     }
 
+    /**
+     * Closes streams.
+     * @throws IOException IOException
+     */
     @Override
     public void close() throws IOException {
         bufferedReader.close();

@@ -5,7 +5,14 @@ package ru.job4j;
  */
 public interface Action {
 
+    /**
+     * Execute.
+     */
     void execute();
 
+    /**
+     * Description.
+     * @return description.
+     */
     String getDescription();
 }

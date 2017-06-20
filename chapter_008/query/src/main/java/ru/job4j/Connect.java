@@ -8,9 +8,22 @@ import java.util.ArrayList;
  */
 public interface Connect extends Closeable {
 
+    /**
+     * Sends message.
+     * @param s s
+     */
     void sendAnswer(String s);
 
+    /**
+     * Takes message.
+     * @return string
+     */
     String takeAnswer();
 
+    /**
+     * Sends and takes message.
+     * @param s s
+     * @return string
+     */
     String sendTakeAnswer(String s);
 }

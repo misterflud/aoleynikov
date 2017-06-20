@@ -5,8 +5,15 @@ package ru.job4j;
  */
 public abstract class BaseFilter implements Filter {
 
+    /**
+     * Position in list.
+     */
     protected int number;
 
+    /**
+     * Constructor.
+     * @param number position
+     */
     public BaseFilter(int number) {
         this.number = number;
     }
