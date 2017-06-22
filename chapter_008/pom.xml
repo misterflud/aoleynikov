@@ -20,5 +20,6 @@
     <modules>
         <module>updateInsert</module>
         <module>query</module>
+        <module>testTask</module>
     </modules>
 </project>
