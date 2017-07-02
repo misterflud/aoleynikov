@@ -1,6 +1,7 @@
 package aoleynikov.servlets;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.Properties;
@@ -24,10 +25,18 @@ public class ConnectionWithDataBase implements AutoCloseable {
 
     private BufferedReader reader;
 
-    public ConnectionWithDataBase(String username, String password, String url) {
-        this.username = username;
-        this.password = password;
-        this.url = url;
+    public ConnectionWithDataBase() {
+        final Properties prs = new Properties();
+        ClassLoader loader = ConnectionWithDataBase.class.getClassLoader();
+        try (InputStream inputStream = loader.getResourceAsStream("config.properties")) {
+            prs.load(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.username = prs.getProperty("username");
+        this.password = prs.getProperty("password");
+        this.url = prs.getProperty("url");
+
         checkTableAndCreate();
     }
 
@@ -35,7 +44,6 @@ public class ConnectionWithDataBase implements AutoCloseable {
         try {
             connection = DriverManager.getConnection(url, username, password);
 
-            final Properties prs = new Properties();
             ClassLoader load = ConnectionWithDataBase.class.getClassLoader();
             reader = new BufferedReader(new InputStreamReader(load.getResourceAsStream("createusertable.sql"))); //получили скрипт создания таблицы
 
@@ -78,7 +86,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
         }
     }
 
-    public BaseUser getUser(BaseUser userWithLogin) {
+    public User getUser(BaseUser userWithLogin) {
         try {
             st = connection.prepareStatement("SELECT * FROM users where login = ?");
             st.setString(1, userWithLogin.login);

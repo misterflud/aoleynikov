@@ -17,4 +17,8 @@ public class User extends BaseUser {
     public User(){
 
     }
+
+    public User(String login){
+        super(login);
+    }
 }

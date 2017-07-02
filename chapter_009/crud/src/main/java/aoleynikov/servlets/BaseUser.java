@@ -31,4 +31,8 @@ public abstract class BaseUser {
     public BaseUser(){
 
     }
+
+    public BaseUser(String login){
+        this.login = login;
+    }
 }

@@ -13,5 +13,6 @@
 
     <modules>
         <module>webproject1</module>
+        <module>crud</module>
     </modules>
 </project>

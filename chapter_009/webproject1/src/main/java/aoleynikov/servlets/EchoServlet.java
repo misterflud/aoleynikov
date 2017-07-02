@@ -19,14 +19,8 @@ public class EchoServlet extends HttpServlet {
         resp.setContentType("text/html");
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(resp.getOutputStream()));
 
-
-        /*
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.append("Hello world Servlets");
-        writer.flush();
-        writer.close();
-         */
-        bufferedWriter.write("Hello gays");
+        String login = req.getParameter("login");
+        bufferedWriter.write("Login " + login);
         bufferedWriter.flush();
         bufferedWriter.close();
     }
