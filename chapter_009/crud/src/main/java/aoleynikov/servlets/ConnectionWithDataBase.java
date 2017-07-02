@@ -25,6 +25,9 @@ public class ConnectionWithDataBase implements AutoCloseable {
 
     private BufferedReader reader;
 
+    /**
+     * Constructor.
+     */
     public ConnectionWithDataBase() {
         final Properties prs = new Properties();
         ClassLoader loader = ConnectionWithDataBase.class.getClassLoader();
@@ -40,6 +43,9 @@ public class ConnectionWithDataBase implements AutoCloseable {
         checkTableAndCreate();
     }
 
+    /**
+     * Creates table, if it's not exist.
+     */
     private void checkTableAndCreate() {
         try {
             connection = DriverManager.getConnection(url, username, password);
