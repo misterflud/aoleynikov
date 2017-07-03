@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 
 
@@ -20,7 +23,13 @@ public class UsersServlet extends HttpServlet {
     private ConnectionWithDataBase dataBase = new ConnectionWithDataBase(); // НЕ РАБОАЕТ
 
 
-
+    /**
+     * Gets user.
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -35,6 +44,13 @@ public class UsersServlet extends HttpServlet {
 
     //http://localhost:8080/items/echo?name=Anton&login=mister&email=@mail
 
+    /**
+     * Creates user.
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -61,7 +77,7 @@ public class UsersServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
-
+    //http://localhost:8080/items/echo?login=ll
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -69,7 +85,8 @@ public class UsersServlet extends HttpServlet {
         dataBase.deleteUser(user);
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(resp.getOutputStream()))) {
-            bufferedWriter.write("Deleted!");
+            bufferedWriter.write("Deleted!" + user.login);
         }
     }
+
 }
