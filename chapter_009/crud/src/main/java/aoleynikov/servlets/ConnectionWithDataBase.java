@@ -1,5 +1,7 @@
 package aoleynikov.servlets;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,24 +14,46 @@ import java.util.logging.Logger;
  * Created by Anton on 02.07.2017.
  */
 public class ConnectionWithDataBase implements AutoCloseable {
-
+    /**
+     * User PostgeSQL.
+     */
     private String username;
-
+    /**
+     * Password PostgeSQL.
+     */
     private String password;
-
+    /**
+     * UDL PostgeSQL.
+     */
     private String url;
-
+    /**
+     * Connection with Database.
+     */
     private Connection connection;
-
+    /**
+     * Executing SQL scripts.
+     */
     private PreparedStatement st;
-
+    /**
+     * Request from database.
+     */
     private ResultSet rs;
-
+    /**
+     * Reader from file with SQL Scripts.
+     */
     private BufferedReader reader;
-
-    FileHandler fh;
-
+    /**
+     * File for logs.
+     */
+    private FileHandler fh;
+    /**
+     * Logger.
+     */
     private static Logger log = Logger.getLogger(CreateBase.class.getName());
+    /**
+     * Basic Source.
+     */
+    private BasicDataSource bs;
     /**
      * Constructor.
      */
@@ -64,7 +88,15 @@ public class ConnectionWithDataBase implements AutoCloseable {
     private void checkTableAndCreate() {
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url, username, password);
+            bs = new BasicDataSource();
+            bs.setUrl(url);
+            bs.setUsername(username);
+            bs.setPassword(password);
+            bs.setMinIdle(5);
+            bs.setMaxIdle(10);
+            bs.setMaxOpenPreparedStatements(100);
+
+            connection = bs.getConnection();
             log.info("3333");
             ClassLoader load = ConnectionWithDataBase.class.getClassLoader();
             reader = new BufferedReader(new InputStreamReader(load.getResourceAsStream("createusertable.sql"))); //получили скрипт создания таблицы
@@ -82,6 +114,10 @@ public class ConnectionWithDataBase implements AutoCloseable {
 
     }
 
+    /**
+     * Creates line in BaseDate.
+     * @param user user
+     */
     public void createUser(BaseUser user) {
         try {
             st = connection.prepareStatement("INSERT INTO users(name, login, email, createdDate) VALUES (?, ?, ?, ?)");
@@ -96,6 +132,10 @@ public class ConnectionWithDataBase implements AutoCloseable {
 
     }
 
+    /**
+     * Edited user.
+     * @param editUser editUser
+     */
     public void editUser(BaseUser editUser) {
         try {
             st = connection.prepareStatement("UPDATE users SET name = ? WHERE login = ? AND email = ?");
@@ -108,6 +148,11 @@ public class ConnectionWithDataBase implements AutoCloseable {
         }
     }
 
+    /**
+     * Gets users.
+     * @param userWithLogin user without other parameters
+     * @return user
+     */
     public User getUser(BaseUser userWithLogin) {
         try {
             log.info("4");
@@ -122,6 +167,10 @@ public class ConnectionWithDataBase implements AutoCloseable {
         return null;
     }
 
+    /**
+     * Deletes user.
+     * @param userWithLogin user without other parameters
+     */
     public void deleteUser(BaseUser userWithLogin) {
         try {
             st = connection.prepareStatement("DELETE FROM users where login = ?");
@@ -132,6 +181,10 @@ public class ConnectionWithDataBase implements AutoCloseable {
         }
     }
 
+    /**
+     * Closes streams.
+     * @throws Exception Exception
+     */
     @Override
     public void close() throws Exception {
         fh.close();
