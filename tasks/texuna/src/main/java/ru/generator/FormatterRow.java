@@ -7,26 +7,60 @@ import ru.generator.Parsers.XmlParameters;
  * Created by Anton on 13.07.2017.
  */
 public class FormatterRow {
+    /**
+     * Number from tsv file.
+     */
     private String numberColumn;
+    /**
+     * Date from tsv file.
+     */
     private String dateColumn;
-    private String thirdColumn;
-
+    /**
+     * Name of people from tsv file.
+     */
+    private String nameColumn;
+    /**
+     * Width of first column.
+     */
     private int widthNumber;
+    /**
+     * Width of second column.
+     */
     private int widthDate;
+    /**
+     * Width of third column.
+     */
     private int widthName;
-
+    /**
+     * Width table
+     */
     private int widthTable;
-
+    /**
+     * Height of information row.
+     */
     private int heightRow = 0;
-
+    /**
+     * StringBuilder for Number.
+     */
     private StringBuilder temp1 = new StringBuilder();
+    /**
+     * StringBuilder for Number.
+     */
     private StringBuilder temp2 = new StringBuilder();
+    /**
+     * StringBuilder for Number.
+     */
     private StringBuilder temp3 = new StringBuilder();
-
+    /**
+     * StringBuilder for resulted information row.
+     */
     private StringBuilder stringRow = new StringBuilder();
 
 
-
+    /**
+     * Constructor.
+     * @param xml xml file with parameters
+     */
     public FormatterRow(XmlParameters xml) {
         this.widthNumber = xml.getWidthNumber();
         this.widthDate = xml.getWidthDate();
@@ -35,18 +69,18 @@ public class FormatterRow {
     }
 
     /**
-     * Creates Row.
+     * Creates Information row.
      * @param s mass from tsv
      * @return Row
      */
     public Row formatter(String[] s) {
         this.numberColumn = s[0]; //чтобы удбнее было понимать
         this.dateColumn = s[1];
-        this.thirdColumn = s[2];
+        this.nameColumn = s[2];
 
         final String[] s1 = WordUtils.wrap(numberColumn, widthNumber, "\n", true).split("\n");
         final String[] s2 = WordUtils.wrap(dateColumn, widthDate, "\n", true).split("\n");
-        final String[] s3 = WordUtils.wrap(thirdColumn, widthName, "\n", true).split("\n");
+        final String[] s3 = WordUtils.wrap(nameColumn, widthName, "\n", true).split("\n");
 
         final int len1 = s1.length;
         final int len2 = s2.length;

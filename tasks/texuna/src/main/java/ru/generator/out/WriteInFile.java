@@ -1,18 +1,29 @@
 package ru.generator.out;
 
-import ru.generator.out.Output;
-
-import java.io.*;
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
 
 /**
  * Created by Anton on 14.07.2017.
+ *
  */
 public class WriteInFile implements Output, Closeable {
-
+    /**
+     * FileStream.
+     */
     private FileOutputStream fileOutputStream;
-
+    /**
+     * OutPutStream.
+     */
     private OutputStreamWriter outputStreamWriter;
 
+    /**
+     * Constructor.
+     * @param path path of file
+     */
     public WriteInFile(String path) {
         try {
             File file = new File(path);
@@ -23,6 +34,10 @@ public class WriteInFile implements Output, Closeable {
         }
 
     }
+    /**
+     * Writes in stream.
+     * @param s String
+     */
     @Override
     public void write(String s) {
         try {
@@ -33,6 +48,10 @@ public class WriteInFile implements Output, Closeable {
 
     }
 
+    /**
+     * Closes.
+     * @throws IOException Exception
+     */
     @Override
     public void close() throws IOException {
         outputStreamWriter.close();

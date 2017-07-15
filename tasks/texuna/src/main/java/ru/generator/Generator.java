@@ -10,23 +10,22 @@ import ru.generator.out.WriteInFile;
  *
  */
 public class Generator {
+    /**
+     * Start.
+     * @param args paths
+     */
     public static void main(String[] args) {
-
-        //TsvPars tsvPars = new TsvPars("C:\\java\\testsTask\\1\\source-data.tsv");
-        //tsvPars.getDataNext();
-        //int a = 6;
-        //int b = 6;
-        //System.out.println((a > b) ? a : b);
-        //b =+ 1;
-        //a += 1;
-        //System.out.println(b);
-        //System.out.println(a);
-        //FormatterRow formatterRow = new FormatterRow(tsvPars.getDataNext(), xmlParameters);
-        //System.out.println(formatterRow.getStringRow());
         Generator generator = new Generator();
-        generator.start("C:\\java\\testsTask\\1\\settings.xml", "C:\\java\\testsTask\\1\\source-data.tsv", "C:\\java\\testsTask\\1\\out.txt");
+        //generator.start("C:\\java\\testsTask\\1\\settings.xml", "C:\\java\\testsTask\\1\\source-data.tsv", "C:\\java\\testsTask\\1\\out.txt");
+        generator.start(args[0], args[1], args[2]);
     }
 
+    /**
+     * Start Generator.
+     * @param path1 xml file
+     * @param path2 tsv file
+     * @param path3 txt file
+     */
     public void start(String path1, String path2, String path3) {
         try (WriteInFile writeInFile = new WriteInFile(path3)) {
 
