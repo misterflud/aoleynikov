@@ -17,7 +17,6 @@ public class Generator {
      */
     public static void main(String[] args) {
         Generator generator = new Generator();
-        //generator.start("C:\\java\\testsTask\\1\\settings.xml", "C:\\java\\testsTask\\1\\source-data.tsv", "C:\\java\\testsTask\\1\\out.txt");
         generator.start(args[0], args[1], args[2]);
     }
 
