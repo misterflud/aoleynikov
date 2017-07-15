@@ -10,6 +10,7 @@ import ru.generator.out.WriteInFile;
  *
  */
 public class Generator {
+
     /**
      * Start.
      * @param args paths
@@ -35,9 +36,7 @@ public class Generator {
 
             final String[] top = {"Номер", "Дата", "ФИО"};
             final Row rowTop = formatterRow.formatter(top);
-            
             FormatterTable formatterTable = new FormatterTable(xmlParameters, rowTop, writeInFile);
-            
             while (tsvPars.hasLine()) {
                 formatterTable.addRow(formatterRow.formatter(tsvPars.getDataNext()));
             }

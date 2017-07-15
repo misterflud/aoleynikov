@@ -21,7 +21,7 @@ public class FormatterTable {
     private final Row stringTop;
 
     /**
-     * Output
+     * Output.
      */
     private Output output;
 

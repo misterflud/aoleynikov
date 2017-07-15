@@ -2,11 +2,8 @@ package ru.generator.Parsers;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.File;
@@ -16,33 +13,70 @@ import java.io.File;
  */
 public class XmlParameters {
 
-
+    /**
+     * Width table.
+     */
     private int widthTable;
+
+    /**
+     * Height table.
+     */
     private int heightTable;
+
+    /**
+     * Width of the first column.
+     */
     private int widthNumber;
+
+    /**
+     * Width of the second column.
+     */
     private int widthDate;
+
+    /**
+     * Width of the third column.
+     */
     private int widthName;
 
+    /**
+     * Getter.
+     * @return int
+     */
     public int getWidthTable() {
         return widthTable;
     }
 
+    /**
+     * Getter.
+     * @return int
+     */
     public int getHeightTable() {
         return heightTable;
     }
 
+    /**
+     * Getter.
+     * @return int
+     */
     public int getWidthNumber() {
         return widthNumber;
     }
 
+    /**
+     * Getter.
+     * @return int
+     */
     public int getWidthDate() {
         return widthDate;
     }
 
+    /**
+     * Getter.
+     * @return int
+     */
     public int getWidthName() {
         return widthName;
     }
-
 
 
     /**

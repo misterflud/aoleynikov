@@ -10,7 +10,7 @@ public class Row {
      */
     private String row;
     /**
-     * Height row
+     * Height row.
      */
     private int heightRow;
 

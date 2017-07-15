@@ -7,55 +7,66 @@ import ru.generator.Parsers.XmlParameters;
  * Created by Anton on 13.07.2017.
  */
 public class FormatterRow {
+
     /**
      * Number from tsv file.
      */
     private String numberColumn;
+
     /**
      * Date from tsv file.
      */
     private String dateColumn;
+
     /**
      * Name of people from tsv file.
      */
     private String nameColumn;
+
     /**
      * Width of first column.
      */
     private int widthNumber;
+
     /**
-     * Width of second column.
+     * Width of the second column.
      */
     private int widthDate;
+
     /**
-     * Width of third column.
+     * Width of the third column.
      */
     private int widthName;
+
     /**
-     * Width table
+     * Width table.
      */
     private int widthTable;
+
     /**
      * Height of information row.
      */
     private int heightRow = 0;
+
     /**
      * StringBuilder for Number.
      */
     private StringBuilder temp1 = new StringBuilder();
+
     /**
      * StringBuilder for Number.
      */
     private StringBuilder temp2 = new StringBuilder();
+
     /**
      * StringBuilder for Number.
      */
     private StringBuilder temp3 = new StringBuilder();
+
     /**
      * StringBuilder for resulted information row.
      */
     private StringBuilder stringRow = new StringBuilder();
-
 
     /**
      * Constructor.
