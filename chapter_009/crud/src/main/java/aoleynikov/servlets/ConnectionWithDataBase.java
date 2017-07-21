@@ -38,18 +38,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
      * Request from database.
      */
     private ResultSet rs;
-    /**
-     * Reader from file with SQL Scripts.
-     */
-    private BufferedReader reader;
-    /**
-     * File for logs.
-     */
-    private FileHandler fh;
-    /**
-     * Logger.
-     */
-    private static Logger log = Logger.getLogger(CreateBase.class.getName());
+
     /**
      * Basic Source.
      */
@@ -58,14 +47,6 @@ public class ConnectionWithDataBase implements AutoCloseable {
      * Constructor.
      */
     public ConnectionWithDataBase() {
-
-        try {
-            fh = new FileHandler("C:\\java\\SQL\\log.txt");
-            log.addHandler(fh);
-        } catch (Exception e) {
-            System.out.println("ERRR");
-        }
-
 
 
         final Properties prs = new Properties();
@@ -86,7 +67,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
      * Creates table, if it's not exist.
      */
     private void checkTableAndCreate() {
-        try {
+        try{
             Class.forName("org.postgresql.Driver");
             bs = new BasicDataSource();
             bs.setUrl(url);
@@ -97,17 +78,14 @@ public class ConnectionWithDataBase implements AutoCloseable {
             bs.setMaxOpenPreparedStatements(100);
 
             connection = bs.getConnection();
-            log.info("3333");
             ClassLoader load = ConnectionWithDataBase.class.getClassLoader();
-            reader = new BufferedReader(new InputStreamReader(load.getResourceAsStream("createusertable.sql"))); //получили скрипт создания таблицы
-
-            st = connection.prepareStatement(reader.readLine());
-            rs = st.executeQuery();
-            if (!rs.next()) {
-                connection.prepareStatement(reader.readLine()).execute();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(load.getResourceAsStream("createusertable.sql")))) { //получили скрипт создания таблицы
+                st = connection.prepareStatement(reader.readLine());
+                rs = st.executeQuery();
+                if (!rs.next()) {
+                    connection.prepareStatement(reader.readLine()).execute();
+                }
             }
-
-            reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -155,14 +133,13 @@ public class ConnectionWithDataBase implements AutoCloseable {
      */
     public User getUser(BaseUser userWithLogin) {
         try {
-            log.info("4");
             st = connection.prepareStatement("SELECT * FROM users where login = ?");
             st.setString(1, userWithLogin.login);
             rs = st.executeQuery();
             rs.next();
             return new User(rs.getString("name"), rs.getString("login"), rs.getString("email"), rs.getTimestamp("createdDate"));
         } catch (Exception e) {
-            log.info("5" + e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -187,9 +164,8 @@ public class ConnectionWithDataBase implements AutoCloseable {
      */
     @Override
     public void close() throws Exception {
-        fh.close();
         st.close();
-        reader.close();
+        rs.close();
         connection.close();
     }
 }

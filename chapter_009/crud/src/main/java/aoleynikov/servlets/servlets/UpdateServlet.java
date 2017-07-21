@@ -1,6 +1,7 @@
 package aoleynikov.servlets.servlets;
 
 import aoleynikov.servlets.ConnectionWithDataBase;
+import aoleynikov.servlets.SingletonPrintOut;
 import aoleynikov.servlets.User;
 
 import javax.servlet.ServletException;
@@ -30,26 +31,7 @@ public class UpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(resp.getOutputStream()))) {
-            bufferedWriter.write("<!DOCTYPE html>" +
-                    "<html lang=\"en\">" +
-                    "<head>" +
-                    "<meta charset=\"UTF-8\">" +
-                    "<title>Title</title>" +
-                    "</head>" +
-                    "<body>" +
-                    "Write new name" +
-                    "Write login" +
-                    "<form action='"+ req.getContextPath() +"/update' method='post'>" +
-                    "Name: <input type='text' name='name'/>" +
-                    "Login: <input type='text' name='login'/>" +
-                    "<input type='submit' name = 'get' value='Update user'/>" +
-                    "</form>" +
-                    "<br/>" +
-                    line +
-                    "</body>" +
-                    "</html>");
-        }
+        resp.sendRedirect(String.format("%s/views/UpdateUser.jsp", req.getContextPath()));
     }
 
     /**
@@ -67,7 +49,8 @@ public class UpdateServlet extends HttpServlet {
             user.name = req.getParameter("name");
             dataBase.editUser(user);
             line = String.format("<table><tr><td> %s </td><td> %s </td><td> %s </td><td> %s </td></tr></table>", user.name, user.login, user.email, user.timeOfCreate).toString();
-            doGet(req, resp);
+            SingletonPrintOut.getInstance().setString(line);
+            resp.sendRedirect(String.format("%s/views/UpdateUser.jsp", req.getContextPath()));
         } catch(Exception e) {
             e.printStackTrace();
         }

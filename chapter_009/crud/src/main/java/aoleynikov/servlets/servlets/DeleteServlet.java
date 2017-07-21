@@ -1,6 +1,7 @@
 package aoleynikov.servlets.servlets;
 
 import aoleynikov.servlets.ConnectionWithDataBase;
+import aoleynikov.servlets.SingletonPrintOut;
 import aoleynikov.servlets.User;
 
 import javax.servlet.ServletException;
@@ -30,23 +31,7 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(resp.getOutputStream()))) {
-            bufferedWriter.write("<!DOCTYPE html>" +
-                    "<html lang=\"en\">" +
-                    "<head>" +
-                    "<meta charset=\"UTF-8\">" +
-                    "<title>Title</title>" +
-                    "</head>" +
-                    "<body>" +
-                    "<form action='"+ req.getContextPath() +"/delete' method='post'>" +
-                    "Login: <input type='text' name='login'/>" +
-                    "<input type='submit' name = 'get' value='Delete user'/>" +
-                    "</form>" +
-                    "<br/>" +
-                    line +
-                    "</body>" +
-                    "</html>");
-        }
+        resp.sendRedirect(String.format("%s/views/DeleteUser.jsp", req.getContextPath()));
     }
 
     /**
@@ -62,7 +47,8 @@ public class DeleteServlet extends HttpServlet {
         try(ConnectionWithDataBase dataBase = new ConnectionWithDataBase()) {
             dataBase.deleteUser(new User(req.getParameter("login")));
             line = "Deleted";
-            doGet(req, resp);
+            SingletonPrintOut.getInstance().setString(line);
+            resp.sendRedirect(String.format("%s/views/DeleteUser.jsp", req.getContextPath()));
         } catch(Exception e) {
             e.printStackTrace();
         }

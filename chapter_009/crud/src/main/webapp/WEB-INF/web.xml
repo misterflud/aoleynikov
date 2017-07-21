@@ -7,7 +7,7 @@
 
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
-        <url-pattern>/echo</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>
 -->
@@ -20,6 +20,16 @@
             <res-auth>Container</res-auth>
         </resource-ref>
         -->
+
+    <servlet>
+        <servlet-name>UsersServlet</servlet-name>
+        <servlet-class>aoleynikov.servlets.UsersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UsersServlet</servlet-name>
+        <url-pattern>/echo</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>StartServlet</servlet-name>
         <servlet-class>aoleynikov.servlets.servlets.StartServlet</servlet-class>

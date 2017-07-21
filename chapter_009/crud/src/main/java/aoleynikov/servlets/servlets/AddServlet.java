@@ -1,6 +1,7 @@
 package aoleynikov.servlets.servlets;
 
 import aoleynikov.servlets.ConnectionWithDataBase;
+import aoleynikov.servlets.SingletonPrintOut;
 import aoleynikov.servlets.User;
 
 import javax.servlet.ServletException;
@@ -32,25 +33,7 @@ public class AddServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(resp.getOutputStream()))) {
-            bufferedWriter.write("<!DOCTYPE html>" +
-                    "<html lang=\"en\">" +
-                    "<head>" +
-                    "<meta charset=\"UTF-8\">" +
-                    "<title>Title</title>" +
-                    "</head>" +
-                    "<body>" +
-                    "<form action='"+ req.getContextPath() +"/add' method='post'>" +
-                    "Name: <input type='text' name='name'/>" +
-                    "Login: <input type='text' name='login'/>" +
-                    "Email: <input type='text' name='email'/>" +
-                    "<input type='submit' name = 'get' value='Add user'/>" +
-                    "</form>" +
-                    "<br/>" +
-                    line +
-                    "</body>" +
-                    "</html>");
-        }
+        resp.sendRedirect(String.format("%s/views/AddUser.jsp", req.getContextPath()));
     }
 
     /**
@@ -67,7 +50,8 @@ public class AddServlet extends HttpServlet {
             User user = new User(req.getParameter("name"), req.getParameter("login"), req.getParameter("email"), new Timestamp(System.currentTimeMillis()));
             dataBase.createUser(user);
             line = String.format("<table><tr><td> %s </td><td> %s </td><td> %s </td><td> %s </td></tr></table>", user.name, user.login, user.email, user.timeOfCreate).toString();
-            doGet(req, resp);
+            SingletonPrintOut.getInstance().setString(line);
+            resp.sendRedirect(String.format("%s/views/AddUser.jsp", req.getContextPath()));
         } catch(Exception e) {
             e.printStackTrace();
         }
