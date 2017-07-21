@@ -75,9 +75,12 @@ public class UsersServlet extends HttpServlet {
         resp.setContentType("text/html");
 
         //dataBase.createUser(new User(name, login, email, new Timestamp(System.currentTimeMillis())));
+
         User user = dataBase.getUser(new User(req.getParameter("login")));
         line = String.format("<table><tr><td> %s </td><td> %s </td><td> %s </td><td> %s </td></tr></table>",user.name, user.login, user.email, user.timeOfCreate).toString();
-        doGet(req, resp);
+        SingletonPrintOut.getInstance().setString(line);
+        resp.sendRedirect(String.format("%s/UsersView.jsp", req.getContextPath()));
+        //doGet(req, resp);
     }
 
     /**
