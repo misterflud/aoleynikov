@@ -4,6 +4,9 @@ package ru.job4j;
  * Created by Anton on 19.04.2017.
  */
 public class User {
+	/**
+	 * 
+	 */
     /**
      * Id.
      */
