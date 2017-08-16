@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>tasks</artifactId>
@@ -12,5 +13,6 @@
     <modules>
         <module>mztoTask</module>
         <module>texuna</module>
-    </modules>
+    <module>serejcaProject</module>
+  </modules>
 </project>
