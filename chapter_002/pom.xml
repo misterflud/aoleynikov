@@ -17,4 +17,5 @@
         <module>additionalTask</module>
     </modules>
 
+    <groupId>ru.oleynikov</groupId>
 </project>
