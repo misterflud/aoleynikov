@@ -10,7 +10,11 @@ public class Manager {
 	}
 	
 	public void parsing() {
+		/*
 		pushingButton.push(site);
+		*/
+		
+		parser.parse("C://Users//oleynikov//Desktop//processing//sergProject//ВКонтакте _ Comments Widget.html");
 	}
 	
 }
