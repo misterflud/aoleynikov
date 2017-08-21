@@ -1,5 +1,7 @@
 package ru.aoleynikov;
 
-public class StreamOut {
+import java.io.Closeable;
 
+public interface StreamOut extends Closeable {
+	public void printOut(String s);
 }

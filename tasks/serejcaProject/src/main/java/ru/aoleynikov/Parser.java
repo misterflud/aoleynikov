@@ -13,9 +13,9 @@ import org.jsoup.select.Elements;
  
 
 public class Parser {
-	private ArrayList<String> users = new ArrayList<>();
+	private ArrayList<String> users = new ArrayList<>(1000);
 	
-	public ArrayList<String> parse(String path) {
+	public ArrayList<String> parse(String path, StreamOut streamOut) {
 		File file = new File(path);
 		String id = "";
 		try {
@@ -23,12 +23,12 @@ public class Parser {
 			Elements authors = document.getElementsByClass("author");
 			for (Element author : authors) {
 				id = author.attr("href");
-				
-				System.out.println(id);
+				streamOut.printOut(id);
+				//System.out.println(id);
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} 
 		
