@@ -11,6 +11,8 @@
 
     <modules>
         <module>threads</module>
+        <module>monitoreSynchronizy</module>
+        <module>javaMemoryModel</module>
 
     </modules>
 </project>
