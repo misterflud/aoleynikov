@@ -1,7 +1,7 @@
 package ru.aoleynikov;
 
 /**
- * Start program.
+ * For testing program.
  * @author Anton Oleynikov
  * created on 22.08.2017
  */
@@ -12,7 +12,7 @@ public class Start {
 	static int ii;
 	
 	/**
-	 * 
+	 * Storage.
 	 */
 	static UserStorage userStorage = new UserStorageOne();
 	
