@@ -9,6 +9,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ * Pushing button or something else do in site for creating html file.
+ * @author Anton Oleynikov
+ * created on 22.08.2017
+ */
 public class PushingButton {
 	
 	public String push(String url) {

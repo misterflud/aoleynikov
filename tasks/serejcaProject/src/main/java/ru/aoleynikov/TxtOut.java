@@ -7,11 +7,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+/**
+ * Writing to txt file.
+ * @author Anton Oleynikov
+ * created on 22.08.2017
+ */
 public class TxtOut implements StreamOut {
 	
+	/**
+	 * Writer.
+	 */
 	private BufferedWriter writer;
 	
-	
+	/**
+	 * Constructor.
+	 * @param path
+	 */
 	public TxtOut(String path) {
 		try {
 			writer = new BufferedWriter(new FileWriter(new File(path)));
@@ -20,6 +31,9 @@ public class TxtOut implements StreamOut {
 		}
 	}
 
+	/**
+	 * Printing (writing).
+	 */
 	@Override
 	public void printOut(String s) {
 		try {
@@ -32,6 +46,9 @@ public class TxtOut implements StreamOut {
 		
 	}
 
+	/**
+	 * Closing streams.
+	 */
 	@Override
 	public void close() throws IOException {
 		writer.close();

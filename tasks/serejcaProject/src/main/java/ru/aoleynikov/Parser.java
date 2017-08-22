@@ -11,7 +11,11 @@ import org.jsoup.select.Elements;
 
 
  
-
+/**
+ * Parser for html file.
+ * @author Anton Oleynikov
+ * created on 22.08.2017
+ */
 public class Parser {
 	private ArrayList<String> users = new ArrayList<>(1000);
 	
