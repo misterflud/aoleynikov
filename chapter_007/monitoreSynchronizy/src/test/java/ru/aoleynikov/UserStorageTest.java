@@ -6,11 +6,16 @@ package ru.aoleynikov;
  */
 
 import org.junit.Test;
-
+/**
+ * Test class.
+ * @author Anton Oleynikov
+ * created on 22.08.2017
+ */
 public class UserStorageTest {
 	
 	/**
 	 * Test.
+	 * We are creating 20 threads with different actions.
 	 */
 	@Test
 	public void whenThen() {
@@ -33,7 +38,7 @@ public class UserStorageTest {
 	}
 	
 	/**
-	 * Thread1.
+	 * Thread for adding user.
 	 * @author Anton Oleynikov
 	 * created on 07.08.2017
 	 */
@@ -57,6 +62,11 @@ public class UserStorageTest {
 		}
 	}
 	
+	/**
+	 * Thread for transaction.
+	 * @author Anton Oleynikov
+	 * created on 22.08.2017
+	 */
 	class TransactionTread extends Thread {
 		private String name;
 		private int count;

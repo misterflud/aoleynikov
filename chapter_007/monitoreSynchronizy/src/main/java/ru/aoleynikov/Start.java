@@ -1,10 +1,25 @@
 package ru.aoleynikov;
 
+/**
+ * Start program.
+ * @author Anton Oleynikov
+ * created on 22.08.2017
+ */
 public class Start {
+	/**
+	 * 
+	 */
 	static int ii;
+	
+	/**
+	 * 
+	 */
 	static UserStorage userStorage = new UserStorageOne();
 	
-	
+	/**
+	 * Start.
+	 * @param args args.
+	 */
 	public static void main(String[] args) {
 	
 		
