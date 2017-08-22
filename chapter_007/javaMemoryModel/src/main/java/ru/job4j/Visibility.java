@@ -25,11 +25,13 @@ public class Visibility {
     public void start() {
 
         try {
-            System.out.println(c);
+        	System.out.println(String.format("%s %s", "Begin Program", c));
             One one = new One();
             Two two = new Two();
-            Thread.sleep(100);// join не срабатывает
-            System.out.println(c);
+            //Thread.sleep(100);// join не срабатывает
+            one.join();
+            two.join();
+            System.out.println(String.format("%s %s", "End Program", c));
         } catch (Exception e) {
             e.printStackTrace();
         }
