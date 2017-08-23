@@ -1,1 +1,1 @@
-This program are parcering comment from vk.com. 
+This program are parcering comments from vk.com. 
