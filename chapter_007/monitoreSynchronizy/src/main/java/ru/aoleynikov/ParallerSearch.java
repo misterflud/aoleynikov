@@ -18,7 +18,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.extractor.XSSFExcelExtractor;
 
 /**
- * 
+ * Searcher.
  * @author Anton Oleynikov
  * created on 08.08.2017
  */
@@ -27,23 +27,45 @@ public class ParallerSearch {
 	//запускать на каждую директорию свой поток, в котором пробегаются по всем файлам, а при попадании на папку запускает такой же поток для нее
 	
 	
-	
+	/**
+	 * Path of root.
+	 */
 	private String root;
 	
 	//private InputStreamReader inputStreamReader = new InputStreamReader(new File(root).)
 	
+	/**
+	 * Text witch we want to found.
+	 */
 	private String text;
 	
+	/**
+	 * Extension.
+	 */
 	private ArrayList<String> exts;
 	
+	
+	/**
+	 * Paths of files with found text. 
+	 */
 	private ArrayList<String> result = new ArrayList<>();
 	
+	/**
+	 * Constructor.
+	 * @param root start path for search
+	 * @param text text
+	 * @param exts extension
+	 */
 	public ParallerSearch(String root, String text, ArrayList<String> exts) {
 		this.root = root;
 		this.text = text;
 		this.exts = exts;
 	}
 	
+	/**
+	 * Start searching.
+	 * @return
+	 */
 	public synchronized ArrayList<String> start() {
 		Thread thread = new Searcher(root);
 		
@@ -57,7 +79,12 @@ public class ParallerSearch {
 		return result;
 	}
 	
-	
+	/**
+	 * Searching the text in inside file.
+	 * @param file file
+	 * @param ext extension
+	 * @return have or no text the inside the file
+	 */
 	private boolean insideSearcher(File file, String ext) {
 		
 		if (file.canRead()) {
@@ -75,6 +102,11 @@ public class ParallerSearch {
 		return false;
 	}
 	
+	/**
+	 * Finding in xls.
+	 * @param file file
+	 * @return have or no text the inside the file
+	 */
 	private boolean insideXls(File file) {
 		//System.out.println(file.getAbsolutePath());
 		try(InputStream in = new FileInputStream(file); HSSFWorkbook wb = new HSSFWorkbook(in); ExcelExtractor extractor = new ExcelExtractor(wb)) {
@@ -93,7 +125,11 @@ public class ParallerSearch {
 		return false;
 	}
 	
-	
+	/**
+	 * Finding in xlsx.
+	 * @param file file
+	 * @return have or no text the inside the file
+	 */
 	private boolean insideXlsx(File file) {
 		//System.out.println(file.getAbsolutePath());
 		try(InputStream in = new FileInputStream(file); XSSFWorkbook wb = new XSSFWorkbook(in); XSSFExcelExtractor extractor = new XSSFExcelExtractor(wb)) {
@@ -114,11 +150,22 @@ public class ParallerSearch {
 		return false;
 	}
 	
+	/**
+	 * Finding in doc.
+	 * @param file file
+	 * @return have or no text the inside the file
+	 */
 	private boolean insideDoc(File file) {
 		
 		return false;
 	}
 	
+	
+	/**
+	 * Finding in txt.
+	 * @param file file
+	 * @return have or no text the inside the file
+	 */
 	private boolean insideTxt(File file) {
 		try (InputStream inp = new FileInputStream(file); InputStreamReader isr = new InputStreamReader(inp); BufferedReader reader = new BufferedReader(isr)) {
 			String s = "";
@@ -135,13 +182,17 @@ public class ParallerSearch {
 		return false;
 	}
 	
+	/**
+	 * Addding path to result.
+	 * @param path path of file
+	 */
 	private synchronized void addResult(String path) {
 		result.add(path);
 	}
 	
 	
 	/**
-	 * 
+	 * Class for finding.
 	 * @author Anton Oleynikov
 	 * created on 11.08.2017
 	 */
@@ -155,25 +206,32 @@ public class ParallerSearch {
 		}
 		
 
-		
+		/**
+		 * Start tread.
+		 */
 		@Override
 		public void run() {
 			String ext;
 			File file = new File(startPath);
 			File[] files = file.listFiles();
 			for (File iter : files) {
-				ext = extention(iter.getName());
+				ext = extension(iter.getName());
 				//System.out.println(iter.getAbsolutePath());
 				if (iter.isDirectory()) {
 					new Searcher(iter.getAbsolutePath());
-				} else if (exts.contains(extention(iter.getName()))) { //(exts.contains(extention(iter.getName())))
+				} else if (exts.contains(extension(iter.getName()))) { //(exts.contains(extention(iter.getName())))
 					//System.out.println(iter.getAbsolutePath());
 					insideSearcher(iter, ext);
 				}
 			}
 		}
 		
-		private String extention(String fileName) {
+		/**
+		 * Getting the extension of file.
+		 * @param fileName
+		 * @return
+		 */
+		private String extension(String fileName) {
 			//System.out.println(fileName);
 			String[] two = fileName.split("\\.");
 			if (two.length == 2) {

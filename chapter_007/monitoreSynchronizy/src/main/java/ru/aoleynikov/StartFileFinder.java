@@ -4,12 +4,21 @@ import java.util.ArrayList;
 
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
+/**
+ * Start.
+ * @author Anton Oleynikov
+ * created on 23.08.2017
+ */
 public class StartFileFinder {
 
+	/**
+	 * Start program.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		ArrayList<String> exts = new ArrayList<>();
 		//exts.add("xls");
-		exts.add("xlsx");
+		exts.add("xlsx"); // расширения
 		exts.add("xls");
 
 		//exts.add("txt");
