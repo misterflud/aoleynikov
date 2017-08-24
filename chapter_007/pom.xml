@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>chapter_007</artifactId>
@@ -13,6 +14,6 @@
         <module>threads</module>
         <module>monitoreSynchronizy</module>
         <module>javaMemoryModel</module>
-
-    </modules>
+    <module>wait_notify_notifyall</module>
+  </modules>
 </project>
