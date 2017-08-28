@@ -13,6 +13,8 @@ public class StatisticStringTest {
     public void whenPutStringThenGetStatistic() {
         StatisticString statisticString = new StatisticString();
         statisticString.analysis(" asda sada adas ", 1000);
+        statisticString.analysis("", 1000);
+        statisticString.analysis(" ", 1000);
         statisticString.analysis("sda sada adas sda sada adas sda sada adas sda sada adas sda sada adas sda sada adas sda sada adas sda sada adas sda sada adas sda sada adas sda sada adas sda sada adas ", 5);
     }
 }

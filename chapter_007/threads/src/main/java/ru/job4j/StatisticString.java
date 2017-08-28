@@ -56,8 +56,22 @@ public class StatisticString {
          */
         @Override
         public void run() {
+        	/*
             String s = string.replaceAll("([A-Za-z0-9-]+)", "");
             System.out.println(String.format("Spaces %s", s.length()));
+            */
+        	int count = 0;
+        	if (string.length() == 0) {
+        		count = 0;
+        	} else {
+        		for (int i = 0; i < string.length(); i++) {
+	            	if (" ".equals(string.substring(i, i + 1))) {
+	            		count++;
+	            	}
+	            }
+        		
+        	}
+        	System.out.println(String.format("Spaces %s", count));
         }
     }
     /**
@@ -84,29 +98,63 @@ public class StatisticString {
         public void run() {
             String[] s = string.split(" +");
             int count = s.length;
-            if (s[0].equals("")) {
-                count--;
-            }
-            if (s[s.length - 1].equals("")) {
-                count--;
+            if (s.length == 0) {
+            	count = 0;
+            } else {
+            	System.out.println("adad " + s.length);
+            	if (s.length == 1 && s[0].equals("")) {
+            		count = 0;
+            	} else {
+            		if (s[0].equals("")) {
+		                count--;
+		            }
+		            if (s[s.length - 1].equals("")) {
+		                count--;
+		            }
+            	}
+
             }
             System.out.println(String.format("Words %s", count));
         }
     }
 
+    /**
+     * Counts time.
+     * @author Anton Oleynikov
+     * created on 28.08.2017
+     */
     private class TimeManagement implements Runnable {
+    	
+    	/**
+    	 * Period of work.
+    	 */
         private long millis;
 
+        /**
+         * Space thread.
+         */
         private Thread tr1;
 
+        /**
+         * Words thread.
+         */
         private Thread tr2;
 
+        /**
+         * Constructor.
+         * @param tr1 tr1
+         * @param tr2 tr2
+         * @param millis millis
+         */
         public TimeManagement(Thread tr1, Thread tr2, long millis) {
             this.tr1 = tr1;
             this.tr2 = tr2;
             this.millis = millis;
         }
 
+        /**
+         * Run.
+         */
         @Override
         public void run() {
             Date date1 = new Date();
