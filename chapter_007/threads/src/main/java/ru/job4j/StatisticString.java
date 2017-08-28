@@ -4,8 +4,6 @@ import java.util.Date;
 
 /**
  * Created by Anton on 04.07.2017.
- * Создать программу, которая будет считать количество и пробелом в тексте.
- * Необходимо создать два Thread. Первый будет считать количество слов. Второй количество пробелом в тексте.
  */
 public class StatisticString {
     /**
@@ -56,7 +54,7 @@ public class StatisticString {
          */
         @Override
         public void run() {
-        	/*
+        	/* регулярное выражение тоже работает.
             String s = string.replaceAll("([A-Za-z0-9-]+)", "");
             System.out.println(String.format("Spaces %s", s.length()));
             */
