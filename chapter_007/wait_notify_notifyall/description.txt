@@ -1,0 +1,3 @@
+Programs:
+1. Realisation of pattern "Producer Customer". Classes:
+	ProducerCustomer.java has two threads. First thread is customer and read the new news from producer, second thread is producer and it creates news when news are read;
