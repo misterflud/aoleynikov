@@ -1,0 +1,7 @@
+Programs:
+1. Asynchronous operation, program printing information from two tread in the same time. Classes:
+	AsynchronousOperarion.java;
+2. Calculate spaces and letters in the text in multithreading operation. If time of calculation is over time limit, all operation will be break. Classes:
+	StaticticString.java contains three inner classes. First class is calculator of spaces, second class is calculator of litters, third class is calculator of time;
+	StatisticStringTest.java starts the program. 
+	 
