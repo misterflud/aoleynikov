@@ -1,0 +1,22 @@
+Programs:
+1. FileManager. It are used sockets. it can take files, send files and manage directory. Classes:
+	ConnectManager.java is interface which describes main methods for connection server and client.   
+	ClientManager.java is interface implements ConnectManager.java and adds special methods for client;
+	ServerManager.java is interface implements ConnectManager.java and adds special methods for server;
+	ServerNetFileManager.java is class manages all logic on server side;
+	ServerNetFileManager.java is class manages all logic on client side;
+	config.properties contains information about port, ip, startDirForServer, startDirForClient.
+2. ChatBot. You write messages to bot and it will answer to you from txt file  Classes:
+	Chat.java;
+	config.properties contains file1. It is path ro answer file;
+3. Checks in bite stream even and odd numbers. Classes:
+	Number.java;
+4. Deleter. Deletes word from stream. Classes:
+	Delete.java deletes all words(contain in abuse[]) from stream;
+5. External sorting. Sorts the big txt files (more 3Gb). The algorithm is external sorting. Classes:
+	Sort.java;
+6. ZipArchive. Creates zip file using java tools. Classes:
+	Zip.java;
+7. SendTakeFile. Sends and takes file between server and client like the FileManager program, but easier. Classes:
+	Client.java
+	Server.java 
