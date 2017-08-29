@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -42,13 +43,15 @@ public class ParallerSearch {
 	/**
 	 * Extension.
 	 */
-	private ArrayList<String> exts;
+	private CopyOnWriteArrayList<String> exts = new CopyOnWriteArrayList<String>();
+	//private ArrayList<String> exts = new ArrayList<>();
 	
 	
 	/**
 	 * Paths of files with found text. 
 	 */
-	private ArrayList<String> result = new ArrayList<>();
+	private CopyOnWriteArrayList<String> result = new CopyOnWriteArrayList<>();
+	//private ArrayList<String> result = new ArrayList<>();
 	
 	/**
 	 * Constructor.
@@ -59,14 +62,14 @@ public class ParallerSearch {
 	public ParallerSearch(String root, String text, ArrayList<String> exts) {
 		this.root = root;
 		this.text = text;
-		this.exts = exts;
+		this.exts.addAll(exts);
 	}
 	
 	/**
 	 * Start searching.
 	 * @return
 	 */
-	public synchronized ArrayList<String> start() {
+	public synchronized CopyOnWriteArrayList<String> start() {
 		Thread thread = new Searcher(root);
 		
 		try {

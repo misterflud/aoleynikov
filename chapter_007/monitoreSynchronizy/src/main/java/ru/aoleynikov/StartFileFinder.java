@@ -1,6 +1,7 @@
 package ru.aoleynikov;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
@@ -23,7 +24,7 @@ public class StartFileFinder {
 
 		//exts.add("txt");
 		ParallerSearch parallerSearch = new ParallerSearch("C://Users//oleynikov//Desktop//1С", "86342D7000", exts);
-		ArrayList<String> result = parallerSearch.start();
+		CopyOnWriteArrayList<String> result = parallerSearch.start();
 		//System.out.println("ssssssssssssssssssssssssssssss" + result.size());
 		for (String iter : result) {
 			System.out.println(iter);
