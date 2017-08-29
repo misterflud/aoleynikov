@@ -6,17 +6,26 @@ Programs:
 	ServerNetFileManager.java is class manages all logic on server side;
 	ServerNetFileManager.java is class manages all logic on client side;
 	config.properties contains information about port, ip, startDirForServer, startDirForClient.
-2. ChatBot. You write messages to bot and it will answer to you from txt file  Classes:
+2. Chat. You write messages to bot and it will answer(random text) to you from txt file  Classes:
 	Chat.java;
-	config.properties contains file1. It is path ro answer file;
+	ChatTest.java starts program;
+	config.properties contains file1. It is path of answer file;
 3. Checks in bite stream even and odd numbers. Classes:
 	Number.java;
 4. Deleter. Deletes word from stream. Classes:
 	Delete.java deletes all words(contain in abuse[]) from stream;
+	DeleteTest.java starts program;
 5. External sorting. Sorts the big txt files (more 3Gb). The algorithm is external sorting. Classes:
 	Sort.java;
+	SortTest starts program;
 6. ZipArchive. Creates zip file using java tools. Classes:
 	Zip.java;
+	ZipTest.java starts program;
 7. SendTakeFile. Sends and takes file between server and client like the FileManager program, but easier. Classes:
 	Client.java
-	Server.java 
+	Server.java
+8. Chat is wise Oracle. It is like the Chat, but on server and server can analysis the question. Classes:
+	  Client.java answers;
+	  BotTest.java starts program;
+	  ClientBot.java;
+	  ServerBot.java;
