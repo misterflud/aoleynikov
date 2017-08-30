@@ -28,7 +28,8 @@ public class Visibility {
         	System.out.println(String.format("%s %s", "Begin Program", c));
             One one = new One();
             Two two = new Two();
-            //Thread.sleep(100);// join не срабатывает
+            one.start();
+            two.start();
             one.join();
             two.join();
             System.out.println(String.format("%s %s", "End Program", c));
@@ -48,8 +49,7 @@ public class Visibility {
          * Constructor.
          */
         public One() {
-            Thread t1 = new Thread(this);
-            t1.start();
+            
         }
 
         /**
@@ -80,8 +80,7 @@ public class Visibility {
          * Constructor.
          */
         public Two() {
-            Thread t2 = new Thread(this);
-            t2.start();
+            
         }
 
         /**
