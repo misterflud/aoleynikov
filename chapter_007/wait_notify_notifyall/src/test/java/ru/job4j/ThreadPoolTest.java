@@ -6,13 +6,17 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-
+/**
+ * Test and begin class.
+ * @author Anton Oleynikov
+ * created on 30.08.2017
+ */
 public class ThreadPoolTest {
-	
+	/**
+	 * Test.
+	 */
 	@Test
 	public void whenThen() {
-		System.out.println("S");
-		
 		try (ThreadPool threadPool = new ThreadPool(4)) {
 			for (int i = 0; i < 30; i++) {
 				if (i % 2 == 0) {
@@ -37,6 +41,11 @@ public class ThreadPoolTest {
 		}
 	}
 	
+	/**
+	 * Work class.
+	 * @author Anton Oleynikov
+	 * created on 30.08.2017
+	 */
 	private class WorkOne implements Work {
 		
 		private String name;
@@ -47,12 +56,17 @@ public class ThreadPoolTest {
 
 		@Override
 		public void execute() {
-			for (int i = 0; i < 100000; i++);
+			for (int i = 0; i < 10000; i++);
 			System.out.println("One " + name);
 		}
 		
 	}
 	
+	/**
+	 * Work class.
+	 * @author Anton Oleynikov
+	 * created on 30.08.2017
+	 */
 	private class WorkTwo implements Work {
 		
 		private String name;
