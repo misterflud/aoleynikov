@@ -1,3 +1,7 @@
 Programs:
-1. Realisation of pattern "Producer Customer". Classes:
+1. Realisations of pattern "Producer Customer". Classes:
 	ProducerCustomer.java has two threads. First thread is customer and read the new news from producer, second thread is producer and it creates news when news are read;
+2. ThreadPool. This is program creates work threads (it dependents by cores computers) which execute some calculations comes from customer.
+	ThreadPool.java manages works between work treads;
+	Work.java is interface with method execute;
+	ThreadPoolTest.java tests program. Adds classes of work in ThreadPool.java;
