@@ -68,7 +68,7 @@ public class UserStorageTwo implements UserStorage {
 		synchronized (monitor4) {
 			monitor4 = id;
 			if (!(monitor4.equals(monitor0) && monitor4.equals(monitor1) && monitor4.equals(monitor2) && monitor4.equals(monitor3))) {
-				list.get(id).setAmount(amount);;
+				list.get(id).setAmount(amount);
 			}
 			monitor4 = -4;
 		}

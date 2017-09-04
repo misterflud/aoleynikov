@@ -38,7 +38,7 @@ public class UserStorageOne implements UserStorage {
 	 * @param amount
 	 */
 	public void update(int id, int amount) {
-		list.get(id).setAmount(amount);;
+		list.get(id).setAmount(amount);
 	}
 	
 	/**
