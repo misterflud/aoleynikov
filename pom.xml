@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.oleynikov</groupId>
@@ -15,7 +16,8 @@
         <module>chapter_007</module>
         <module>chapter_008</module>
         <module>chapter_009</module>
-    </modules>
+    <module>schildt</module>
+  </modules>
 
     <dependencies>
         <dependency>
