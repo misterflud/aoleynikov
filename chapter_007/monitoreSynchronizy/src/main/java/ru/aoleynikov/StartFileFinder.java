@@ -23,7 +23,7 @@ public class StartFileFinder {
 		exts.add("xls");
 
 		//exts.add("txt");
-		ParallerSearch parallerSearch = new ParallerSearch("C://Users//oleynikov//Desktop//1С", "86342D7000", exts);
+		ParallerSearch parallerSearch = new ParallerSearch("C://Users//oleynikov//Desktop//1С", "RS3457H045", exts);
 		CopyOnWriteArrayList<String> result = parallerSearch.start();
 		//System.out.println("ssssssssssssssssssssssssssssss" + result.size());
 		for (String iter : result) {
