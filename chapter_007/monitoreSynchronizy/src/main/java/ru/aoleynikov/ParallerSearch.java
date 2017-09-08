@@ -27,7 +27,7 @@ public class ParallerSearch {
 //Можно без потоков, используя рекурсию
 	//запускать на каждую директорию свой поток, в котором пробегаются по всем файлам, а при попадании на папку запускает такой же поток для нее
 	
-	
+	private volatile int threadsCount = 0;
 	/**
 	 * Path of root.
 	 */
@@ -73,12 +73,19 @@ public class ParallerSearch {
 		Thread thread = new Searcher(root);
 		
 		try {
-			thread.join(); //join не работает
-			Thread.sleep(5000); //
+			Thread.sleep(1000); 
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		while (threadsCount != 0) {
+			try {
+				Thread.sleep(1000); 
+			} catch (InterruptedException e) {
+			
+				e.printStackTrace();
+			}
+		}
+		
 		return result;
 	}
 	
@@ -214,6 +221,7 @@ public class ParallerSearch {
 		 */
 		@Override
 		public void run() {
+			threadsCount++;
 			String ext;
 			File file = new File(startPath);
 			File[] files = file.listFiles();
@@ -227,6 +235,7 @@ public class ParallerSearch {
 					insideSearcher(iter, ext);
 				}
 			}
+			threadsCount--;
 		}
 		
 		/**
