@@ -7,7 +7,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.junit.Test;
 
 
-
+/**
+ * For Experiment. Don't use for test.
+ * @author Anton Oleynikov
+ * created on 12.09.2017
+ */
 public class LockMashineTest {
 	
 	
@@ -17,7 +21,7 @@ public class LockMashineTest {
 
 	
 	
-	
+	@Test
 	public void whenThenOne() {
 		
 		final CyclicBarrier barrier = new CyclicBarrier(5);
