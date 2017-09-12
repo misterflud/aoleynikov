@@ -2,34 +2,50 @@ package ru.job4j;
 
 
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
+/**
+ * Lock for more flexible synchronization.
+ * @author Anton Oleynikov
+ * created on 12.09.2017
+ */
 public class LockMashine {
 	
+	/**
+	 * Locked or not.
+	 */
 	private volatile boolean lockOrNot = false;
 	
-	//private volatile boolean lockSemaphore = false;
 	
-	
-	
+	/**
+	 * Count of threads.
+	 */
 	private volatile int count = 0;
+	
+	/**
+	 * Object for Lock.
+	 */
 	private Object lock1 = new Lock();
+	
+	/**
+	 * Object for Lock.
+	 */
 	private Object lock2 = new Lock2();
 	
 	
 	
-	
+	/**
+	 * Locking.
+	 */
 	public synchronized void lock() {
 		while (lockOrNot) { // wait невозможно использовать иначе вылазиет ошибка IllegalMonitorStateException
 			
 		}
-		System.out.println("sssssss");
 		lockOrNot = true;
 	}
 	
 
-	
+	/**
+	 * Unlocking.
+	 */
 	public void unlock() {
 		if (lockOrNot) {
 			lockOrNot = false;
@@ -41,12 +57,18 @@ public class LockMashine {
 	
 	
 	
-	
+	/**
+	 * Check conditions.
+	 * @return condition of lock
+	 */
 	public boolean lockOrNot() {
 		return lockOrNot;
 	}
 	
-	
+	/**
+	 * Cyclic.
+	 * @param max threads
+	 */
 	public void cyclicBarrier (int max) {
 		synchronized (lock1) {
 			count++;
@@ -59,7 +81,10 @@ public class LockMashine {
 		}
 	}
 	
-	
+	/**
+	 * Don't use.
+	 * @param milisec milisec
+	 */
 	public void lock(int milisec) {
 		System.out.println("asd2");
 		try {
@@ -69,8 +94,18 @@ public class LockMashine {
 		}
 	}
 	
-	
+	/**
+	 * Class for lock's Object. 
+	 * @author Anton Oleynikov
+	 * created on 12.09.2017
+	 */
 	private static final class Lock { }
+	
+	/**
+	 * Class for lock's Object. 
+	 * @author Anton Oleynikov
+	 * created on 12.09.2017
+	 */
 	private static final class Lock2 { }
 		
 	

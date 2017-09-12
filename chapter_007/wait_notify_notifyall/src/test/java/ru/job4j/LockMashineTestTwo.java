@@ -8,15 +8,25 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.junit.Test;
 
 
-
+/**
+ * Test class
+ * @author Anton Oleynikov
+ * created on 12.09.2017
+ */
 public class LockMashineTestTwo {
 	
+	/**
+	 * My realization of Lock API
+	 */
 	private LockMashine lockMashine = new LockMashine();
 	
+	/**
+	 * Concurrent Lock API.
+	 */
 	private Lock lock = new ReentrantLock();
 	
 	/**
-	 * 
+	 * Test.
 	 */
 	@Test
 	public void test() {
@@ -32,6 +42,10 @@ public class LockMashineTestTwo {
 		}
 	}
 	
+	/**
+	 * Print parameters.
+	 * @param a a
+	 */
 	private void print(int a) {
 		try {
 			//lock.lock();    
@@ -45,6 +59,11 @@ public class LockMashineTestTwo {
 		}
 	}
 	
+	/**
+	 * Thread.
+	 * @author Anton Oleynikov
+	 * created on 12.09.2017
+	 */
 	class ThreadTwo extends Thread {
 		
 		private int j;

@@ -5,12 +5,26 @@ import java.util.concurrent.CyclicBarrier;
 
 import org.junit.Test;
 
+/**
+ * Test class
+ * @author Anton Oleynikov
+ * created on 12.09.2017
+ */
 public class LockMashineTestThree {
 	
+	/**
+	 * My realization of Lock API Barrier.
+	 */
 	private LockMashine lockMashine = new LockMashine();
 	
+	/**
+	 * Concurrent Barrier API.
+	 */
 	private CyclicBarrier barrier = new CyclicBarrier(3);
 	
+	/**
+	 * Test.
+	 */
 	@Test
 	public void test() {
 		for (int i = 0; i < 100; i++) {
@@ -23,6 +37,10 @@ public class LockMashineTestThree {
 		}
 	}
 	
+	/**
+	 * Print parameters.
+	 * @param a a
+	 */
 	private void print(int a) {
 		try {
 			//barrier.await();
@@ -36,6 +54,11 @@ public class LockMashineTestThree {
 	}
 
 	
+	/**
+	 * Thread.
+	 * @author Anton Oleynikov
+	 * created on 12.09.2017
+	 */
 	class ThreadThree extends Thread {
 		
 		private int j;
