@@ -6,4 +6,8 @@ Programs:
 	Work.java is interface with method execute;
 	ThreadPoolTest.java tests program. Adds classes of work in ThreadPool.java;
 3. Realization Lock API;
+	LockMashine.java is it my realization Lock API. Contents lock(unlock), semaphore and cyclicBarrier methods;
+	LockMashineTest.java is for experiments;
+	LockMashineTestTwo.java is for test lock (unlock);
+	LockMashineTestThree.java is for test cyclicBarrier;
 	
