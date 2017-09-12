@@ -16,7 +16,7 @@ import org.junit.Test;
 public class LockMashineTestTwo {
 	
 	/**
-	 * My realization of Lock API
+	 * My realization of Lock API.
 	 */
 	private LockMashine lockMashine = new LockMashine();
 	
