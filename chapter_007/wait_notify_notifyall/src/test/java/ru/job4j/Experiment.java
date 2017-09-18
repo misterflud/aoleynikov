@@ -1,76 +1,50 @@
 package ru.job4j;
 
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Experiment {
-	int a = 2;
 	
-	int b = 2;
-	
-	int c = 2;
-	
-	CyclicBarrier barrier;
-	
-	public Experiment(CyclicBarrier barrier) {
-		this.barrier = barrier;
+	//Lock lock = new ReentrantLock();
+	LockMashine lock = new LockMashine();
+	public static void main(String[] args) {
+		
+		new Experiment().start();
+
 	}
 	
-	public void doA(int i) {
-		if (a % 2 == 0) {
-			a = a + i;
-		} else {
-			a = a * i;
+	public void start() {
+		for (int i = 0; i < 10; i++) {
+			new Th().start();
 		}
 	}
 	
-	
-	public synchronized void doB(int i) {
-		if (b % 2 == 0) {
-			b = b + i;
-		} else {
-			b = b * i;
-		}
-		
+	private synchronized void one() {
+		System.out.println("1");
+		two();
 	}
 	
-	public void doC(int i) {
-		try {
-			barrier.await();
-			if (c % 2 == 0) {
-				c = c + i;
-			} else {
-				c = c * i;
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (BrokenBarrierException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		/*
-		Lock lock = new ReentrantLock();
-		try {
-			lock.lock();
-			if (c % 2 == 0) {
-				c = c + i;
-			} else {
-				c = c * i;
-			}
-			
-		} finally {
-			lock.unlock();
-		}
-		*/
+	private synchronized void two() {
+		System.out.println("2");
 	}
 	
-	
-	
-	public void print() {
-		System.out.println(String.format("%s %s %s", a, b, c));
-		
+	private void oneOne() {
+		lock.lock();
+		System.out.println("1");
+		twoTwo();
+		lock.unlock();
 	}
-}
+	
+	private void twoTwo() {
+		lock.lock();
+		System.out.println("2");
+		lock.unlock();
+	}
+	 class Th extends Thread {
+		@Override
+		public void run() {
+			//one();
+			oneOne();
+		}
+	}
+ }

@@ -19,6 +19,14 @@ public class LockMashine {
 	 * Count of threads.
 	 */
 	private volatile int count = 0;
+	/**
+	 * Locked or not.
+	 */
+	Thread  lockedBy = null;
+	/**
+	 * Counts Threads.
+	 */
+	int lockedCount = 0;
 	
 	/**
 	 * Object for Lock.
@@ -36,23 +44,36 @@ public class LockMashine {
 	 * Locking.
 	 */
 	public synchronized void lock() {
-		while (lockOrNot) { // wait невозможно использовать иначе вылазиет ошибка IllegalMonitorStateException
-			
+		Thread callingThread = Thread.currentThread();
+		while (lockOrNot && lockedBy != callingThread) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
+		lockedCount++;
 		lockOrNot = true;
+		lockedBy = callingThread;
 	}
 	
 
 	/**
 	 * Unlocking.
 	 */
-	public void unlock() {
+	public synchronized void unlock() {
+		if(Thread.currentThread() == this.lockedBy){
+		      lockedCount--;
+
+		      if(lockedCount == 0){
+		    	lockOrNot = false;
+		        notify();
+		      }
+		    }
 		if (lockOrNot) {
 			lockOrNot = false;
-			//notifyAll();
+			notify();
 		}
-
-		
 	}
 	
 	
