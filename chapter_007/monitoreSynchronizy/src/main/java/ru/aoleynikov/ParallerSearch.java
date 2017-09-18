@@ -31,26 +31,26 @@ public class ParallerSearch {
 	/**
 	 * Path of root.
 	 */
-	private String root;
+	private final String root;
 	
 	//private InputStreamReader inputStreamReader = new InputStreamReader(new File(root).)
 	
 	/**
 	 * Text witch we want to found.
 	 */
-	private String text;
+	private final String text;
 	
 	/**
 	 * Extension.
 	 */
-	private CopyOnWriteArrayList<String> exts = new CopyOnWriteArrayList<String>();
+	private final CopyOnWriteArrayList<String> exts = new CopyOnWriteArrayList<String>();
 	//private ArrayList<String> exts = new ArrayList<>();
 	
 	
 	/**
 	 * Paths of files with found text. 
 	 */
-	private CopyOnWriteArrayList<String> result = new CopyOnWriteArrayList<>();
+	private final CopyOnWriteArrayList<String> result = new CopyOnWriteArrayList<>();
 	//private ArrayList<String> result = new ArrayList<>();
 	
 	/**
