@@ -1,5 +1,5 @@
 package ru.job4j;
 
-public class OplimisticException {
-
+public class OplimisticException extends Exception {
+	
 }
