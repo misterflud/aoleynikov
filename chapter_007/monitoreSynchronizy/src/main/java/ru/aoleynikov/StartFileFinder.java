@@ -1,5 +1,7 @@
 package ru.aoleynikov;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -23,12 +25,18 @@ public class StartFileFinder {
 		exts.add("xls");
 
 		//exts.add("txt");
-		ParallerSearch parallerSearch = new ParallerSearch("C://Users//oleynikov//Desktop//1С", "921014L500", exts);
-		CopyOnWriteArrayList<String> result = parallerSearch.start();
-		System.out.println("ssssssssssssssssssssssssssssss" + result.size());
-		for (String iter : result) {
-			System.out.println(iter);
+		try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+			System.out.println("Write name of file:");
+			ParallerSearch parallerSearch = new ParallerSearch("C://Users//oleynikov//Desktop//1С", reader.readLine(), exts);
+			CopyOnWriteArrayList<String> result = parallerSearch.start();
+			System.out.println("ssssssssssssssssssssssssssssss" + result.size());
+			for (String iter : result) {
+				System.out.println(iter);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
 	}
 
 }
