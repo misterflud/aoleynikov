@@ -15,5 +15,7 @@
         <module>monitoreSynchronizy</module>
         <module>javaMemoryModel</module>
     <module>wait_notify_notifyall</module>
+    <module>test_tasks</module>
+    <module>nonBlockingAlgoritms</module>
   </modules>
 </project>
