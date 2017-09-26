@@ -20,7 +20,6 @@ public class UserStorageTest {
 	@Test
 	public void whenThen() {
 		UserStorage userStorage = new UserStorageOne(); 
-		//UserStorage userStorage = new UserStorageTwo();
 		for (int i = 0; i < 10; i++) {
 			AddingTread addingTread = new AddingTread("T" + i, i, userStorage);
 			addingTread.start();
