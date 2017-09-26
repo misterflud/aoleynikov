@@ -1,11 +1,11 @@
 Programs:
 1. Realisations of pattern "Producer Customer". Classes:
 	ProducerCustomer.java has two threads. First thread is customer and read the new news from producer, second thread is producer and it creates news when news are read;
-2. ThreadPool. This is program creates work threads (it dependents by cores computers) which execute some calculations comes from customer.
+2. ThreadPool. This is program creates work threads (it dependents by cores computers) which execute some calculations comes from customer. Classes:
 	ThreadPool.java manages works between work treads;
 	Work.java is interface with method execute;
 	ThreadPoolTest.java tests program. Adds classes of work in ThreadPool.java;
-3. Realization Lock API;
+3. Realization Lock API. Classes:
 	LockMashine.java is it my realization Lock API. Contents lock(unlock), semaphore and cyclicBarrier methods;
 	LockMashineTest.java is for experiments;
 	LockMashineTestTwo.java is for test lock (unlock);
