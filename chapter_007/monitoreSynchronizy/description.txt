@@ -12,3 +12,4 @@ Programs:
 3. Searching the text in files in the directory. Type the files can change. Classes:
 	UserStorageTest.java;
 	StartFileFinder.java;
+6.	Threads safe Array and LinkedList list. All implementation (lists and concurrent safe) was created by me. Classes:
