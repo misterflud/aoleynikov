@@ -12,7 +12,7 @@ public class CacheTest {
 	/**
 	 * Cache.
 	 */
-	private Cache<Integer, Integer> cache = new Cache<Integer, Integer>();
+	private Cache<Integer, Model> cache = new Cache<Integer, Model>();
 	
 	/**
 	 * Test one.
@@ -27,10 +27,15 @@ public class CacheTest {
 		for (int i = 0; i < 5; i++) {
 			new ThreadTwo(i).start();
 		}
-		
-		cache.update(9, -100);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cache.update(9, new Model<Integer>(100, 5));
 		for (int i = 0; i < 10; i++) {
-			System.out.println(cache.get(i));
+			System.out.println(cache.get(i).v);
 		}
 	}
 	
@@ -49,7 +54,8 @@ public class CacheTest {
 		
 		@Override
 		public void run() {
-			cache.add(i, i);
+			//System.out.println("bbbb");
+			cache.add(i, new Model<Integer>(i));
 		}
 	}
 	
@@ -68,8 +74,10 @@ public class CacheTest {
 		
 		@Override
 		public void run() {
-			cache.update(i, i * -1);
-			cache.update(i + 1, i * -11);
+			//System.out.println("aaaa");
+			cache.update(i, new Model<Integer>(i * -1, 2));
+			
+			cache.update(i + 1, new Model<Integer>(i + 11, 3));
 		}
 	}
 }

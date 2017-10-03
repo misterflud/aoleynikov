@@ -10,7 +10,7 @@ import java.util.function.BiFunction;
  * @param <K> key
  * @param <V> value
  */
-public class Cache <K, V> {
+public class Cache <K, V extends Versionable> {
 	
 	/**
 	 * Concurrent map.
@@ -39,8 +39,21 @@ public class Cache <K, V> {
 	 * @param k key
 	 * @param v value
 	 */
-	public void update(K k, V v) {
-		map.computeIfPresent(k, (key, value) -> v);
+	public void update(K k, V newModel) {
+		//map.computeIfPresent(k, (key, value) -> newModel);
+		//map.computeIfPresent(k, (key, value) -> newModel.getVersion());
+		
+		if (newModel.getVersion() > map.get(k).getVersion()) {
+			map.computeIfPresent(k, (key, value) -> newModel);
+		} else {
+			try {
+				throw new OplimisticException();
+			} catch (OplimisticException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 	/**

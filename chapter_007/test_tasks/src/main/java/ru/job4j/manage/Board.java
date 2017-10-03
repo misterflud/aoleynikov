@@ -78,7 +78,7 @@ public class Board {
 		
 		if (newLocation.coordX > x || newLocation.coordX < 0 || newLocation.coordY > y || newLocation.coordY < 0) {
 			System.out.print("No ");
-			markCell(oldLocation, oldLocation);
+			//markCell(oldLocation, oldLocation);
 			return oldLocation;
 		} else {
 			markCell(oldLocation, newLocation);
