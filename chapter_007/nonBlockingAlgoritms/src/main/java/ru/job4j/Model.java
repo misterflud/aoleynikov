@@ -23,17 +23,28 @@ public class Model<V> implements Versionable {
 		this.version = 0;
 	}
 	
+	/**
+	 * Constructor.
+	 * @param v v
+	 */
 	public Model(V v) {
 		this.v = v;
 		this.version = 0;
 	}
 	
+	/**
+	 * Constructor.
+	 * @param v v
+	 * @param version version
+	 */
 	public Model(V v, int version) {
 		this.v = v;
 		this.version = version;
 	}
 	
-
+	/**
+	 * Gets version.
+	 */
 	@Override
 	public int getVersion() {
 		return version;
