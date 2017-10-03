@@ -22,8 +22,9 @@ public class Bomberman implements HeroesAction {
 	/**
 	 * Moves.
 	 */
-	public Location move(Location oldLocation, Location newLocation) {
-			return board.changeLocation(oldLocation, newLocation);
+	public synchronized Location move(Location oldLocation, Location newLocation) {
+		System.out.println(oldLocation.coordY + " " + oldLocation.coordX + " " + newLocation.coordY + " " + newLocation.coordX);
+		return board.changeLocation(oldLocation, newLocation);
 	}
 
 

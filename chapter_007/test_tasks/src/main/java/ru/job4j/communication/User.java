@@ -13,7 +13,7 @@ public class User implements UserAction {
 	/**
 	 * Action of heroes.
 	 */
-	private final HeroesAction heroes;
+	private volatile HeroesAction heroes;
 	
 	/**
 	 * Old location.
@@ -65,7 +65,7 @@ public class User implements UserAction {
 		System.out.print("left ");
 		bufferLocation = oldLocation.getCopy();
 		bufferLocation.coordX -= 1;
-		heroes.move(oldLocation, bufferLocation);
+		oldLocation = heroes.move(oldLocation, bufferLocation);
 	}
 
 	/**
@@ -76,8 +76,10 @@ public class User implements UserAction {
 		System.out.print("right ");
 		bufferLocation = oldLocation.getCopy();
 		bufferLocation.coordX += 1;
-		heroes.move(oldLocation, bufferLocation);
+		oldLocation = heroes.move(oldLocation, bufferLocation);
 	}
+	
+	
 	
 	
 }

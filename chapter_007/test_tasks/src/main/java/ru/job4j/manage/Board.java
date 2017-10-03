@@ -76,7 +76,7 @@ public class Board {
 	 */
 	public synchronized Location changeLocation(Location oldLocation, Location newLocation) {
 		
-		if (newLocation.coordX > x - 1 || newLocation.coordX < 0 || newLocation.coordY > y - 1 || newLocation.coordY < 0) {
+		if (newLocation.coordX > x || newLocation.coordX < 0 || newLocation.coordY > y || newLocation.coordY < 0) {
 			System.out.print("No ");
 			markCell(oldLocation, oldLocation);
 			return oldLocation;
@@ -101,7 +101,7 @@ public class Board {
 	 * @param newLocation newLocation
 	 */
 	private synchronized void markCell(Location oldLocation, Location newLocation) {
-		System.out.println(oldLocation.coordY + " " + oldLocation.coordX + " " + newLocation.coordY + " " + newLocation.coordX);
+		//System.out.println(oldLocation.coordY + " " + oldLocation.coordX + " " + newLocation.coordY + " " + newLocation.coordX);
 		board[oldLocation.coordY][oldLocation.coordX] = 0;
 		board[newLocation.coordY][newLocation.coordX] = 2;
 		sendStream();
