@@ -2,60 +2,54 @@ package ru.aoleynikov;
 
 public class DemoJoin {
 
-	public static void main(String[] args) {
-		NewThread о1 = new NewThread ( "Один" );
-		NewThread оЬ2 new NewThread ( "Двa " );
-		NewThread оЬЗ new NewThread ( "Tpи" );
-		System . out . println ( "Пoтoк Один запущен : "
-		+ oЫ .t. i sAlive ( )};
-		System.out . println ( " Пoтoк Два запущен : "
-		+ ob2 .t. i sAli ve ( });
-		System.out . println ( " Пoтoк Три запущен : "
-		+ obЗ .t. i sAl i ve ( ));
+	public static void main(String[] args) {  
+		NewThread ob1 = new NewThread("Один ");
+		NewThread ob2 = new NewThread("Двa ");
+		NewThread obЗ = new NewThread("Tpи ");
+		
+		System.out.println ("Пoтoк Один запущен : " + ob1.t.isAlive());
+		System.out.println ("Пoтoк Два запущен : " + ob2.t.isAlive());
+		System.out.println ("Пoтoк Три запущен : " + obЗ.t.isAlive());
 		// ожидать завершения потоков исполнения
 		try {
-			System.out.println ( "Oжидaниe завершения потоков . " );
-			оЫ . t . j oin ( ) ;
-			оЬ2 . t . j oin ( ) ;
-			оЬЗ . t . j oin () ;
+			System.out.println ("Oжидaниe завершения потоков . ");
+			ob1.t.join();
+			ob2.t.join();
+			obЗ.t.join();
 		}
-		catch ( InterruptedException е} {
-		System . out . println ( " Глaвный поток прерван " );
-		System.out . println ( "Пoтoк Один запущен : "
-		+ oЫ .t. i s.Alive() };
-		System . out . println ( " Пoтoк Два запущен : "
-		+ ob2 .t. i sAlive() );
-		System.out . println ( "Пoтoк Три запущен : "
-		+ obЗ .t. i sAlive ( ) ) ;
-		System.out.println ("Глaвный поток завершен . "} ;
+		catch (InterruptedException e) {
+			System.out.println ("Глaвный поток прерван ");
+			System.out.println ("Пoтoк Один запущен : " + ob1.t.isAlive());
+			System.out.println ("Пoтoк Два запущен : " + ob2.t.isAlive());
+			System.out.println ("Пoтoк Три запущен : " + obЗ.t.isAlive());
+			System.out.println ("Глaвный поток завершен :");
+		}
 
 	}
-	//11 Применить метод j oin() , ч тобы ожидать завершения потоков исполнения
-	class NewThread implements Ruппаblе {
-		Striпg паmе; // имя потока исполнения
+	// Применить метод join() , чтобы ожидать завершения потоков исполнения
+}
+	class NewThread implements Runnable {
+		String name; // имя потока исполнения
 		Thread t;
 		
-		NewThread (Striпg threadname) {
-			
+		public NewThread (String threadname) {
+			name = threadname;
+			t = new Thread(this, name);
+			System.out.println ("Hoвый поток : " + t ) ;
+			t.start(); // запустить поток исполнения 
 		}
-		name = threadname; 
-		t = new Thread (this , name ) ;
-		System.out . println ("Hoвый поток : "+ t ) ;
-		t.start(} ; // запустить поток исполнения
-		11 Точка входа в поток исполнения
-		public void run() {
+		
+
+		public void run() { // Точка входа в поток исполнения
 			try {
 				for (int i = 5; i > 0; i--) {
-					System.out.println (name + "· "+ i );
+					System.out.println (name + ": "+ i);
+					Thread.sleep (1000);
 				}
-				Thread.sleep (1000);
+			}	
 			catch (InterruptedException е) {
-				System.out.println(name + " прерван . ");
-				
-				}
-			System.out.println(name + " завершен . ");
+				System.out.println(name + " прерван.");	
 			}
+			System.out.println(name + " завершен.");
 		}
 	}
-
-}

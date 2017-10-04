@@ -13,7 +13,7 @@ public class LauncherGame {
 	
 	private StreamOut streamOut = new StreamOut();
 	
-	private Board board = new Board(5, 5, streamOut);
+	private Board board = new Board(10, 10, streamOut);
 	
 	/**
 	 * Bomberman.
