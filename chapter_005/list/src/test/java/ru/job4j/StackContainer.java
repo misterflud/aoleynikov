@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * Created by Anton on 12.05.2017.
  */
-public class StackContainer {
+public class StackContainerTest {
     /**
      * Test.
      */
