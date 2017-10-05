@@ -13,6 +13,7 @@ public class DemoJoin {
 		// ожидать завершения потоков исполнения
 		try {
 			System.out.println ("Oжидaниe завершения потоков . ");
+			//join();
 			ob1.t.join();
 			ob2.t.join();
 			obЗ.t.join();
@@ -20,6 +21,7 @@ public class DemoJoin {
 		catch (InterruptedException e) {
 			System.out.println ("Глaвный поток прерван ");
 			System.out.println ("Пoтoк Один запущен : " + ob1.t.isAlive());
+			
 			System.out.println ("Пoтoк Два запущен : " + ob2.t.isAlive());
 			System.out.println ("Пoтoк Три запущен : " + obЗ.t.isAlive());
 			System.out.println ("Глaвный поток завершен :");
