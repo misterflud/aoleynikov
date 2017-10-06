@@ -30,7 +30,8 @@ class Caller implements Runnable {
 	}
 
 	public void run () { 
-		target.call(msg) ;
+
+		target.call(msg);
 	}
 }
 
