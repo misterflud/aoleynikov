@@ -1,5 +1,6 @@
 package ru.job4j;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
