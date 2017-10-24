@@ -2,6 +2,7 @@ package aoleynikov.servlets;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,35 +10,13 @@ import java.sql.*;
 import java.util.Properties;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+import javax.activation.DataSource;
 
 /**
  * Created by Anton on 02.07.2017.
+ * DAO
  */
 public class ConnectionWithDataBase implements AutoCloseable {
-    /**
-     * User PostgeSQL.
-     */
-    private String username;
-    /**
-     * Password PostgeSQL.
-     */
-    private String password;
-    /**
-     * UDL PostgeSQL.
-     */
-    private String url;
-    /**
-     * Connection with Database.
-     */
-    private Connection connection;
-    /**
-     * Executing SQL scripts.
-     */
-    private PreparedStatement st;
-    /**
-     * Request from database.
-     */
-    private ResultSet rs;
 
     /**
      * Basic Source.
@@ -47,19 +26,6 @@ public class ConnectionWithDataBase implements AutoCloseable {
      * Constructor.
      */
     public ConnectionWithDataBase() {
-
-
-        final Properties prs = new Properties();
-        ClassLoader loader = ConnectionWithDataBase.class.getClassLoader();
-        try (InputStream inputStream = loader.getResourceAsStream("config.properties")) {
-            prs.load(inputStream);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        this.username = prs.getProperty("username");
-        this.password = prs.getProperty("password");
-        this.url = prs.getProperty("url");
-
         checkTableAndCreate();
     }
 
@@ -67,7 +33,21 @@ public class ConnectionWithDataBase implements AutoCloseable {
      * Creates table, if it's not exist.
      */
     private void checkTableAndCreate() {
-        try{
+    	ClassLoader load = ConnectionWithDataBase.class.getClassLoader();
+        try (Connection connection = DBUtil.getDataSource().getConnection(); 
+        		BufferedReader reader = new BufferedReader(new InputStreamReader(load.getResourceAsStream("createusertable.sql"))); 
+        		PreparedStatement ps = connection.prepareStatement(reader.readLine());
+        		ResultSet rs = ps.executeQuery();) { //получили скрипт создания таблицы
+            
+         
+            if (!rs.next()) {
+                 connection.prepareStatement(reader.readLine()).execute();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+/*
+  try{
             Class.forName("org.postgresql.Driver");
             bs = new BasicDataSource();
             bs.setUrl(url);
@@ -89,7 +69,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+ */
     }
 
     /**
@@ -97,6 +77,17 @@ public class ConnectionWithDataBase implements AutoCloseable {
      * @param user user
      */
     public void createUser(BaseUser user) {
+        try(Connection connection = DBUtil.getDataSource().getConnection(); 
+        		PreparedStatement ps = connection.prepareStatement("INSERT INTO users(name, login, email, createdDate) VALUES (?, ?, ?, ?)")) {
+            ps.setString(1, user.name);
+            ps.setString(2, user.login);
+            ps.setString(3, user.email);
+            ps.setTimestamp(4, user.timeOfCreate);
+            ps.execute();
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
+        /*
         try {
             st = connection.prepareStatement("INSERT INTO users(name, login, email, createdDate) VALUES (?, ?, ?, ?)");
             st.setString(1, user.name);
@@ -107,6 +98,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+         */
 
     }
 
@@ -115,6 +107,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
      * @param editUser editUser
      */
     public void editUser(BaseUser editUser) {
+    	/*
         try {
             st = connection.prepareStatement("UPDATE users SET name = ? WHERE login = ? AND email = ?");
             st.setString(1, editUser.name);
@@ -124,6 +117,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
     }
 
     /**
@@ -132,6 +126,20 @@ public class ConnectionWithDataBase implements AutoCloseable {
      * @return user
      */
     public User getUser(BaseUser userWithLogin) {
+    	try(Connection connection = DBUtil.getDataSource().getConnection(); 
+        	PreparedStatement ps = connection.prepareStatement("SELECT * FROM users where login = ?")) {
+    		ps.setString(1, userWithLogin.login);
+    		try (ResultSet rs = ps.executeQuery()) {
+    			rs.next();
+    			return new User(rs.getString("name"), rs.getString("login"), rs.getString("email"), rs.getTimestamp("createdDate"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+    		
+    	} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	/*
         try {
             st = connection.prepareStatement("SELECT * FROM users where login = ?");
             st.setString(1, userWithLogin.login);
@@ -141,6 +149,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
         return null;
     }
 
@@ -149,6 +158,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
      * @param userWithLogin user without other parameters
      */
     public void deleteUser(BaseUser userWithLogin) {
+    	/*
         try {
             st = connection.prepareStatement("DELETE FROM users where login = ?");
             st.setString(1, userWithLogin.login);
@@ -156,7 +166,12 @@ public class ConnectionWithDataBase implements AutoCloseable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
     }
+    
+    private void refreshConnection() {
+		
+	}
 
     /**
      * Closes streams.
@@ -164,8 +179,10 @@ public class ConnectionWithDataBase implements AutoCloseable {
      */
     @Override
     public void close() throws Exception {
+    	/*
         st.close();
         rs.close();
         connection.close();
+        */
     }
 }

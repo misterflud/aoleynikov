@@ -1,7 +1,0 @@
-<Resource name="jdbc/servlets" auth="Container"
-          type="javax.sql.DataSource" maxActive="100"
-          maxIdle="30" maxWait="200"
-          username="postgres"
-          password="331610"
-          driverClassName="jdbc.driver.name"
-          url="jdbc:postgresql://localhost:5432/server"/>
