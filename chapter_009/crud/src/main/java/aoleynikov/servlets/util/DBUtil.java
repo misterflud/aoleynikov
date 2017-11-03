@@ -1,4 +1,4 @@
-package aoleynikov.servlets;
+package aoleynikov.servlets.util;
 
 import javax.sql.DataSource;
 import javax.naming.Context;

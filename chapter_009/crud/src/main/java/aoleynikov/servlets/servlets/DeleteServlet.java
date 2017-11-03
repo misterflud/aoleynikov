@@ -1,8 +1,8 @@
 package aoleynikov.servlets.servlets;
 
-import aoleynikov.servlets.ConnectionWithDataBase;
 import aoleynikov.servlets.SingletonPrintOut;
-import aoleynikov.servlets.User;
+import aoleynikov.servlets.dao.ConnectionWithDataBaseDao;
+import aoleynikov.servlets.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +44,7 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        try(ConnectionWithDataBase dataBase = new ConnectionWithDataBase()) {
+        try(ConnectionWithDataBaseDao dataBase = new ConnectionWithDataBaseDao()) {
             dataBase.deleteUser(new User(req.getParameter("login")));
             line = "Deleted";
             SingletonPrintOut.getInstance().setString(line);

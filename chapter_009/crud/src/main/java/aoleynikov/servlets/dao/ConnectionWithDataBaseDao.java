@@ -1,12 +1,17 @@
-package aoleynikov.servlets;
+package aoleynikov.servlets.dao;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import aoleynikov.servlets.model.BaseUser;
+import aoleynikov.servlets.model.User;
+import aoleynikov.servlets.util.DBUtil;
 
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -16,7 +21,7 @@ import javax.activation.DataSource;
  * Created by Anton on 02.07.2017.
  * DAO
  */
-public class ConnectionWithDataBase implements AutoCloseable {
+public class ConnectionWithDataBaseDao implements AutoCloseable {
 
     /**
      * Basic Source.
@@ -25,15 +30,15 @@ public class ConnectionWithDataBase implements AutoCloseable {
     /**
      * Constructor.
      */
-    public ConnectionWithDataBase() {
-        checkTableAndCreate();
+    public ConnectionWithDataBaseDao() {
+        //checkTableAndCreate();
     }
 
     /**
      * Creates table, if it's not exist.
      */
     private void checkTableAndCreate() {
-    	ClassLoader load = ConnectionWithDataBase.class.getClassLoader();
+    	ClassLoader load = ConnectionWithDataBaseDao.class.getClassLoader();
         try (Connection connection = DBUtil.getDataSource().getConnection(); 
         		BufferedReader reader = new BufferedReader(new InputStreamReader(load.getResourceAsStream("createusertable.sql"))); 
         		PreparedStatement ps = connection.prepareStatement(reader.readLine());
@@ -46,30 +51,6 @@ public class ConnectionWithDataBase implements AutoCloseable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-/*
-  try{
-            Class.forName("org.postgresql.Driver");
-            bs = new BasicDataSource();
-            bs.setUrl(url);
-            bs.setUsername(username);
-            bs.setPassword(password);
-            bs.setMinIdle(5);
-            bs.setMaxIdle(10);
-            bs.setMaxOpenPreparedStatements(100);
-
-            connection = bs.getConnection();
-            ClassLoader load = ConnectionWithDataBase.class.getClassLoader();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(load.getResourceAsStream("createusertable.sql")))) { //получили скрипт создания таблицы
-                st = connection.prepareStatement(reader.readLine());
-                rs = st.executeQuery();
-                if (!rs.next()) {
-                    connection.prepareStatement(reader.readLine()).execute();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
- */
     }
 
     /**
@@ -79,10 +60,10 @@ public class ConnectionWithDataBase implements AutoCloseable {
     public void createUser(BaseUser user) {
         try(Connection connection = DBUtil.getDataSource().getConnection(); 
         		PreparedStatement ps = connection.prepareStatement("INSERT INTO users(name, login, email, createdDate) VALUES (?, ?, ?, ?)")) {
-            ps.setString(1, user.name);
-            ps.setString(2, user.login);
-            ps.setString(3, user.email);
-            ps.setTimestamp(4, user.timeOfCreate);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getLogin());
+            ps.setString(3, user.getEmail());
+            ps.setTimestamp(4, user.getTimeOfCreate());
             ps.execute();
         } catch (Exception e) {
 			e.printStackTrace();
@@ -128,7 +109,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
     public User getUser(BaseUser userWithLogin) {
     	try(Connection connection = DBUtil.getDataSource().getConnection(); 
         	PreparedStatement ps = connection.prepareStatement("SELECT * FROM users where login = ?")) {
-    		ps.setString(1, userWithLogin.login);
+    		ps.setString(1, userWithLogin.getLogin());
     		try (ResultSet rs = ps.executeQuery()) {
     			rs.next();
     			return new User(rs.getString("name"), rs.getString("login"), rs.getString("email"), rs.getTimestamp("createdDate"));
@@ -152,6 +133,8 @@ public class ConnectionWithDataBase implements AutoCloseable {
         */
         return null;
     }
+    
+    
 
     /**
      * Deletes user.
@@ -169,9 +152,7 @@ public class ConnectionWithDataBase implements AutoCloseable {
         */
     }
     
-    private void refreshConnection() {
-		
-	}
+
 
     /**
      * Closes streams.
@@ -184,5 +165,27 @@ public class ConnectionWithDataBase implements AutoCloseable {
         rs.close();
         connection.close();
         */
+    }
+    
+    /**
+     * Shows all users.
+     * @return list
+     */
+    public ArrayList<BaseUser> getAll() {
+    	ArrayList<BaseUser> list = new ArrayList<>();
+    	try(Connection connection = DBUtil.getDataSource().getConnection(); 
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM users")) {
+        	try (ResultSet rs = ps.executeQuery()) {
+        		while(rs.next()) {
+        			list.add(new User(rs.getString("name"), rs.getString("login"), rs.getString("email"), rs.getTimestamp("createddate")));
+        		}
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+        		
+        } catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	return list;
     }
 }
