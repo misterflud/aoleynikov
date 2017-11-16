@@ -3,6 +3,7 @@ package aoleynikov.servlets.service;
 import java.awt.List;
 import java.util.ArrayList;
 
+import aoleynikov.servlets.model.AnonUser;
 import aoleynikov.servlets.model.BaseUser;
 import aoleynikov.servlets.dao.ConnectionWithDataBaseDao;
 import aoleynikov.servlets.model.User;
@@ -33,4 +34,10 @@ public class Service {
 	public void addUser(BaseUser user) {
 		new ConnectionWithDataBaseDao().createUser(user);
 	}
+	
+	
+	public boolean authUser(AnonUser user) {
+		return new ConnectionWithDataBaseDao().authUser(user);
+	}
+	
 }

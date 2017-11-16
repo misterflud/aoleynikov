@@ -22,6 +22,32 @@ public abstract class BaseUser {
      * When created.
      */
     private Timestamp timeOfCreate;
+    
+    /**
+     * 
+     */
+    private String userType;
+    /**
+     * 
+     */
+    private String password;
+    /**
+     * Constructor.
+     * @param name name
+     * @param login login
+     * @param email email
+     * @param timeOfCreate when created
+     * @param userType type 
+     * @param password password
+     */
+    public BaseUser(String name, String login, String email, Timestamp timeOfCreate, String userType, String password) {
+        this.setName(name);
+        this.setLogin(login);
+        this.setEmail(email);
+        this.setTimeOfCreate(timeOfCreate);
+        this.userType = userType;
+        this.password = password;
+    }
 
     /**
      * Constructor.
@@ -63,6 +89,11 @@ public abstract class BaseUser {
      */
     public BaseUser(String login){
         this.setLogin(login);
+    }
+    
+    public BaseUser(String login, String password) {
+    	this.setLogin(login);
+    	this.setPassword(password);
     }
 
     /**
@@ -124,5 +155,33 @@ public abstract class BaseUser {
 	 */
 	public void setTimeOfCreate(Timestamp timeOfCreate) {
 		this.timeOfCreate = timeOfCreate;
+	}
+
+	/**
+	 * @return the userType
+	 */
+	public String getUserType() {
+		return userType;
+	}
+
+	/**
+	 * @param userType the userType to set
+	 */
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

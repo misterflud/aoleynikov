@@ -1,0 +1,12 @@
+Programs:
+1. UserManager. It is used database, MVC, servlets, Apache TomCat and Apache connection pool for database. It used scriplets, JSTL. Classes and other resources:
+	AddUsers.jsp is view's MVC. Creates HTML for users site;
+	UsersViews.jsp is view's MVC. Creates HTML for users site.
+	UsersController.java is Controller's MVC. Manages all logic in program. Can select models, views. Gets HTTP methods (requests), Sends response to user;
+	Service.java is bridge between Controller and other Resources;
+	ConnectionWithDataBaseDao.java is DAO. Manages database.
+	BaseUser.java is abstract class. Describes main fields and behaviors user in system. It is Model's MVC;
+	User.java is Model's MVC;
+	DBUtil.java is connection pool (Apache connection pool);
+	content.xml is describer file for connect to DataBase.
+

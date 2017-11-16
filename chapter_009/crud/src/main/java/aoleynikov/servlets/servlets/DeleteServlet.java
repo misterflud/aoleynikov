@@ -43,14 +43,6 @@ public class DeleteServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        try(ConnectionWithDataBaseDao dataBase = new ConnectionWithDataBaseDao()) {
-            dataBase.deleteUser(new User(req.getParameter("login")));
-            line = "Deleted";
-            SingletonPrintOut.getInstance().setString(line);
-            resp.sendRedirect(String.format("%s/views/DeleteUser.jsp", req.getContextPath()));
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+
     }
 }

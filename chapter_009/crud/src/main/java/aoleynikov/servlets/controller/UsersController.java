@@ -5,20 +5,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.w3c.dom.css.ElementCSSInlineStyle;
 
 import aoleynikov.servlets.dao.ConnectionWithDataBaseDao;
+import aoleynikov.servlets.model.AnonUser;
 import aoleynikov.servlets.model.BaseUser;
 import aoleynikov.servlets.model.User;
 import aoleynikov.servlets.service.Service;
 
-import java.io.BufferedWriter;
+
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Timestamp;
-import java.util.ArrayList;
+
 
 
 
@@ -44,6 +43,12 @@ public class UsersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	String action = req.getServletPath();
+    	HttpSession session = req.getSession();
+    	synchronized (session) {
+    		if (session.getAttribute("login") == null && action != "/addUser") {
+    			action = "/start";
+    		}
+		}
     	
 		switch (action) {
 			case "/add":
@@ -57,7 +62,10 @@ public class UsersController extends HttpServlet {
 				break;
 			case "/addUser":
 				addUser(req, resp);
-				break;				
+				break;
+			case "/authUser":
+				authUser(req, resp);
+				break;
 			default:
 				start(req, resp); //get
 				break;
@@ -75,18 +83,6 @@ public class UsersController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	/*
-        resp.setContentType("text/html");
-
-        //dataBase.createUser(new User(name, login, email, new Timestamp(System.currentTimeMillis())));
-        User user = dataBase.getUser(new User(req.getParameter("login")));
-        line = String.format("<table><tr><td> %s </td><td> %s </td><td> %s </td><td> %s </td></tr></table>",user.name, user.login, user.email, user.timeOfCreate).toString();
-        SingletonPrintOut.getInstance().setString(line);
-        resp.sendRedirect(String.format("%s/UsersView.jsp", req.getContextPath()));
-        //doGet(req, resp);
- 
-         */
-    	//req.getRequestDispatcher("/WEB_INF/views/UsersView.jsp").forward(req, resp);
     	doGet(req, resp);
     }
     
@@ -163,13 +159,44 @@ public class UsersController extends HttpServlet {
 		}
     }
     
+    
+    public void authUser(HttpServletRequest request, HttpServletResponse response) {
+    	Service service = new Service();
+    	String login = request.getParameter("login");
+    	String password = request.getParameter("password");
+    	if (service.authUser(new AnonUser(login, password))) {
+    		
+    		HttpSession session = request.getSession();
+    		synchronized (session) {
+				session.setAttribute("login", login);
+			}
+    		
+    		
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
+        	try {
+    			dispatcher.forward(request, response);
+    		} catch (ServletException | IOException e) {
+    			e.printStackTrace();
+    		}
+    	} else {
+    		request.setAttribute("error", "This user does not exist.");
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.jsp");
+        	try {
+    			dispatcher.forward(request, response);
+    		} catch (ServletException | IOException e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	
+    }
+    
     /**
      * Start jsp page -- UsersViews.jsp.
      * @param request
      * @param response
      */
     public void start(HttpServletRequest request, HttpServletResponse response) {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.jsp");
 		try {
 			dispatcher.forward(request, response);
 		} catch (ServletException e) {
@@ -194,20 +221,6 @@ public class UsersController extends HttpServlet {
 
     }
 
-    /**
-     * For deleting.
-     * @param req request
-     * @param resp response
-     * @throws ServletException Exception
-     * @throws IOException Exception
-     */
-    //http://localhost:8080/items/echo?login=ll
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        User user = new User(req.getParameter("login"));
-        dataBase.deleteUser(user);
-        line = "Deleted!";
-    }
+
 
 }

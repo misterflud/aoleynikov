@@ -6,6 +6,20 @@ import java.sql.Timestamp;
  * Created by Anton on 02.07.2017.
  */
 public class User extends BaseUser {
+	
+    /**
+     * Constructor.
+     * @param name name
+     * @param login login
+     * @param email email
+     * @param timeOfCreate when created
+     * @param userType type 
+     * @param password password
+     */
+    public User(String name, String login, String email, Timestamp timeOfCreate, String userType, String password) {
+        super(name, login, email, timeOfCreate, userType, password);
+    }
+    
     /**
      * Constructor.
      * @param name name
@@ -30,7 +44,7 @@ public class User extends BaseUser {
     /**
      * Constructor.
      */
-    public User(){
+    public User() {
 
     }
 

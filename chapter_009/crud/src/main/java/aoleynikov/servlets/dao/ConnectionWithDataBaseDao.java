@@ -2,20 +2,17 @@ package aoleynikov.servlets.dao;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import aoleynikov.servlets.model.AnonUser;
 import aoleynikov.servlets.model.BaseUser;
 import aoleynikov.servlets.model.User;
 import aoleynikov.servlets.util.DBUtil;
 
 import java.awt.List;
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Properties;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import javax.activation.DataSource;
+
 
 /**
  * Created by Anton on 02.07.2017.
@@ -68,18 +65,6 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
         } catch (Exception e) {
 			e.printStackTrace();
 		}
-        /*
-        try {
-            st = connection.prepareStatement("INSERT INTO users(name, login, email, createdDate) VALUES (?, ?, ?, ?)");
-            st.setString(1, user.name);
-            st.setString(2, user.login);
-            st.setString(3, user.email);
-            st.setTimestamp(4, user.timeOfCreate);
-            st.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-         */
 
     }
 
@@ -88,17 +73,7 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
      * @param editUser editUser
      */
     public void editUser(BaseUser editUser) {
-    	/*
-        try {
-            st = connection.prepareStatement("UPDATE users SET name = ? WHERE login = ? AND email = ?");
-            st.setString(1, editUser.name);
-            st.setString(2, editUser.login);
-            st.setString(3, editUser.email);
-            st.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
+
     }
 
     /**
@@ -120,37 +95,10 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
     	} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	/*
-        try {
-            st = connection.prepareStatement("SELECT * FROM users where login = ?");
-            st.setString(1, userWithLogin.login);
-            rs = st.executeQuery();
-            rs.next();
-            return new User(rs.getString("name"), rs.getString("login"), rs.getString("email"), rs.getTimestamp("createdDate"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
+
         return null;
     }
     
-    
-
-    /**
-     * Deletes user.
-     * @param userWithLogin user without other parameters
-     */
-    public void deleteUser(BaseUser userWithLogin) {
-    	/*
-        try {
-            st = connection.prepareStatement("DELETE FROM users where login = ?");
-            st.setString(1, userWithLogin.login);
-            st.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
-    }
     
 
 
@@ -160,11 +108,7 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
      */
     @Override
     public void close() throws Exception {
-    	/*
-        st.close();
-        rs.close();
-        connection.close();
-        */
+
     }
     
     /**
@@ -174,7 +118,7 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
     public ArrayList<BaseUser> getAll() {
     	ArrayList<BaseUser> list = new ArrayList<>();
     	try(Connection connection = DBUtil.getDataSource().getConnection(); 
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM users")) {
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM users")) {
         	try (ResultSet rs = ps.executeQuery()) {
         		while(rs.next()) {
         			list.add(new User(rs.getString("name"), rs.getString("login"), rs.getString("email"), rs.getTimestamp("createddate")));
@@ -187,5 +131,25 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
     		e.printStackTrace();
     	}
     	return list;
+    }
+    
+    public boolean authUser(AnonUser user) {
+    	try(Connection connection = DBUtil.getDataSource().getConnection(); 
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE login = ? AND password = ?")) {
+    		ps.setString(1, user.getLogin());
+    		ps.setString(2, user.getPassword());
+        	try (ResultSet rs = ps.executeQuery()) {
+        		while(rs.next()) {
+        			return true;
+        		}
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+		return false;
     }
 }

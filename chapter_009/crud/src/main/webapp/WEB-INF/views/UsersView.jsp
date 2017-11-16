@@ -13,23 +13,6 @@
     <title></title>
 </head>
 <body>
-<%--
-<form action="<%=request.getContextPath()%>/echo" method="post">
-    Login: <input type="text" name="login"/>
-    <input type="submit" name = "get" value="Get user"/>
-</form>
-
-
-<form action="<%=request.getContextPath()%>/" method="post">
-    Login: <input type="text" name="login"/>
-    <input type="submit" name = "get" value="Get user"/>
-</form>
-
-<form action="<%=request.getContextPath()%>/" method="post">
-    <input type="submit" name = "get" value="Show all"/>
-</form>
-<br/>
---%>
 
 	<center>
 		<h1>User Managment</h1>
@@ -71,6 +54,7 @@
 	        </table>
 	    </div>	        
     </c:if>
+    
     <c:if test="${listUser != null}">
 	    <div align="center">
 	        <table border="1" cellpadding="4">
@@ -93,26 +77,6 @@
 	    </div>	       		
      </c:if>
             	
-<%--
-    <div align="center">
-        <table border="1" cellpadding="4">
-            <caption><h2>List of Users</h2></caption>
-            <tr>
-                <th>Name</th>
-                <th>Login</th>
-                <th>Email</th>
-                <th>CreatedDate</th>
-            </tr>
-            <c:forEach var="user" items="${listUser}">
-                <tr>
-                    <td><c:out value="${user.name}" /></td>
-                    <td><c:out value="${user.login}" /></td>
-                    <td><c:out value="${user.email}" /></td>
-                    <td><c:out value="${user.timeOfCreate}" /></td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>	
---%>
+
 </body>
 </html>
