@@ -26,7 +26,7 @@ public abstract class BaseUser {
     /**
      * 
      */
-    private String userType;
+    private Role userRole;
     /**
      * 
      */
@@ -40,12 +40,12 @@ public abstract class BaseUser {
      * @param userType type 
      * @param password password
      */
-    public BaseUser(String name, String login, String email, Timestamp timeOfCreate, String userType, String password) {
+    public BaseUser(String name, String login, String email, Timestamp timeOfCreate, Role userType, String password) {
         this.setName(name);
         this.setLogin(login);
         this.setEmail(email);
         this.setTimeOfCreate(timeOfCreate);
-        this.userType = userType;
+        this.userRole = userType;
         this.password = password;
     }
 
@@ -160,15 +160,15 @@ public abstract class BaseUser {
 	/**
 	 * @return the userType
 	 */
-	public String getUserType() {
-		return userType;
+	public Role getUserType() {
+		return userRole;
 	}
 
 	/**
 	 * @param userType the userType to set
 	 */
-	public void setUserType(String userType) {
-		this.userType = userType;
+	public void setUserType(Role userType) {
+		this.userRole = userType;
 	}
 
 	/**

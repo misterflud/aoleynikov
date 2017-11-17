@@ -16,7 +16,7 @@ public class User extends BaseUser {
      * @param userType type 
      * @param password password
      */
-    public User(String name, String login, String email, Timestamp timeOfCreate, String userType, String password) {
+    public User(String name, String login, String email, Timestamp timeOfCreate, Role userType, String password) {
         super(name, login, email, timeOfCreate, userType, password);
     }
     

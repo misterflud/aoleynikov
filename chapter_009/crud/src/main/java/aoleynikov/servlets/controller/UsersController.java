@@ -43,13 +43,18 @@ public class UsersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	String action = req.getServletPath();
+    	
     	HttpSession session = req.getSession();
+    	if (session.getAttributeNames().hasMoreElements()) {
+    		System.out.println(session.getAttributeNames().nextElement());
+    	}
     	synchronized (session) {
-    		if (session.getAttribute("login") == null && action != "/addUser") {
+    		if (session.getAttribute("login") == null && !"/authUser".equals(action.toString())) {
+    			System.out.println(action);
     			action = "/start";
+    			System.out.println(action);
     		}
 		}
-    	
 		switch (action) {
 			case "/add":
 				add(req, resp);
@@ -66,8 +71,11 @@ public class UsersController extends HttpServlet {
 			case "/authUser":
 				authUser(req, resp);
 				break;
+			case "/get":
+				get(req, resp);
+				break;
 			default:
-				start(req, resp); //get
+				start(req, resp); 
 				break;
 		}
     }
@@ -139,6 +147,21 @@ public class UsersController extends HttpServlet {
     }
     
     /**
+     * Changes jsp to UsersUsers.jsp.
+     * @param request req
+     * @param response resp
+     */
+    public void get(HttpServletRequest request, HttpServletResponse response) {
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
+    	try {
+			dispatcher.forward(request, response);
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    
+    /**
      * Adds user to database.
      * @param request req
      * @param response resp
@@ -164,30 +187,28 @@ public class UsersController extends HttpServlet {
     	Service service = new Service();
     	String login = request.getParameter("login");
     	String password = request.getParameter("password");
-    	if (service.authUser(new AnonUser(login, password))) {
-    		
-    		HttpSession session = request.getSession();
-    		synchronized (session) {
+    	
+	    if (service.authUser(new AnonUser(login, password))) {
+	    	HttpSession session = request.getSession();
+	    	synchronized (session) {
 				session.setAttribute("login", login);
 			}
-    		
-    		
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
-        	try {
-    			dispatcher.forward(request, response);
-    		} catch (ServletException | IOException e) {
-    			e.printStackTrace();
-    		}
-    	} else {
-    		request.setAttribute("error", "This user does not exist.");
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.jsp");
-        	try {
-    			dispatcher.forward(request, response);
-    		} catch (ServletException | IOException e) {
-    			e.printStackTrace();
-    		}
-    	}
-    	
+	 
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
+	        try {
+	    		dispatcher.forward(request, response);
+	    	} catch (ServletException | IOException e) {
+	    		e.printStackTrace();
+	    	}
+	    } else {
+	    	request.setAttribute("error", "This user does not exist.");
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.jsp");
+	        try {
+	    		dispatcher.forward(request, response);
+	    	} catch (ServletException | IOException e) {
+	    		e.printStackTrace();
+	    	}
+	    }
     }
     
     /**
@@ -196,13 +217,27 @@ public class UsersController extends HttpServlet {
      * @param response
      */
     public void start(HttpServletRequest request, HttpServletResponse response) {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.jsp");
-		try {
-			dispatcher.forward(request, response);
-		} catch (ServletException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+    	HttpSession session = request.getSession();
+    	boolean boolSession;
+		synchronized (session) {
+			boolSession = session.getAttribute("login") == null ? true : false;
+		}
+		if(boolSession) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.jsp");
+			try {
+				dispatcher.forward(request, response);
+			} catch (ServletException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
+        	try {
+    			dispatcher.forward(request, response);
+    		} catch (ServletException | IOException e) {
+    			e.printStackTrace();
+    		}
 		}
     }
 
@@ -218,7 +253,6 @@ public class UsersController extends HttpServlet {
         resp.setContentType("text/html");
         User user1 = new User(req.getParameter("login"));
         User user2 = new User(dataBase.getUser(user1));
-
     }
 
 
