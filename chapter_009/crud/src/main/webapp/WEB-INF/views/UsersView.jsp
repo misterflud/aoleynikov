@@ -50,7 +50,14 @@
 	               <td><c:out value="${user.login}" /></td>
 	               <td><c:out value="${user.email}" /></td>
 	               <td><c:out value="${user.timeOfCreate}" /></td>
+	               <td><c:out value="${user.userRole}" /></td>
 	            </tr>
+	            
+	            <a href="edit?login=<c:out value='${user.login}' />">Edit</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <c:if test="${user.userRole == 1}">   
+                	<a href="delete?login=<c:out value='${user.login}' />">Delete</a>
+                </c:if>    
 	        </table>
 	    </div>	        
     </c:if>
@@ -71,6 +78,7 @@
 	                    <td><c:out value="${user.login}" /></td>
 	                    <td><c:out value="${user.email}" /></td>
 	                    <td><c:out value="${user.timeOfCreate}" /></td>
+	                    <td> </td>
 	                </tr>
 	            </c:forEach>
 	        </table>

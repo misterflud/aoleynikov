@@ -72,8 +72,12 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
      * Edited user.
      * @param editUser editUser
      */
-    public void editUser(BaseUser editUser) {
+    public void editUser(BaseUser oldUser, BaseUser newUser) {
 
+    }
+    
+    public void deleteUser(BaseUser baseUser) {
+    	
     }
 
     /**

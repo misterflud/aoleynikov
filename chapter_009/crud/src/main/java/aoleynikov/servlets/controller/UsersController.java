@@ -7,14 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.w3c.dom.css.ElementCSSInlineStyle;
 
 import aoleynikov.servlets.dao.ConnectionWithDataBaseDao;
 import aoleynikov.servlets.model.AnonUser;
 import aoleynikov.servlets.model.BaseUser;
 import aoleynikov.servlets.model.User;
 import aoleynikov.servlets.service.Service;
-
+import aoleynikov.servlets.servlets.DeleteServlet;
 
 import java.io.IOException;
 
@@ -44,6 +43,8 @@ public class UsersController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	String action = req.getServletPath();
     	
+    	
+    	/*
     	HttpSession session = req.getSession();
     	if (session.getAttributeNames().hasMoreElements()) {
     		System.out.println(session.getAttributeNames().nextElement());
@@ -55,6 +56,9 @@ public class UsersController extends HttpServlet {
     			System.out.println(action);
     		}
 		}
+    	
+    	*/
+    	
 		switch (action) {
 			case "/add":
 				add(req, resp);
@@ -73,6 +77,12 @@ public class UsersController extends HttpServlet {
 				break;
 			case "/get":
 				get(req, resp);
+				break;
+			case "/delete":
+				delete(req, resp);
+				break;
+			case "/edit":
+				edit(req, resp);
 				break;
 			default:
 				start(req, resp); 
@@ -187,13 +197,19 @@ public class UsersController extends HttpServlet {
     	Service service = new Service();
     	String login = request.getParameter("login");
     	String password = request.getParameter("password");
+    	HttpSession session = request.getSession();
+    	AnonUser anonUser = new AnonUser(login, password);
     	
-	    if (service.authUser(new AnonUser(login, password))) {
-	    	HttpSession session = request.getSession();
+    	
+
+    		
+	    if (service.authUser(anonUser)) {
+	    	BaseUser user = service.get(anonUser);
 	    	synchronized (session) {
 				session.setAttribute("login", login);
+				session.setAttribute("role_id", user.getUserType());
 			}
-	 
+	    	
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
 	        try {
 	    		dispatcher.forward(request, response);
@@ -201,7 +217,19 @@ public class UsersController extends HttpServlet {
 	    		e.printStackTrace();
 	    	}
 	    } else {
-	    	request.setAttribute("error", "This user does not exist.");
+	    	boolean boolSession;
+	    	
+			synchronized (session) {
+				boolSession = session.getAttribute("errorAuth") == null ? true : false; //для того чтобы при неправильном вводе пароля вывалилась ошибка
+			}
+			
+			if (!boolSession) {
+				request.setAttribute("error", "This user does not exist."); 
+			}
+			
+	    	synchronized (session) {
+				session.setAttribute("errorAuth", "errorAuth");
+			}
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.jsp");
 	        try {
 	    		dispatcher.forward(request, response);
@@ -217,30 +245,26 @@ public class UsersController extends HttpServlet {
      * @param response
      */
     public void start(HttpServletRequest request, HttpServletResponse response) {
-    	HttpSession session = request.getSession();
-    	boolean boolSession;
-		synchronized (session) {
-			boolSession = session.getAttribute("login") == null ? true : false;
-		}
-		if(boolSession) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.jsp");
-			try {
-				dispatcher.forward(request, response);
-			} catch (ServletException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
-        	try {
-    			dispatcher.forward(request, response);
-    		} catch (ServletException | IOException e) {
-    			e.printStackTrace();
-    		}
+    	
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.jsp");
+		try {
+			dispatcher.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
     }
 
+    
+    public void delete(HttpServletRequest request, HttpServletResponse response) {
+    	
+    }
+    
+    public void edit(HttpServletRequest request, HttpServletResponse response) {
+    	
+    }
+    
     /**
      * For editing.
      * @param req request

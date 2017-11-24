@@ -15,7 +15,7 @@ public class Service {
 	 * @param user user
 	 * @return
 	 */
-	public BaseUser get(User user) {
+	public BaseUser get(BaseUser user) {
 		return new ConnectionWithDataBaseDao().getUser(user);
 	}
 	
@@ -38,6 +38,14 @@ public class Service {
 	
 	public boolean authUser(AnonUser user) {
 		return new ConnectionWithDataBaseDao().authUser(user);
+	}
+	
+	public void deleteUser(BaseUser user) {
+		
+	}
+	
+	public void editUser(BaseUser userOld, BaseUser newUser) {
+		
 	}
 	
 }

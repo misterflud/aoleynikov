@@ -52,9 +52,14 @@
             </tr>
 
             <tr>
-            	<td colspan="2" align="center">
-            		<input type="submit" value="Save" />
-            	</td>
+            	<c:if test="${user.userRole == 1}">
+            		<div>
+		            	<td colspan="2" align="center">
+		            		<input type="submit" value="Save" />
+		            	</td>
+
+		            </div>
+            	</c:if>
             </tr>
         </table>
         </form>
