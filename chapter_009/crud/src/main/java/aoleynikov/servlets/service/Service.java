@@ -41,7 +41,7 @@ public class Service {
 	}
 	
 	public void deleteUser(BaseUser user) {
-		
+		new ConnectionWithDataBaseDao().deleteUser(user);
 	}
 	
 	public void editUser(BaseUser userOld, BaseUser newUser) {

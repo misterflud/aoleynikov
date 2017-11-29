@@ -31,6 +31,25 @@ public abstract class BaseUser {
      * 
      */
     private String password;
+    
+    
+    /**
+     * Constructor.
+     * @param name name
+     * @param login login
+     * @param email email
+     * @param timeOfCreate when created
+     * @param userType type 
+     * @param password password
+     */
+    public BaseUser(String name, String login, String email, Timestamp timeOfCreate, Role userType) {
+        this.setName(name);
+        this.setLogin(login);
+        this.setEmail(email);
+        this.setTimeOfCreate(timeOfCreate);
+        this.userRole = userType;
+    }
+    
     /**
      * Constructor.
      * @param name name
@@ -160,14 +179,14 @@ public abstract class BaseUser {
 	/**
 	 * @return the userType
 	 */
-	public Role getUserType() {
+	public Role getUserRole() {
 		return userRole;
 	}
 
 	/**
 	 * @param userType the userType to set
 	 */
-	public void setUserType(Role userType) {
+	public void setUserRole(Role userType) {
 		this.userRole = userType;
 	}
 
@@ -183,5 +202,22 @@ public abstract class BaseUser {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	@Override
+	public boolean equals(Object user) {
+
+		if (!(user instanceof BaseUser)) {
+			return false;
+		}
+		BaseUser user2 = (BaseUser) user;
+		
+		//System.out.println(String.format("%s %s %s %s", "this", this.userRole.getName(), this.login, this.timeOfCreate));
+		//System.out.println(String.format("%s %s %s %s", "2", user2.userRole.getName(), user2.login, user2.timeOfCreate));
+		
+		if (this.userRole.equals(user2.userRole) && this.login.equals(user2.login) && this.timeOfCreate.equals(user2.timeOfCreate)) {
+			return true;
+		}
+		return false;
 	}
 }

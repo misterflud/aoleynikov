@@ -31,7 +31,7 @@ public class AuthFilter implements Filter {
 		} else {
 			HttpSession session = request2.getSession();
 			synchronized (session) {
-				if(session.getAttribute("login") == null) {
+				if(session.getAttribute("authUser") == null) {
 					//System.out.println("ssssssss");
 					((HttpServletResponse) response).sendRedirect(String.format("%s/authUser", request2.getContextPath()));
 					return;

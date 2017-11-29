@@ -47,7 +47,7 @@ public class UpdateServlet extends HttpServlet {
         try(ConnectionWithDataBaseDao dataBase = new ConnectionWithDataBaseDao()) {
             User user = dataBase.getUser(new User(req.getParameter("login")));
             user.setName(req.getParameter("name"));
-            dataBase.editUser(user);
+            //dataBase.editUser(user);
             line = String.format("<table><tr><td> %s </td><td> %s </td><td> %s </td><td> %s </td></tr></table>", user.getName(), user.getLogin(), user.getEmail(), user.getTimeOfCreate()).toString();
             SingletonPrintOut.getInstance().setString(line);
             resp.sendRedirect(String.format("%s/views/UpdateUser.jsp", req.getContextPath()));

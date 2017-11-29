@@ -35,50 +35,92 @@
 	</center>
 
             	
-    <c:if test="${user != null}">
-	    <div align="center">
-	        <table border="1" cellpadding="4">
-	            <caption><h2>List of Users</h2></caption>
-	            <tr>
-	                <th>Name</th>
-	                <th>Login</th>
-	                <th>Email</th>
-	                <th>CreatedDate</th>
-	            </tr>
-	            <tr>
-	               <td><c:out value="${user.name}" /></td>
-	               <td><c:out value="${user.login}" /></td>
-	               <td><c:out value="${user.email}" /></td>
-	               <td><c:out value="${user.timeOfCreate}" /></td>
-	               <td><c:out value="${user.userRole}" /></td>
-	            </tr>
-	            
-	            <a href="edit?login=<c:out value='${user.login}' />">Edit</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                <c:if test="${user.userRole == 1}">   
-                	<a href="delete?login=<c:out value='${user.login}' />">Delete</a>
-                </c:if>    
-	        </table>
-	    </div>	        
+    <c:if test="${getEditUser != null}">
+
+		    <div align="center">
+		        <table border="1" cellpadding="4">
+		            <caption><h2>List of Users</h2></caption>
+		            <tr>
+		                <th>Name</th>
+		                <th>Login</th>
+		                <th>Email</th>
+		                <th>CreatedDate</th>
+		                <th>UserRole</th>
+		                <c:if test = "${userOrAdmin == true and userOrAdmin != null}"> 
+		                	<div>
+		                		<th>Delete</th>
+		                		<th>Save</th>
+		                	</div>
+		                </c:if>
+		            </tr>
+		            <tr>
+		               <td>
+		                   <input type="text" name="name" size="20"
+	                			value="<c:out value='${getEditUser.name}' />"
+	                		/>
+		               </td>
+		               <td>		                
+		               		<input type="text" name="login" size="20"
+	                			value="<c:out value='${getEditUser.login}' />"
+	                		/>	
+	                		
+		               </td>
+		               <td>
+		               		<input type="text" name="email" size="20"
+	                			value="<c:out value='${getEditUser.email}' />"
+	                		/>               
+		               </td>
+		               <td>
+		               		<input type="text" name="timeOfCreate" size="20"
+	                			value="<c:out value='${getEditUser.timeOfCreate}' />"
+	                		/>		               
+		               </td>
+		               <td>
+		               		<input type="text" name="userRole" size="20"
+	                			value="<c:out value='${getEditUser.userRole.name}' />"
+	                		/>	               
+		               </td>
+	 
+	 
+				       <c:if test = "${sameUser == true or isAdmin == true}">                			
+		                	<form action="saveEdit" method="post">
+		                		<c:set var="loginlogin" scope="request" value= '${getEditUser.login}' />
+				            	<td>
+				            		<input type="submit" value="Save" />
+				            	</td>	                			 
+		                	</form>
+		                	<form action="deleteUser" method="post">
+		                	  	
+			                	<td>
+			                		
+					            	<input type="submit" value="Delete" />
+					            </td>
+					        </form>	 
+		             	</c:if> 
+		            </tr>  
+		        </table>
+		    </div>
+		       
     </c:if>
     
     <c:if test="${listUser != null}">
 	    <div align="center">
-	        <table border="1" cellpadding="4">
+	        <table border="1" cellpadding="5">
 	            <caption><h2>List of Users</h2></caption>
 	            <tr>
 	                <th>Name</th>
 	                <th>Login</th>
 	                <th>Email</th>
 	                <th>CreatedDate</th>
+	                <th>UserRole</th>
 	            </tr>
 	            <c:forEach var="user" items="${listUser}">
 	                <tr>
 	                    <td><c:out value="${user.name}" /></td>
 	                    <td><c:out value="${user.login}" /></td>
 	                    <td><c:out value="${user.email}" /></td>
-	                    <td><c:out value="${user.timeOfCreate}" /></td>
-	                    <td> </td>
+	                    <td><c:out value="${user.timeOfCreate}" /></td>  
+	                    <td><c:out value="${user.userRole.name}" /></td>
 	                </tr>
 	            </c:forEach>
 	        </table>

@@ -78,10 +78,10 @@ public class UsersController extends HttpServlet {
 			case "/get":
 				get(req, resp);
 				break;
-			case "/delete":
+			case "/deleteUser":
 				delete(req, resp);
 				break;
-			case "/edit":
+			case "/saveEdit":
 				edit(req, resp);
 				break;
 			default:
@@ -112,9 +112,24 @@ public class UsersController extends HttpServlet {
      * @param response resp
      */
     public void getUser(HttpServletRequest request, HttpServletResponse response) {
+    	HttpSession session = request.getSession();
+    	boolean sameUser = false;
+    	boolean isAdmin = false;
     	Service service = new Service();
 		try {
-			request.setAttribute("user", service.get(new User(request.getParameter("login"))));
+			BaseUser userFromView = service.get(new User(request.getParameter("login")));
+			BaseUser userFromSession = ((BaseUser) session.getAttribute("authUser"));
+			if (userFromView.equals(userFromSession)) {
+				sameUser = true;
+			}
+			
+			if (userFromSession.getUserRole().getId() == 1) {
+				isAdmin = true;
+			}
+			request.setAttribute("getEditUser", userFromView);
+			
+			request.setAttribute("sameUser", sameUser);
+			request.setAttribute("isAdmin", isAdmin);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
 			dispatcher.forward(request, response);
 		} catch (ServletException e) {
@@ -148,7 +163,18 @@ public class UsersController extends HttpServlet {
      * @param response resp
      */
     public void add(HttpServletRequest request, HttpServletResponse response) {
+    	
     	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/AddUsers.jsp");
+    	HttpSession session = request.getSession();	
+    	boolean adminOrNot = false;
+    	if (((BaseUser) session.getAttribute("authUser")).getUserRole().getId() == 1) {
+    		adminOrNot = true;
+    	}
+    	System.out.println(adminOrNot  +  " add");
+    	request.setAttribute("adminOrNot", adminOrNot);
+    	
+    	
+    	
     	try {
 			dispatcher.forward(request, response);
 		} catch (ServletException | IOException e) {
@@ -177,13 +203,14 @@ public class UsersController extends HttpServlet {
      * @param response resp
      */
     public void addUser(HttpServletRequest request, HttpServletResponse response) {
+
     	Service service = new Service();
     	String name = request.getParameter("name");
     	String login = request.getParameter("login");
     	String email = request.getParameter("email");
     	BaseUser user = new User(name, login, email);
     	service.addUser(user);
-  
+    	
     	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/AddUsers.jsp");
     	try {
 			dispatcher.forward(request, response);
@@ -192,7 +219,11 @@ public class UsersController extends HttpServlet {
 		}
     }
     
-    
+    /**
+     * 
+     * @param request
+     * @param response
+     */
     public void authUser(HttpServletRequest request, HttpServletResponse response) {
     	Service service = new Service();
     	String login = request.getParameter("login");
@@ -204,10 +235,9 @@ public class UsersController extends HttpServlet {
 
     		
 	    if (service.authUser(anonUser)) {
-	    	BaseUser user = service.get(anonUser);
+	    	BaseUser authUser = service.get(anonUser);
 	    	synchronized (session) {
-				session.setAttribute("login", login);
-				session.setAttribute("role_id", user.getUserType());
+				session.setAttribute("authUser", authUser);
 			}
 	    	
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
@@ -256,13 +286,33 @@ public class UsersController extends HttpServlet {
 		}
     }
 
-    
+    /**
+     * 
+     * @param request
+     * @param response
+     */
     public void delete(HttpServletRequest request, HttpServletResponse response) {
+    	Service service = new Service();
+    	HttpSession session = request.getSession();
     	
+    	System.out.println(request.getParameter("login") + "del");
+
+    	BaseUser user = service.get(new AnonUser(request.getParameter("login")));
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
+		service.deleteUser(user);
+		try {
+			dispatcher.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     public void edit(HttpServletRequest request, HttpServletResponse response) {
-    	
+    	System.out.println(request.getAttribute("login") + " edit");
+    	System.out.println(request.getParameter("loginlogin"));
+    	System.out.println(request.getAttribute("loginlogin"));
     }
     
     /**
@@ -278,7 +328,4 @@ public class UsersController extends HttpServlet {
         User user1 = new User(req.getParameter("login"));
         User user2 = new User(dataBase.getUser(user1));
     }
-
-
-
 }

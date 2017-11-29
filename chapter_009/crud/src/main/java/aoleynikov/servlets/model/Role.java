@@ -8,7 +8,8 @@ public abstract class Role {
 	
 	private String name;
 	
-	
+
+
 	
 	public Role(int id, String name) {
 		this.name = name;
@@ -43,4 +44,15 @@ public abstract class Role {
 		this.name = name;
 	}
 
+	@Override
+	public boolean equals(Object role) {
+		if (! (role instanceof Role)) {
+			return false;
+		}
+		Role role2 = (Role) role;
+		if (role2.id == this.id) {
+			return true;
+		}
+		return false;
+	}
 }

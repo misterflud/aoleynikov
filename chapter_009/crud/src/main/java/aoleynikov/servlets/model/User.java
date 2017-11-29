@@ -7,6 +7,20 @@ import java.sql.Timestamp;
  */
 public class User extends BaseUser {
 	
+	
+    /**
+     * Constructor.
+     * @param name name
+     * @param login login
+     * @param email email
+     * @param timeOfCreate when created
+     * @param userType type 
+     * @param password password
+     */
+    public User(String name, String login, String email, Timestamp timeOfCreate, Role userType) {
+        super(name, login, email, timeOfCreate, userType);
+    }
+	
     /**
      * Constructor.
      * @param name name

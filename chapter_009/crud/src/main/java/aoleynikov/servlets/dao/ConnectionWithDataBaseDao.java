@@ -4,6 +4,8 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 import aoleynikov.servlets.model.AnonUser;
 import aoleynikov.servlets.model.BaseUser;
+import aoleynikov.servlets.model.GeteerRole;
+import aoleynikov.servlets.model.Role;
 import aoleynikov.servlets.model.User;
 import aoleynikov.servlets.util.DBUtil;
 
@@ -77,7 +79,14 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
     }
     
     public void deleteUser(BaseUser baseUser) {
-    	
+    	try(Connection connection = DBUtil.getDataSource().getConnection(); 
+    		PreparedStatement ps = connection.prepareStatement("DELETE FROM USERS WHERE LOGIN = ?")) {
+    		System.out.println(baseUser.getLogin());
+    		ps.setString(1, baseUser.getLogin());
+    		ps.executeUpdate();
+    	} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -90,8 +99,11 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
         	PreparedStatement ps = connection.prepareStatement("SELECT * FROM users where login = ?")) {
     		ps.setString(1, userWithLogin.getLogin());
     		try (ResultSet rs = ps.executeQuery()) {
+    			
     			rs.next();
-    			return new User(rs.getString("name"), rs.getString("login"), rs.getString("email"), rs.getTimestamp("createdDate"));
+    			GeteerRole geteerRole = new GeteerRole();
+
+    			return new User(rs.getString("name"), rs.getString("login"), rs.getString("email"), rs.getTimestamp("createdDate"), geteerRole.getRole(rs.getInt("role_id")));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -120,12 +132,13 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
      * @return list
      */
     public ArrayList<BaseUser> getAll() {
+    	GeteerRole geteerRole = new GeteerRole();
     	ArrayList<BaseUser> list = new ArrayList<>();
     	try(Connection connection = DBUtil.getDataSource().getConnection(); 
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM users")) {
         	try (ResultSet rs = ps.executeQuery()) {
         		while(rs.next()) {
-        			list.add(new User(rs.getString("name"), rs.getString("login"), rs.getString("email"), rs.getTimestamp("createddate")));
+        			list.add(new User(rs.getString("name"), rs.getString("login"), rs.getString("email"), rs.getTimestamp("createddate"), geteerRole.getRole(rs.getInt("role_id"))));
         		}
     		} catch (Exception e) {
     			e.printStackTrace();
