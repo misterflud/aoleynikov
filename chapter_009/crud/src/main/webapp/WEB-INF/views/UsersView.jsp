@@ -36,7 +36,7 @@
 
             	
     <c:if test="${getEditUser != null}">
-
+		<form name  = "1"  method="post">
 		    <div align="center">
 		        <table border="1" cellpadding="4">
 		            <caption><h2>List of Users</h2></caption>
@@ -83,24 +83,19 @@
 	 
 	 
 				       <c:if test = "${sameUser == true or isAdmin == true}">                			
-		                	<form action="saveEdit" method="post">
-		                		<c:set var="loginlogin" scope="request" value= '${getEditUser.login}' />
 				            	<td>
-				            		<input type="submit" value="Save" />
+				            		<input formaction ="saveEdit" type="submit" value="Save" />
 				            	</td>	                			 
-		                	</form>
-		                	<form action="deleteUser" method="post">
-		                	  	
+		                	   	  	
 			                	<td>
-			                		
-					            	<input type="submit" value="Delete" />
+					            	<input formaction ="deleteUser" type="submit" value="Delete" />
 					            </td>
-					        </form>	 
+					        
 		             	</c:if> 
 		            </tr>  
 		        </table>
 		    </div>
-		       
+		 </form>     
     </c:if>
     
     <c:if test="${listUser != null}">

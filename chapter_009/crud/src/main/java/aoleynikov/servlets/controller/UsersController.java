@@ -310,9 +310,7 @@ public class UsersController extends HttpServlet {
     }
     
     public void edit(HttpServletRequest request, HttpServletResponse response) {
-    	System.out.println(request.getAttribute("login") + " edit");
-    	System.out.println(request.getParameter("loginlogin"));
-    	System.out.println(request.getAttribute("loginlogin"));
+    	System.out.println(request.getParameter("login"));
     }
     
     /**

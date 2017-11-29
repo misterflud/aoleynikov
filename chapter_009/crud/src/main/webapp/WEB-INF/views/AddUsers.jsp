@@ -49,7 +49,18 @@
 		                	<input type="text" name="email" size="45"/>
 		                </td>
 		            </tr>
-
+					<tr>
+		                <th>Password: </th>
+		                <td>
+		                	<input type="text" name="password" size="45"/>
+		                </td>
+		            </tr>
+					<tr>
+		                <th>Role_id: </th>
+		                <td>
+		                	<input type="text" name="role_id" size="45"/>
+		                </td>
+		            </tr>		            
 		            <tr>
 				         <td colspan="2" align="center">
 				            <input type="submit" value="Save" />
