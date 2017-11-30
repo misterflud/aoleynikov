@@ -33,6 +33,24 @@ public abstract class BaseUser {
     private String password;
     
     
+    
+    /**
+     * Constructor.
+     * @param name name
+     * @param login login
+     * @param email email
+     * @param timeOfCreate when created
+     * @param userType type 
+     * @param password password
+     */
+    public BaseUser(String name, String login, String email, String password, Role userType) {
+        this.setName(name);
+        this.setLogin(login);
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setTimeOfCreate(new Timestamp(System.currentTimeMillis()));
+        this.userRole = userType;
+    }
     /**
      * Constructor.
      * @param name name

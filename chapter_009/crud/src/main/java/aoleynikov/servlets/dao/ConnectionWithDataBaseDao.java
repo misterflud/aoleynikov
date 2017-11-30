@@ -58,11 +58,14 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
      */
     public void createUser(BaseUser user) {
         try(Connection connection = DBUtil.getDataSource().getConnection(); 
-        		PreparedStatement ps = connection.prepareStatement("INSERT INTO users(name, login, email, createdDate) VALUES (?, ?, ?, ?)")) {
+        		PreparedStatement ps = connection.prepareStatement("INSERT INTO users(name, login, email, createddate, password, role_id) VALUES (?, ?, ?, ?, ?, ?)")) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getEmail());
             ps.setTimestamp(4, user.getTimeOfCreate());
+            ps.setString(5, user.getPassword());
+            ps.setInt(6, user.getUserRole().getId());
+            
             ps.execute();
         } catch (Exception e) {
 			e.printStackTrace();
@@ -74,10 +77,23 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
      * Edited user.
      * @param editUser editUser
      */
-    public void editUser(BaseUser oldUser, BaseUser newUser) {
-
+    public void editUser(BaseUser editUser) {
+    	try(Connection connection = DBUtil.getDataSource().getConnection(); 
+    			PreparedStatement pStatement = connection.prepareStatement("UPDATE USERS SET NAME = ?, EMAIL = ? WHERE LOGIN = ?")) {
+    		
+    		pStatement.setString(1, editUser.getName());
+    		pStatement.setString(2, editUser.getEmail());
+    		pStatement.setString(3, editUser.getLogin());
+    		pStatement.executeQuery();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+		}
     }
     
+    /**
+     * Deletes user.
+     * @param baseUser BaseUser
+     */
     public void deleteUser(BaseUser baseUser) {
     	try(Connection connection = DBUtil.getDataSource().getConnection(); 
     		PreparedStatement ps = connection.prepareStatement("DELETE FROM USERS WHERE LOGIN = ?")) {
@@ -150,12 +166,18 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
     	return list;
     }
     
+    /**
+     * Authentications user.
+     * @param user user
+     * @return boolean
+     */
     public boolean authUser(AnonUser user) {
     	try(Connection connection = DBUtil.getDataSource().getConnection(); 
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE login = ? AND password = ?")) {
     		ps.setString(1, user.getLogin());
     		ps.setString(2, user.getPassword());
         	try (ResultSet rs = ps.executeQuery()) {
+        		
         		while(rs.next()) {
         			return true;
         		}

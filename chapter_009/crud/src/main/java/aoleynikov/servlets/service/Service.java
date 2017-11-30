@@ -8,6 +8,11 @@ import aoleynikov.servlets.model.BaseUser;
 import aoleynikov.servlets.dao.ConnectionWithDataBaseDao;
 import aoleynikov.servlets.model.User;
 
+/**
+ * Service class.
+ * @author Anton Oleynikov
+ * created on 30.11.2017
+ */
 public class Service {
 	
 	/**
@@ -35,17 +40,28 @@ public class Service {
 		new ConnectionWithDataBaseDao().createUser(user);
 	}
 	
-	
+	/**
+	 * Service for authentication user.
+	 * @param user user
+	 * @return boolean
+	 */
 	public boolean authUser(AnonUser user) {
 		return new ConnectionWithDataBaseDao().authUser(user);
 	}
-	
+	/**
+	 * Service for deletes user.
+	 * @param user user
+	 */
 	public void deleteUser(BaseUser user) {
 		new ConnectionWithDataBaseDao().deleteUser(user);
 	}
-	
-	public void editUser(BaseUser userOld, BaseUser newUser) {
-		
+
+	/**
+	 * Service for edit user.
+	 * @param editUser
+	 */
+	public void editUser(BaseUser editUser) {
+		new ConnectionWithDataBaseDao().editUser(editUser);
 	}
 	
 }

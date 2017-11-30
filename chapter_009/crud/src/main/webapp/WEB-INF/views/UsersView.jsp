@@ -59,21 +59,21 @@
 	                			value="<c:out value='${getEditUser.name}' />"
 	                		/>
 		               </td>
-		               <td>		                
-		               		<input type="text" name="login" size="20"
+		               <td>	
+		               		<c:out value='${getEditUser.login}' />
+		               		<input type="hidden" name="login" size="20"
 	                			value="<c:out value='${getEditUser.login}' />"
-	                		/>	
-	                		
+	                		/>     		               	                
+		               		
 		               </td>
 		               <td>
+		               
 		               		<input type="text" name="email" size="20"
 	                			value="<c:out value='${getEditUser.email}' />"
 	                		/>               
 		               </td>
 		               <td>
-		               		<input type="text" name="timeOfCreate" size="20"
-	                			value="<c:out value='${getEditUser.timeOfCreate}' />"
-	                		/>		               
+		               		<c:out value='${getEditUser.timeOfCreate}' />		               
 		               </td>
 		               <td>
 		               		<input type="text" name="userRole" size="20"
@@ -82,7 +82,7 @@
 		               </td>
 	 
 	 
-				       <c:if test = "${sameUser == true or isAdmin == true}">                			
+				       <c:if test = "${sameUser == true or isAdmin == true}">          			
 				            	<td>
 				            		<input formaction ="saveEdit" type="submit" value="Save" />
 				            	</td>	                			 
@@ -90,7 +90,6 @@
 			                	<td>
 					            	<input formaction ="deleteUser" type="submit" value="Delete" />
 					            </td>
-					        
 		             	</c:if> 
 		            </tr>  
 		        </table>
