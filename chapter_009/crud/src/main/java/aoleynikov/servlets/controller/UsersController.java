@@ -322,10 +322,12 @@ public class UsersController extends HttpServlet {
      */
     public void edit(HttpServletRequest request, HttpServletResponse response) {
     	Service service = new Service();
+    	GeteerRole geteerRole = new GeteerRole();
     	String name = request.getParameter("name");
     	String login = request.getParameter("login");
     	String email = request.getParameter("email");
-    	BaseUser editUser = new AnonUser(name, login, email);
+    	Role role = geteerRole.getRole(Integer.parseInt(request.getParameter("userRole")));
+    	BaseUser editUser = new AnonUser(name, login, email, role);
     	//System.out.println(request.getParameter("login") + " edit");
     	service.editUser(editUser);
     	//System.out.println(request.getParameter("login"));

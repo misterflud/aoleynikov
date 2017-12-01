@@ -76,9 +76,19 @@
 		               		<c:out value='${getEditUser.timeOfCreate}' />		               
 		               </td>
 		               <td>
-		               		<input type="text" name="userRole" size="20"
-	                			value="<c:out value='${getEditUser.userRole.name}' />"
-	                		/>	               
+		               		<c:if test = "${isAdmin == true}"> 
+		               		    <input type="text" name="userRole" size="20"
+	                				value="<c:out value='${getEditUser.userRole.id}' />"
+	                			/>	
+		               		</c:if>
+		               		<c:if test = "${isAdmin == false}"> 
+
+		               			<c:out value='${getEditUser.userRole.name}' />
+		               		    <input type="hidden" name="userRole" size="20"
+	                				value="<c:out value='${getEditUser.userRole.id}' />"
+	                			/>	
+		               		</c:if>	
+		               			               		               
 		               </td>
 	 
 	 

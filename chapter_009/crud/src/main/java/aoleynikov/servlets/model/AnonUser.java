@@ -6,6 +6,10 @@ public class AnonUser extends BaseUser {
 		super(name, login, email, password, role);
 	}
 	
+	public AnonUser(String name, String login, String email, Role role) {
+		super(name, login, email, role);
+	}
+	
 	public AnonUser(String name, String login, String email) {
 		super(name, login, email);
 	}

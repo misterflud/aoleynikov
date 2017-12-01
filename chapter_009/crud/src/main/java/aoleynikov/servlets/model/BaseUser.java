@@ -40,8 +40,8 @@ public abstract class BaseUser {
      * @param login login
      * @param email email
      * @param timeOfCreate when created
-     * @param userType type 
      * @param password password
+     * @param userType type 
      */
     public BaseUser(String name, String login, String email, String password, Role userType) {
         this.setName(name);
@@ -51,6 +51,21 @@ public abstract class BaseUser {
         this.setTimeOfCreate(new Timestamp(System.currentTimeMillis()));
         this.userRole = userType;
     }
+    
+    /**
+     * Constructor.
+     * @param name name
+     * @param login login
+     * @param email email
+     * @param userType type 
+     */
+    public BaseUser(String name, String login, String email,  Role userType) {
+        this.setName(name);
+        this.setLogin(login);
+        this.setEmail(email);
+        this.setTimeOfCreate(timeOfCreate);
+        this.userRole = userType;
+    }
     /**
      * Constructor.
      * @param name name
@@ -58,7 +73,6 @@ public abstract class BaseUser {
      * @param email email
      * @param timeOfCreate when created
      * @param userType type 
-     * @param password password
      */
     public BaseUser(String name, String login, String email, Timestamp timeOfCreate, Role userType) {
         this.setName(name);
@@ -128,6 +142,11 @@ public abstract class BaseUser {
         this.setLogin(login);
     }
     
+    /**
+     * User.
+     * @param login login
+     * @param password password
+     */
     public BaseUser(String login, String password) {
     	this.setLogin(login);
     	this.setPassword(password);
@@ -143,11 +162,17 @@ public abstract class BaseUser {
         this.setEmail(user.getEmail());
         this.setTimeOfCreate(user.getTimeOfCreate());
     }
-
+    /**
+     * Gets name.
+     * @return
+     */
 	public String getName() {
 		return name;
 	}
-
+	/**
+	 * Sets name.
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}

@@ -79,12 +79,15 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
      */
     public void editUser(BaseUser editUser) {
     	try(Connection connection = DBUtil.getDataSource().getConnection(); 
-    			PreparedStatement pStatement = connection.prepareStatement("UPDATE USERS SET NAME = ?, EMAIL = ? WHERE LOGIN = ?")) {
+    			PreparedStatement pStatement = connection.prepareStatement("UPDATE USERS SET NAME = ?, EMAIL = ?, ROLE_ID = ? WHERE LOGIN = ?")) {
     		
     		pStatement.setString(1, editUser.getName());
     		pStatement.setString(2, editUser.getEmail());
-    		pStatement.setString(3, editUser.getLogin());
-    		pStatement.executeQuery();
+    		pStatement.setInt(3, editUser.getUserRole().getId());
+    		pStatement.setString(4, editUser.getLogin());
+    		pStatement.execute();
+
+    		//pStatement.executeQuery();
     	} catch (Exception e) {
     		e.printStackTrace();
 		}
@@ -173,14 +176,13 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
      */
     public boolean authUser(AnonUser user) {
     	try(Connection connection = DBUtil.getDataSource().getConnection(); 
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE login = ? AND password = ?")) {
+        PreparedStatement ps = connection.prepareStatement("SELECT EXISTS (SELECT * FROM  USERS WHERE login = ? and password = ?) as yes_or_no")) {
     		ps.setString(1, user.getLogin());
     		ps.setString(2, user.getPassword());
         	try (ResultSet rs = ps.executeQuery()) {
-        		
-        		while(rs.next()) {
-        			return true;
-        		}
+        		rs.next();
+        		return rs.getBoolean("yes_or_no");
+
     		} catch (Exception e) {
     			e.printStackTrace();
     		}
@@ -188,7 +190,7 @@ public class ConnectionWithDataBaseDao implements AutoCloseable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
+
 		return false;
     }
 }
