@@ -1,4 +1,4 @@
-package controller;
+package aoleynikov.servlets.controller;
 
 import static org.junit.Assert.*;
 
@@ -17,7 +17,7 @@ public class UsersControllerTest {
 		UsersController usersController = new UsersController();
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
-		
+		usersController.d
 	}
 
 }
