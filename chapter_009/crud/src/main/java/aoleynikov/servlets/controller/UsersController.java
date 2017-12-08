@@ -15,7 +15,7 @@ import aoleynikov.servlets.model.GeteerRole;
 import aoleynikov.servlets.model.Role;
 import aoleynikov.servlets.model.User;
 import aoleynikov.servlets.service.Service;
-import aoleynikov.servlets.servlets.DeleteServlet;
+
 
 import java.io.IOException;
 
@@ -44,22 +44,6 @@ public class UsersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	String action = req.getServletPath();
-    	
-    	
-    	/*
-    	HttpSession session = req.getSession();
-    	if (session.getAttributeNames().hasMoreElements()) {
-    		System.out.println(session.getAttributeNames().nextElement());
-    	}
-    	synchronized (session) {
-    		if (session.getAttribute("login") == null && !"/authUser".equals(action.toString())) {
-    			System.out.println(action);
-    			action = "/start";
-    			System.out.println(action);
-    		}
-		}
-    	
-    	*/
     	
 		switch (action) {
 			case "/add":
@@ -235,15 +219,12 @@ public class UsersController extends HttpServlet {
     	String password = request.getParameter("password");
     	HttpSession session = request.getSession();
     	AnonUser anonUser = new AnonUser(login, password);
-    	
-    	
-
     		
 	    if (service.authUser(anonUser)) {
 	    	BaseUser authUser = service.get(anonUser);
-	    	synchronized (session) {
-				session.setAttribute("authUser", authUser);
-			}
+	   
+			session.setAttribute("authUser", authUser);
+			
 	    	
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
 	        try {
@@ -262,9 +243,8 @@ public class UsersController extends HttpServlet {
 				request.setAttribute("error", "This user does not exist."); 
 			}
 			
-	    	synchronized (session) {
-				session.setAttribute("errorAuth", "errorAuth");
-			}
+			session.setAttribute("errorAuth", "errorAuth");
+			
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.jsp");
 	        try {
 	    		dispatcher.forward(request, response);
