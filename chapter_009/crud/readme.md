@@ -1,27 +1,46 @@
-#__It is CRUD on JSP:__
+# It is CRUD on JSP:
 
 
 
-- ul	Create
-- ul	Read
-- ul	Update
-- ul	Delete
+- 	Create
+- 	Read
+- 	Update
+- 	Delete
 
 
 
 ### Technology:
  	
-- ul	JavaEE	
-- ul	JSP
-- ul	JDBC
-- ul	SQL
-- ul	Mockito	
+- 	JavaEE	
+- 	JSP
+- 	JDBC
+- 	SQL
+- 	Mockito	
 
 ### Strucutre:
 
-- ul	Controller
-- ul	dao
-- ul	model
-- ul	service
-- ul	util
-- ul	test
+-	main.java.aoleynikov.servlets
+	+ 	controller
+		+	AuthFilter.java
+		+	JsonController.java
+		+	UsersController.java
+	+ 	dao
+		+	ConnectionWithDataBase.java
+	+ 	model
+		+	AdminRole.java
+		+	AnonUser.java
+		+	BaseUser.java
+		+	GeteerRole.java
+		+	Role.java
+		+	User.java
+		+	UserRole.java
+	+ 	service
+		+	Service.java	
+	+ 	util
+		+	DBUtil.java
+-	test.java.aoleynikov.servlets
+	+ 	controller
+		+	UsersControllerTest.java
+
+
+
