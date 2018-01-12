@@ -1,15 +1,16 @@
-# It is CRUD on JSP:
+# CRUD on JSP
 
 
+## Task
 
+Create CRUD:
 - 	Create
 - 	Read
 - 	Update
 - 	Delete
 
 
-
-#### Technology:
+## Technology
  	
 - 	JavaEE	
 - 	JSP
@@ -17,7 +18,7 @@
 - 	SQL
 - 	Mockito	
 
-#### Structure:
+## Structure
 
 -	main.java.aoleynikov.servlets
 	+ 	controller
@@ -41,6 +42,9 @@
 -	test.java.aoleynikov.servlets
 	+ 	controller
 		+	UsersControllerTest.java
+		
+## Realisation
+
 
 
 
