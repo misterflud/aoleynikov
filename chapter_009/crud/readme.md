@@ -9,7 +9,7 @@
 
 
 
-### Technology:
+#### Technology:
  	
 - 	JavaEE	
 - 	JSP
@@ -17,7 +17,7 @@
 - 	SQL
 - 	Mockito	
 
-### Strucutre:
+#### Structure:
 
 -	main.java.aoleynikov.servlets
 	+ 	controller
