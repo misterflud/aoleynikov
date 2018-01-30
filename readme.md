@@ -26,21 +26,21 @@ Each chapter describes some technologies in practice tasks.
 
 ### Structure
 
--	Chapter 1	
--	Chapter 2
--	Chapter 3
--	Chapter 4
--	Chapter 5
--	Chapter 6
--	Chapter 7
--	Chapter 8
--	Chapter 9
--	Chapter 10
--	Chapter 11
--	Chapter 12
--	Chapter 13
--	schild
--	tasks
+-	Chapter 1. This chapter is about base functions of language (loops, String, subString, objects etc).	
+-	Chapter 2. This chapter is about main idea of object-oriented programming. Contains some interesting programs.
+-	Chapter 3. This chapter is about Streams (IO).
+-	Chapter 4. This chapter is about object-oriented design.
+-	Chapter 5. This chapter is about collections.
+-	Chapter 6. - 
+-	Chapter 7. This chapter is about multithreading.
+-	Chapter 8. This chapter is about SQL and JDBC.
+-	Chapter 9. This chapter is about JSP, JSTL and web programming.
+-	Chapter 10. -
+-	Chapter 11. - 
+-	Chapter 12. - 
+-	Chapter 13. -
+-	schild. Contains programs from book of Herbert Schildt.
+-	tasks. Contain test tasks of employer.
 
 ## Task list for repository
 

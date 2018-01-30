@@ -39,6 +39,7 @@ public class ServerBot {
             prs.load(inputStream);
         }
         port = Integer.parseInt(prs.getProperty("port"));
+        System.out.println(port);
     }
 
     /**

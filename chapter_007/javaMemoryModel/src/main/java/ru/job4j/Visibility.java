@@ -13,7 +13,7 @@ public class Visibility {
      * Start program.
      * @param args args
      */
-    public static void main( String[] args )
+    public static void main(String[] args)
     {
         Visibility visibility = new Visibility();
         visibility.start();

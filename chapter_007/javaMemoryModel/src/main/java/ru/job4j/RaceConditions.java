@@ -19,7 +19,7 @@ public class RaceConditions
      * Start program.
      * @param args args
      */
-    public static void main( String[] args ) //неясно почему программа зависает, ведь c хранится в каждой нити как копия????????????????
+    public static void main(String[] args) //неясно почему программа зависает, ведь c хранится в каждой нити как копия????????????????
     {
         RaceConditions raceConditions = new RaceConditions();
         raceConditions.start();
