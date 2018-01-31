@@ -47,8 +47,8 @@ Each chapter describes some technologies in practice tasks.
 - [x] Start.
 - [x] Adds readme.md in start page of aoleynikov repository.
 - [ ] Use less the commits.
-- [ ] Adds readme.md in start page.
-- [ ] Adds in all chapters readme.md.
+- [x] Adds readme.md in start page.
+- [x] Adds in all chapters readme.md.
 - [ ] Adds in all tasks readme.md.
 
 
