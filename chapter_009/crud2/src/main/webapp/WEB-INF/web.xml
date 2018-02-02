@@ -1,5 +1,5 @@
 <web-app>
-
+	
 	<filter>
 		<filter-name>AuthFilter</filter-name>
 		<filter-class>ru.job4j.controller.AuthFilter</filter-class> 
@@ -18,6 +18,17 @@
     
     <servlet-mapping>
         <servlet-name>UsersController</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>UserJsonController</servlet-name>
+        <servlet-class>ru.job4j.controller.UserJsonController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>UserJsonController</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>
