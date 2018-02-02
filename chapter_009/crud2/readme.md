@@ -23,6 +23,8 @@ The main difference with CRUD is absence the JSP and using just client languages
 - 	Mockito
 -	MVC	
 -	Apache connection pool
+- 	AJAX
+-	JSON
 - 	Postgresql
 
 ## Structure
@@ -50,13 +52,24 @@ The main difference with CRUD is absence the JSP and using just client languages
 	+ 	controller
 		+	UsersControllerTest.java
 		
+## Task list 
+
+- [x] Copies all files from crud to here. 
+- [x] Creates HTML pages for each JSP. 
+- [ ] Creates connection between server and JavaScript (AJAX, JSON). 
+- [ ] Creates all logic on user page like in JSP.
+- [ ] Logic in DAO is the same like in crud, but service should be different.
+- [ ] Adds comments.
+
 ## Realisation
 
 
  
 ## Notes
 
-
+02.02.2018
+Main problem in css, because how it works does't clear. Background has "weight" 13 Mb. Maybe will be better use one HTML and 
+load adding html by JavaScript. But now its work like three pages.
 
 
 

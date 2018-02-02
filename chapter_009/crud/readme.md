@@ -51,6 +51,13 @@ Create CRUD in web page:
 	+ 	controller
 		+	UsersControllerTest.java
 		
+## Task list 
+
+- [x] Creates MVC structure. 
+- [x] Creates JSP. 
+- [x] Adds connection pool. 
+- [ ] Adds working mockito. Find solution with JNDI and mockito.
+
 ## Realisation
 
   This web application describes standard web page with different roles (administrator and user). 
