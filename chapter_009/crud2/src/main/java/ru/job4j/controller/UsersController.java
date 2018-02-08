@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
 
 import ru.job4j.dao.ConnectionWithDataBaseDao;
 import ru.job4j.model.AnonUser;
@@ -44,7 +44,10 @@ public class UsersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	String action = req.getServletPath();
+    	String uri = req.getRequestURI();
     	
+    	System.out.println("get " + action);
+    	System.out.println("getUri " + uri);
 		switch (action) {
 			case "/add":
 				add(req, resp);
@@ -59,7 +62,7 @@ public class UsersController extends HttpServlet {
 				addUser(req, resp);
 				break;
 			case "/authUser":
-				authUser(req, resp);
+				authUserPage(req, resp);
 				break;
 			case "/get":
 				get(req, resp);
@@ -68,7 +71,8 @@ public class UsersController extends HttpServlet {
 				delete(req, resp);
 				break;
 			case "/saveEdit":
-				edit(req, resp);
+				//edit(req, resp);
+				System.out.println("ky ky ky ky");
 				break;
 			default:
 				start(req, resp); 
@@ -87,6 +91,7 @@ public class UsersController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	System.out.println("post");
     	doGet(req, resp);
     }
     
@@ -131,6 +136,7 @@ public class UsersController extends HttpServlet {
      * @param response resp
      */
     public void getAll(HttpServletRequest request, HttpServletResponse response) {
+    	System.out.println(request.getRequestURI() + " 111");
     	Service service = new Service();
 		try {
 			request.setAttribute("listUser", service.getAll());
@@ -213,7 +219,18 @@ public class UsersController extends HttpServlet {
      * @param request request
      * @param response response
      */
-    public void authUser(HttpServletRequest request, HttpServletResponse response) {
+    public void authUserPage(HttpServletRequest request, HttpServletResponse response) {
+    	
+//    	HttpSession session = request.getSession();
+//    	session.setAttribute("authUser", new AnonUser("1", "1"));
+//    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.html");
+//    	try {
+//			dispatcher.forward(request, response);
+//		} catch (ServletException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+    	
     	Service service = new Service();
     	String login = request.getParameter("login");
     	String password = request.getParameter("password");
@@ -225,32 +242,21 @@ public class UsersController extends HttpServlet {
 	   
 			session.setAttribute("authUser", authUser);
 			
-	    	
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/Index.html");
+			response.setContentType("text/html");
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.html");
 	        try {
 	    		dispatcher.forward(request, response);
 	    	} catch (ServletException | IOException e) {
 	    		e.printStackTrace();
 	    	}
 	    } else {
-	    	boolean boolSession;
-	    	
-			synchronized (session) {
-				boolSession = session.getAttribute("errorAuth") == null ? true : false; //для того чтобы при неправильном вводе пароля вывалилась ошибка
-			}
 			
-			if (!boolSession) {
-				request.setAttribute("error", "This user does not exist."); 
-			}
-			
-			session.setAttribute("errorAuth", "errorAuth");
-			
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/Index.html");
-	        try {
-	    		dispatcher.forward(request, response);
-	    	} catch (ServletException | IOException e) {
-	    		e.printStackTrace();
-	    	}
+//	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/Index.html");
+//	        try {
+//	    		dispatcher.forward(request, response);
+//	    	} catch (ServletException | IOException e) {
+//	    		e.printStackTrace();
+//	    	}
 	    }
     }
     
@@ -259,16 +265,25 @@ public class UsersController extends HttpServlet {
      * @param request
      * @param response
      */
-    public void start(HttpServletRequest request, HttpServletResponse response) {
-    	
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/Index.html");
-		try {
+    public void start(HttpServletRequest request, HttpServletResponse response) {	
+    	System.out.print("methodStart ");
+    	System.out.println(request.getRequestURI() + " 33");
+    	response.setContentType("text/html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.html");
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegViewJ.jsp");
+        if (dispatcher == null) {
+        	System.out.println("dispatcher is null ");
+        } else {
+        	try {
 			dispatcher.forward(request, response);
-		} catch (ServletException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			} catch (ServletException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        }
+
+    
     }
 
     /**

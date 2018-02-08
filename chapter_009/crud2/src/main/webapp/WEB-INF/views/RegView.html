@@ -1,56 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>RegView</title>
+	<head>
+		<meta charset="UTF-8">
+		<title>RegView</title>
 	
-	
-	
-	
-	<link rel="stylesheet" type="text/css" href="css/style1.css">
-	
-	<script src="first.js"></script>
-	
-	
-	
-	<!--  <script>
-		<script src="myscript.js"></script>
-		function validate() {
-			var result = true;
-			if (document.getElementsByName("login")[0].value == '') {
-				alert("ky ky");
-				result = false;	
-			}
-			return result;
-		}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		
+		
+		<link rel="stylesheet" type="text/css" href="resources/css/style1.css">
 	
-	</script>
+		<script src="resources/nullForm.js"></script>
+		
+		<script type="text/javascript"></script>
 	
-	-->
-</head>
-<body>
-
-	<div class = center>
-		<p>Start Page</p>
-	</div>
-	
-	
-	  <div class="col-75">
-        <form action="/items" method = "post" onsubmit="return validate();">
-			Login: <input type = "text" name = "login" placeholder="Your login..">
-			Password: <input type = "password" name = "password" placeholder="Your password..">
-			<input type = "submit" value = "Ok">
-		</form>
-      </div>
-	<!--
-	<div class = center>
-		<form action="/items" method = "post" onsubmit="return validate();">
-			Login: <input type = "text" name = "login">
-			Password: <input type = "password" name = "password">
-			<input type = "submit" value = "Ok">
-		</form>
-	</div>
-	  -->
-</body>
+	</head>
+	<body>
+		<div class = center>
+			<p>Start Page</p>
+		</div>
+		<div class="col-75">
+	    	<form action="/crud2/authUser" method = "post" onsubmit="return validate();">
+				Login: <input type = "text" name = "login" placeholder="Your login..">
+				Password: <input type = "password" name = "password" placeholder="Your password..">
+				<input type = "submit" value = "Ok">
+			</form>
+	    </div>
+	</body>
 </html>

@@ -1,41 +1,48 @@
-<web-app>
-	
-	<filter>
-		<filter-name>AuthFilter</filter-name>
-		<filter-class>ru.job4j.controller.AuthFilter</filter-class> 
-	</filter>
-    
-    <filter-mapping>
-        <filter-name>AuthFilter </filter-name>
-        <url-pattern>*</url-pattern>
-    </filter-mapping>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>ru.job4j.controller.AuthFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
+  
+  
+  <servlet>
+    <servlet-name>UsersController</servlet-name>
+    <servlet-class>ru.job4j.controller.UsersController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UsersController</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  
 
-    <servlet>
-        <servlet-name>UsersController</servlet-name>
-        <servlet-class>ru.job4j.controller.UsersController</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>UsersController</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-    
-    
-    <servlet>
-        <servlet-name>UserJsonController</servlet-name>
-        <servlet-class>ru.job4j.controller.UserJsonController</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>UserJsonController</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.css</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.jpg</url-pattern>
+  </servlet-mapping>
 </web-app>
-
-
-
-    <!---
+<!--
         <resource-ref>
             DB Connection
             <res-ref-name>jdbc/servlets</res-ref-name>
