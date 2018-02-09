@@ -251,12 +251,12 @@ public class UsersController extends HttpServlet {
 	    	}
 	    } else {
 			
-//	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/Index.html");
-//	        try {
-//	    		dispatcher.forward(request, response);
-//	    	} catch (ServletException | IOException e) {
-//	    		e.printStackTrace();
-//	    	}
+	    	try {
+				((HttpServletResponse) response).sendRedirect(String.format("%s/start", request.getContextPath()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }
     }
     

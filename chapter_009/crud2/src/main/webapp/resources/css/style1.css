@@ -60,22 +60,35 @@
 		    
 
 		td {
-		   padding: 3px; /* Поля вокруг содержимого таблицы */
-		   border: 2px solid black; /* Параметры рамки */
-		}
+			background: #b8b8b8
+		   	padding: 3px; /* Поля вокруг содержимого таблицы */
+		   	border: 2px solid black; /* Параметры рамки */
+		   	opacity: 0.7; /* Полупрозрачность таблицы */
+    		filter: alpha(Opacity=70); /* Для IE */
+		}   
+
 		
 		th {
-		   padding: 3px; /* Поля вокруг содержимого таблицы */
-		   border: 2px solid black; /* Параметры рамки */
-		   color: black; /* текст */
-		   background-color: white;
+			background-color: #b8b8b8;
+		   	padding: 3px; /* Поля вокруг содержимого таблицы */
+		   	border: 2px solid black; /* Параметры рамки */
+		   	color: black; /* текст */	
+		   	opacity: 0.9; /* Полупрозрачность таблицы */
+    		filter: alpha(Opacity=90); /* Для IE */
 		}
-		
+		tr {
+			
+			background: #b8b8b8
+			opacity: 0.7; /* Полупрозрачность таблицы */
+    		filter: alpha(Opacity=70); /* Для IE */
+		}
 		caption {
-			background-color: white;
+			background-color: #b8b8b8;
 			text-align: center;
 			color: black;
 			 font-family: 'Times New Roman', Times, serif; /* Гарнитура текста */ 
     		font-size: 25pt; /* Размер шрифта */ 
+    		opacity: 0.9; /* Полупрозрачность таблицы */
+    		filter: alpha(Opacity=90); /* Для IE */
 		}
 	

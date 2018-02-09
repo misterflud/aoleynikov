@@ -69,7 +69,7 @@ The main difference with CRUD is absence the JSP and using just client languages
 Using Filter creates this mistake javax.servlet.ServletRequestWrapper.isAsyncStarted(ServletRequestWrapper.java:409) and a lot of more...   
 
 08.02.2018
-
+Servlet in and should write in response all information. I think it happens by usual Streams. AND when we use JSP, inside JSP all write in response, but when we want send HTML and use forward it doesn't work, because in web.xml writes just one servlet (/) in all forward call the same servlet (creates request-response-loop). In this situation I wrote in web.xml for pattern *.css, *.html, *.js etc for default servlet. Of course I can write in Stream html textf but for this already created tools (default).    
  
 ## Notes
 
@@ -84,9 +84,10 @@ If we want to use Filter (<filter> </filter>), we should understand that each re
 
 08.02.2018
 I 2 days tried do connection between html and server. A lot of pitfalls: browser has cash (save css, html) and changing not showing without reopen, Filter and servlet create request-loop, etc.
+
+09.02.2018
+When called methods HTTP from JSP (I now that JSP creates Html) like this <form action="authUser" method="post"> url is localhostblablabla/crud2/authUser. But if I use usual html, url path is localhostblablabla/authUser. WHY.
  
-
-
 
 
 
