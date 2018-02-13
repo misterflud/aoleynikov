@@ -1,54 +1,175 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>UsersView</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/style1.css">
-
-	<script src="resources/nullForm.js"></script>
-	<!--  <script>
-		<script src="myscript.js"></script>
-		function validate() {
-			var result = true;
-			if (document.getElementsByName("login")[0].value == '') {
-				alert("ky ky");
-				result = false;	
-			}
-			return result;
-		}
-		
+	<head>
+		<meta charset="UTF-8">
+		<title>UsersView</title>
+		<link rel="stylesheet" type="text/css" href="resources/css/style1.css">
+		<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+			<!--  <script src="resources/nullForm.js"></script>-->
 	
-	</script>
+			<!--
+		        $(document).on("click", "#somebutton", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+		            $.get("/crud2/getAll", function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+		                $("#somediv").text(responseText);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+		            });
+		        });
+		
+		        $(document).ready()(function () {
+		        	$("#somebutton").click(function () {
+						alert('asdadasdadasd');
+					});
+				});
+				
+		      
+			 $(
+					$.ajax('./getAll' {
+						method : 'get',
+						comlete: function (data) {
+							var t = document.getElementById("users").DataTable();
+							var users = JSON.parse(data.responseText);
+							for (var i = 0; i != users.lenght; i++) {
+								t.row.add([
+									users[i].login,
+									users[i].name,
+									users[i].email,
+									users[i].timeOfCreate,
+									users[i].userRole
+								]).draw(false);
+							}
+						} 
+					})
+				); 
+				
+				
+				$(function() {
+					alert ('2!');
+				});
+			-->
+		
+
+
+
+			<script>
+				$(function() {
+		        	$("#somebutton").click(function () {
+							$.ajax('./getAll', {
+								method : 'post',
+								error : function(request, status, error) {
+									alert('error');
+								},
+							    success: function(data){ 
+							    	alert('Success!' + data);
+							        
+							    	var jsontext = '{"firstname":"Jesper","surname":"Aaberg","phone":["555-0100","555-0120"]}';  
+							    	var contact = JSON.parse(jsontext);  
+							    	alert(contact.phone[1]);
+							    	
+									var users = JSON.parse(data);
+									alert(users.lenght);
+									
+									for (var i = 0; i != users.lenght; i++) {
+										alert(users[i].login);
+										t.row.add([
+											users[i].login,
+											users[i].name,
+											users[i].email,
+											users[i].timeOfCreate,
+											users[i].userRole
+										]).draw(false);
+									}
+							         
+							    },
+								comlete: function(data) {
+									alert('comlete');
+									
+								} 
+							})						
+						
+					});
+				});
 	
-	-->
-</head>
+
+			
+			</script>
+	</head>
+	
+	
+	
+	<body>
 
 
-
-<body>
-
-	<h1>User Managment</h1>
-    <h2 class="col-75">
-        <a href="get" style="color: white">Get User or Users</a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="add" style="color: white">Add user</a>
-    </h2>
-
-	<div class="col-75">
-		<form action="getUser" method="post">
-			Login: <input type="text" name="login"/>
-    		<input type="submit" name = "getUser" value="Get User"/>
-		</form>
-		
-		<form action="getAll" method="post">
-    		<input type="submit" name = "ShowAll" value="Show All users"/>
-		</form>	
-	</div>
-		
-		
-		<form name  = "1"  method="post">
-		    <div>
-		        <table>
+		<h1>User Managment</h1>
+	    <h2 class="col-75">
+	        <a href="/crud2/get" style="color: white">Get User or Users</a>
+	        &nbsp;&nbsp;&nbsp;
+	        <a href="/crud2/add" style="color: white">Add user</a>
+	    </h2>
+	
+		<div class="col-75">
+			<form action="/crud2/getUser" method="post">
+				Login: <input type="text" name="login"/>
+	    		<input type="submit" name = "getUser" value="Get User"/>
+			</form>
+			
+			<form action="getAll" method="post">
+	    		<input type="submit" name = "ShowAll" value="Show All users"/>
+			</form>	
+			<button id = "somebutton">
+				press
+			</button>
+		</div>
+			
+			
+			<form name  = "1"  method="post">
+			    <div>
+			        <table>
+			            <caption>List of Users</caption>
+			            <tr>
+			                <th>Name</th>
+			                <th>Login</th>
+			                <th>Email</th>
+			                <th>CreatedDate</th>
+			                <th>UserRole</th>
+			               	<th>Save</th>
+			               	<th>Delete</th>
+			               	
+	
+			               
+			            </tr>
+			            <tr>
+			               <td>
+			                   <input type="text" name="name" size="20" value=""/>
+			               </td>
+			               <td>	
+				               	<input type="text" name="login" size="20" value=""/> <!--type="hidden"--> 		               	                
+				           </td>
+			               <td>
+			               		<input type="text" name="email" size="20" value=""/>               
+			               </td>
+			               <td>
+			               		<input type="text" name="CreatedDate" size="20" value=""/>  		               
+			               </td>
+			               <td>
+			               		<input type="text" name="userRole" size="20"value=""/>	
+	      		           </td>
+		 
+		 
+					            			
+					       <td>
+					           	<input formaction ="saveEdit" type="submit" value="Save" />
+					       </td>	                			 
+			                	   	  	
+				           <td>
+						        <input formaction ="deleteUser" type="submit" value="Delete" />
+						   </td>
+			             	
+			            </tr>  
+			        </table>
+			    </div>
+			 </form>     
+			 
+			  <div>
+		        <table id = "users">
 		            <caption>List of Users</caption>
 		            <tr>
 		                <th>Name</th>
@@ -56,64 +177,18 @@
 		                <th>Email</th>
 		                <th>CreatedDate</th>
 		                <th>UserRole</th>
-		               	<th>Save</th>
-		               	<th>Delete</th>
-		               	
-
-		               
 		            </tr>
+		            
 		            <tr>
-		               <td>
-		                   <input type="text" name="name" size="20" value=""/>
-		               </td>
-		               <td>	
-			               	<input type="text" name="login" size="20" value=""/> <!--type="hidden"--> 		               	                
-			           </td>
-		               <td>
-		               		<input type="text" name="email" size="20" value=""/>               
-		               </td>
-		               <td>
-		               		<input type="text" name="CreatedDate" size="20" value=""/>  		               
-		               </td>
-		               <td>
-		               		<input type="text" name="userRole" size="20"value=""/>	
-      		           </td>
-	 
-	 
-				            			
-				       <td>
-				           	<input formaction ="saveEdit" type="submit" value="Save" />
-				       </td>	                			 
-		                	   	  	
-			           <td>
-					        <input formaction ="deleteUser" type="submit" value="Delete" />
-					   </td>
-		             	
-		            </tr>  
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>  
+		            	<td></td>
+		           	</tr>
+		           
 		        </table>
-		    </div>
-		 </form>     
-		 
-		  <div>
-	        <table>
-	            <caption>List of Users</caption>
-	            <tr>
-	                <th>Name</th>
-	                <th>Login</th>
-	                <th>Email</th>
-	                <th>CreatedDate</th>
-	                <th>UserRole</th>
-	            </tr>
-	            
-	                <tr>
-	                    <td></td>
-	                    <td></td>
-	                    <td></td>
-	                    <td></td>  
-	                    <td></td>
-	                </tr>
-	           
-	        </table>
-	    </div>	       		
-</body>
+		    </div>	
+		    <div id="somediv"></div>       		
+	</body>
 </html>

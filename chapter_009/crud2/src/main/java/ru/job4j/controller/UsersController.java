@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
+
+import org.json.*;
+
 
 import ru.job4j.dao.ConnectionWithDataBaseDao;
 import ru.job4j.model.AnonUser;
@@ -18,6 +21,7 @@ import ru.job4j.service.Service;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 
 
@@ -136,17 +140,38 @@ public class UsersController extends HttpServlet {
      * @param response resp
      */
     public void getAll(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("text/json");
+//        response.setCharacterEncoding("UTF-8");
+    	
+    	
     	System.out.println(request.getRequestURI() + " 111");
-    	Service service = new Service();
-		try {
-			request.setAttribute("listUser", service.getAll());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
-			dispatcher.forward(request, response);
-		} catch (ServletException e) {
-			e.printStackTrace();
+    	
+    	try {
+    	
+			PrintWriter writer = new PrintWriter(response.getOutputStream());
+			//writer.append("{\"login\":\"login1\", \"name\":\"name1\", \"email\":\"email1\", \"timeOfCreate\":\"timeOfCreate1\", \"userRole\":\"userRole1\"}");
+			//writer.append("[{'login':'login1'}]");
+			//writer.append("{'login':'login1'}");
+			String s = "{\"login\":\"login1\"}";
+			System.out.println(s);
+			writer.append(s);
+			
+			
+			writer.flush();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+//    	Service service = new Service();
+//		try {
+//			request.setAttribute("listUser", service.getAll());
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.html");
+//			dispatcher.forward(request, response);
+//		} catch (ServletException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
     }
     
     /**
@@ -156,15 +181,15 @@ public class UsersController extends HttpServlet {
      */
     public void add(HttpServletRequest request, HttpServletResponse response) {
     	
-    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/AddUsers.jsp");
-    	HttpSession session = request.getSession();	
-    	boolean adminOrNot = false;
-    	if (((BaseUser) session.getAttribute("authUser")).getUserRole().getId() == 1) {
-    		adminOrNot = true;
-    	}
-    	//System.out.println(adminOrNot  +  " add");
-    	request.setAttribute("adminOrNot", adminOrNot);
-    	
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/AddUsers.html");
+//    	HttpSession session = request.getSession();	
+//    	boolean adminOrNot = false;
+//    	if (((BaseUser) session.getAttribute("authUser")).getUserRole().getId() == 1) {
+//    		adminOrNot = true;
+//    	}
+//    	//System.out.println(adminOrNot  +  " add");
+//    	request.setAttribute("adminOrNot", adminOrNot);
+//    	
     	
     	
     	try {
@@ -180,7 +205,7 @@ public class UsersController extends HttpServlet {
      * @param response resp
      */
     public void get(HttpServletRequest request, HttpServletResponse response) {
-    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.jsp");
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.html");
     	try {
 			dispatcher.forward(request, response);
 		} catch (ServletException | IOException e) {
@@ -268,6 +293,7 @@ public class UsersController extends HttpServlet {
     public void start(HttpServletRequest request, HttpServletResponse response) {	
     	System.out.print("methodStart ");
     	System.out.println(request.getRequestURI() + " 33");
+    	
     	response.setContentType("text/html");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.html");
 		//RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegViewJ.jsp");

@@ -70,6 +70,11 @@ Using Filter creates this mistake javax.servlet.ServletRequestWrapper.isAsyncSta
 
 08.02.2018
 Servlet in and should write in response all information. I think it happens by usual Streams. AND when we use JSP, inside JSP all write in response, but when we want send HTML and use forward it doesn't work, because in web.xml writes just one servlet (/) in all forward call the same servlet (creates request-response-loop). In this situation I wrote in web.xml for pattern *.css, *.html, *.js etc for default servlet. Of course I can write in Stream html textf but for this already created tools (default).    
+
+12.02.2018
+Now all html are corrected, almost. Base all pages can open from html.   I am trying send ajax request from html to server and create response.
+
+
  
 ## Notes
 
@@ -87,7 +92,10 @@ I 2 days tried do connection between html and server. A lot of pitfalls: browser
 
 09.02.2018
 When called methods HTTP from JSP (I now that JSP creates Html) like this <form action="authUser" method="post"> url is localhostblablabla/crud2/authUser. But if I use usual html, url path is localhostblablabla/authUser. WHY.
- 
+
+13.02.2018
+I understand why url from jsp and html is different. We can write like this "./authUser" in html and after that url will be localhostblablabla/crud2/authUser.
+AJax and JavaScript are good tools, but a lot of mistakes not clear for me. I trying send simple JSON object and ajax sends request, server send response, but JSON CANN'T parse it. Why.  
 
 
 

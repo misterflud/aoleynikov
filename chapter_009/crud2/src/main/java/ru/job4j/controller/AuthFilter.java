@@ -23,15 +23,15 @@ public class AuthFilter implements Filter {
 	private Logger logger;
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		try {
-			logger = Logger.getLogger(AuthFilter.class.getName());
+//		try {
+//			logger = Logger.getLogger(AuthFilter.class.getName());
 //			logger.log(Level.INFO, path + " 1");
-			FileHandler fh = new FileHandler("D:/javaLearn/javacodegeeks.log");
-			logger.addHandler(fh);
-		} catch (SecurityException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//			FileHandler fh = new FileHandler("D:/javaLearn/javacodegeeks.log");
+//			logger.addHandler(fh);
+//		} catch (SecurityException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	}
 
@@ -49,15 +49,15 @@ public class AuthFilter implements Filter {
 		HttpServletRequest request2 = (HttpServletRequest) request;
 		HttpSession session = request2.getSession();
 		String path = request2.getRequestURI();
-		if (path.contains("resources") || path.contains(".html")  || path.contains(".jpg")) {
+		if (path.contains("resources") || path.contains(".html")  || path.contains(".jpg")) { //вызов дефолтного сервлета 
 
 			System.out.println(path + " 1");
 			chain.doFilter(request, response);
-		} else if (path.contains("/authUser") || path.contains("/start")) {
+		} else if (path.contains("/authUser") || path.contains("/start")) { // перевод на страницу регистрации
 			
 			System.out.println(path + " 2");
 			chain.doFilter(request, response);
-		} else if (session.getAttribute("authUser") == null) {
+		} else if (session.getAttribute("authUser") == null) { // если в сессии отсутствует аутенфицированный пользователь
 			
 			System.out.println(path + " 3");
 			((HttpServletResponse) response).sendRedirect(String.format("%s/start", request2.getContextPath()));
@@ -66,10 +66,11 @@ public class AuthFilter implements Filter {
 //			request.getRequestDispatcher(request2.getRequestURI().substring(request2.getContextPath().length()) + "/start").forward(request, response);
 			
 			System.out.println(path + " 3333");
-			//chain.doFilter(request, response);
-		} else {
+//			chain.doFilter(request, response);
+		} else { // если все ок, переврдим на нужный обработчик.
 			System.out.println(path + " 4");
-			//((HttpServletResponse) response).sendRedirect(String.format("%s/", request2.getContextPath()));
+//			((HttpServletResponse) response).sendRedirect(String.format("%s", request2.getContextPath()));
+			chain.doFilter(request, response);
 		}
 		
 		
