@@ -95,7 +95,10 @@ When called methods HTTP from JSP (I now that JSP creates Html) like this <form 
 
 13.02.2018
 I understand why url from jsp and html is different. We can write like this "./authUser" in html and after that url will be localhostblablabla/crud2/authUser.
-AJax and JavaScript are good tools, but a lot of mistakes not clear for me. I trying send simple JSON object and ajax sends request, server send response, but JSON CANN'T parse it. Why.  
+AJax and JavaScript are good tools, but a lot of mistakes not clear for me. I trying send simple JSON object and ajax sends request, server send response, but JSON CANN'T parse it. Why.
+
+14.02.2018
+I change jquery code and now it works. 
 
 
 

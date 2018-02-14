@@ -7,9 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-import org.json.*;
-
+import com.google.gson.Gson;
 
 import ru.job4j.dao.ConnectionWithDataBaseDao;
 import ru.job4j.model.AnonUser;
@@ -140,24 +138,27 @@ public class UsersController extends HttpServlet {
      * @param response resp
      */
     public void getAll(HttpServletRequest request, HttpServletResponse response) {
-        response.setContentType("text/json");
-//        response.setCharacterEncoding("UTF-8");
+    	Service service = new Service();
     	
-    	
+    	response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
     	System.out.println(request.getRequestURI() + " 111");
-    	
+    	String s = new Gson().toJson(service.getAll());
     	try {
     	
-			PrintWriter writer = new PrintWriter(response.getOutputStream());
+			//PrintWriter writer = new PrintWriter(response.getOutputStream());
 			//writer.append("{\"login\":\"login1\", \"name\":\"name1\", \"email\":\"email1\", \"timeOfCreate\":\"timeOfCreate1\", \"userRole\":\"userRole1\"}");
 			//writer.append("[{'login':'login1'}]");
 			//writer.append("{'login':'login1'}");
-			String s = "{\"login\":\"login1\"}";
+			//String s = "{\"login\":\"login1\"}";
+			//String s = "{\"login\":\"login1\", \"name\":\"name1\", \"email\":\"email1\", \"timeOfCreate\":\"timeOfCreate1\", \"userRole\":\"userRole1\"}";
+			//String s = "adasdasdasdasdadsa";
 			System.out.println(s);
-			writer.append(s);
+			response.getWriter().write(s);
+			//writer.append(s);
 			
 			
-			writer.flush();
+			//writer.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -268,12 +269,13 @@ public class UsersController extends HttpServlet {
 			session.setAttribute("authUser", authUser);
 			
 			response.setContentType("text/html");
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/UsersView.html");
-	        try {
-	    		dispatcher.forward(request, response);
-	    	} catch (ServletException | IOException e) {
-	    		e.printStackTrace();
-	    	}
+			try {
+				((HttpServletResponse) response).sendRedirect(String.format("%s/get", request.getContextPath()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 	    } else {
 			
 	    	try {
@@ -295,11 +297,15 @@ public class UsersController extends HttpServlet {
     	System.out.println(request.getRequestURI() + " 33");
     	
     	response.setContentType("text/html");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.html");
-		//RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegViewJ.jsp");
-        if (dispatcher == null) {
-        	System.out.println("dispatcher is null ");
-        } else {
+    	if (request.getSession().getAttribute("authUser") != null) {
+			try {
+				((HttpServletResponse) response).sendRedirect(String.format("%s/get", request.getContextPath()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	} else {
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/RegView.html");
         	try {
 			dispatcher.forward(request, response);
 			} catch (ServletException e) {
@@ -307,9 +313,7 @@ public class UsersController extends HttpServlet {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-        }
-
-    
+    	}
     }
 
     /**

@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>UsersView</title>
 		<link rel="stylesheet" type="text/css" href="resources/css/style1.css">
-		<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			<!--  <script src="resources/nullForm.js"></script>-->
 	
 			<!--
@@ -19,37 +19,6 @@
 						alert('asdadasdadasd');
 					});
 				});
-				
-		      
-			 $(
-					$.ajax('./getAll' {
-						method : 'get',
-						comlete: function (data) {
-							var t = document.getElementById("users").DataTable();
-							var users = JSON.parse(data.responseText);
-							for (var i = 0; i != users.lenght; i++) {
-								t.row.add([
-									users[i].login,
-									users[i].name,
-									users[i].email,
-									users[i].timeOfCreate,
-									users[i].userRole
-								]).draw(false);
-							}
-						} 
-					})
-				); 
-				
-				
-				$(function() {
-					alert ('2!');
-				});
-			-->
-		
-
-
-
-			<script>
 				$(function() {
 		        	$("#somebutton").click(function () {
 							$.ajax('./getAll', {
@@ -57,15 +26,16 @@
 								error : function(request, status, error) {
 									alert('error');
 								},
-							    success: function(data){ 
+							    success: function(data) { 
 							    	alert('Success!' + data);
 							        
-							    	var jsontext = '{"firstname":"Jesper","surname":"Aaberg","phone":["555-0100","555-0120"]}';  
+							    	var jsontext = '{"firstname":"Jesper"}';  
 							    	var contact = JSON.parse(jsontext);  
-							    	alert(contact.phone[1]);
+							    	alert(jsontext);
+							    	alert(contact.firstname);
 							    	
 									var users = JSON.parse(data);
-									alert(users.lenght);
+									alert(users.login);
 									
 									for (var i = 0; i != users.lenght; i++) {
 										alert(users[i].login);
@@ -87,9 +57,33 @@
 						
 					});
 				});
-	
+		      
 
-			
+				
+				
+				$(function() {
+					alert ('2!');
+				});
+			-->
+		
+
+
+
+			<script>
+				$(function() {
+		        	$("#somebutton").click(function () {
+		        		
+			            $.get("/crud2/getAll", function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+			            	         // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+			            	$.each(responseJson, function(index, item) { // Iterate over the JSON array.
+			            		   // Create HTML <li> element, set its text content with currently iterated item and append it to the <ul>.
+			            		$('#users').append('<tr><td>' + item.name + '</td><td>' + item.login + '</td><td>' + item.email + '</td><td>' + item.timeOfCreate + '</td><td>' + item.userRole.name + '</td></tr>');
+			            	});
+			            });
+						
+					});
+				});
+
 			</script>
 	</head>
 	
@@ -111,13 +105,13 @@
 	    		<input type="submit" name = "getUser" value="Get User"/>
 			</form>
 			
-			<form action="getAll" method="post">
-	    		<input type="submit" name = "ShowAll" value="Show All users"/>
-			</form>	
 			<button id = "somebutton">
-				press
+				ShowAll
 			</button>
+			
 		</div>
+		
+		
 			
 			
 			<form name  = "1"  method="post">
@@ -179,13 +173,7 @@
 		                <th>UserRole</th>
 		            </tr>
 		            
-		            <tr>
-		            	<td></td>
-		            	<td></td>
-		            	<td></td>
-		            	<td></td>  
-		            	<td></td>
-		           	</tr>
+
 		           
 		        </table>
 		    </div>	
