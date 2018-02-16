@@ -8,82 +8,25 @@
 			<!--  <script src="resources/nullForm.js"></script>-->
 	
 			<!--
-		        $(document).on("click", "#somebutton", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-		            $.get("/crud2/getAll", function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-		                $("#somediv").text(responseText);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
-		            });
-		        });
-		
-		        $(document).ready()(function () {
-		        	$("#somebutton").click(function () {
-						alert('asdadasdadasd');
-					});
-				});
-				$(function() {
-		        	$("#somebutton").click(function () {
-							$.ajax('./getAll', {
-								method : 'post',
-								error : function(request, status, error) {
-									alert('error');
-								},
-							    success: function(data) { 
-							    	alert('Success!' + data);
-							        
-							    	var jsontext = '{"firstname":"Jesper"}';  
-							    	var contact = JSON.parse(jsontext);  
-							    	alert(jsontext);
-							    	alert(contact.firstname);
-							    	
-									var users = JSON.parse(data);
-									alert(users.login);
-									
-									for (var i = 0; i != users.lenght; i++) {
-										alert(users[i].login);
-										t.row.add([
-											users[i].login,
-											users[i].name,
-											users[i].email,
-											users[i].timeOfCreate,
-											users[i].userRole
-										]).draw(false);
-									}
-							         
-							    },
-								comlete: function(data) {
-									alert('comlete');
-									
-								} 
-							})						
-						
-					});
-				});
-		      
 
-				
-				
-				$(function() {
-					alert ('2!');
-				});
 			-->
 		
 
 
 
 			<script>
-				$(function() {
-		        	$("#somebutton").click(function () {
-		        		
-			            $.get("/crud2/getAll", function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-			            	         // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
-			            	$.each(responseJson, function(index, item) { // Iterate over the JSON array.
-			            		   // Create HTML <li> element, set its text content with currently iterated item and append it to the <ul>.
-			            		$('#users').append('<tr><td>' + item.name + '</td><td>' + item.login + '</td><td>' + item.email + '</td><td>' + item.timeOfCreate + '</td><td>' + item.userRole.name + '</td></tr>');
-			            	});
+				function get_table() {
+			        $.get("/crud2/getAll", function(responseJson) {   
+		            	$("#users tr:gt(0)").remove();
+			            $.each(responseJson, function(index, item) {  
+			            	$('#users').append('<tr class = "output_tr" ><td>' + item.name + '</td><td>' + item.login + '</td><td>' + item.email + '</td><td>' + item.timeOfCreate + '</td><td>' + item.userRole.name + '</td></tr>');
 			            });
-						
-					});
-				});
-
+			        });
+		        }
+				
+				function alle() {
+	        		alert('sfsdfs');
+	        	}
 			</script>
 	</head>
 	
@@ -105,8 +48,12 @@
 	    		<input type="submit" name = "getUser" value="Get User"/>
 			</form>
 			
-			<button id = "somebutton">
+			<button id = "somebutton" onclick= "get_table()">
 				ShowAll
+			</button>
+			
+			<button id = "s2" onclick="alle()">
+				s2
 			</button>
 			
 		</div>
@@ -116,8 +63,8 @@
 			
 			<form name  = "1"  method="post">
 			    <div>
-			        <table>
-			            <caption>List of Users</caption>
+			        <table class = "input_table">
+			            <caption>User</caption>
 			            <tr>
 			                <th>Name</th>
 			                <th>Login</th>
@@ -163,7 +110,7 @@
 			 </form>     
 			 
 			  <div>
-		        <table id = "users">
+		        <table class = "output_table" id = "users">
 		            <caption>List of Users</caption>
 		            <tr>
 		                <th>Name</th>
@@ -172,7 +119,6 @@
 		                <th>CreatedDate</th>
 		                <th>UserRole</th>
 		            </tr>
-		            
 
 		           
 		        </table>
