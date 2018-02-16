@@ -57,8 +57,8 @@ The main difference with CRUD is absence the JSP and using just client languages
 - [x] Copies all files from crud to here. 
 - [x] Creates HTML pages for each JSP.
 - [x] Does successful connection between html, filter, servlet, server.
-- [ ] Understands why html forms creates url without /crud2/ (root). 
-- [ ] Creates connection between server and JavaScript (AJAX, JSON). 
+- [x] Understands why html forms creates url without /crud2/ (root). Should adds "." before crud2.
+- [x] Creates connection between server and JavaScript (AJAX, JSON). 
 - [ ] Creates all logic on user page like in JSP.
 - [ ] Logic in DAO is the same like in crud, but service should be different.
 - [ ] Adds comments.
@@ -74,6 +74,8 @@ Servlet in and should write in response all information. I think it happens by u
 12.02.2018
 Now all html are corrected, almost. Base all pages can open from html.   I am trying send ajax request from html to server and create response.
 
+16.02.2018
+Something are adding tag in my html <tbody>. I a lot of time wasted to understand why specificity doesn't work..   
 
  
 ## Notes
@@ -100,7 +102,8 @@ AJax and JavaScript are good tools, but a lot of mistakes not clear for me. I tr
 14.02.2018
 I change jquery code and now it works. 
 
-
+16.02.2018
+I understand main aim CSS, HTML, JavaScript, Jquery, but a lot of information inside each technology... It becomes to slow creation cite.
 
 
 
