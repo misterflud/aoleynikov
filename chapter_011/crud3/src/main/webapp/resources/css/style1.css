@@ -1,0 +1,142 @@
+@charset "UTF-8";
+	
+		
+		body {
+    		background-image: url(../images/samuel-ferrara-270946.jpg);
+    		/* Фоновое изображение выровнено по центру в горизонтальной и вертикальной плоскостях*/   background-position: center center;      
+/* Фон не повторяется*/    background-repeat: no-repeat;      
+/* Фон зафиксирован в области просмотра и потому не двигается, когда высота контента превышает высоту изображения*/    background-attachment: fixed;      
+/* Это свойство заставляет фон менять масштаб при изменении размеров содержащего его контейнера*/   background-size: cover;      
+/* Цвет фона, который будет отображаться при загрузке фоновой картинки*/  background-color: #464646; 
+		}
+		
+			
+		h1 {
+		    color: white;
+		    text-align: center;
+		}
+		
+		p {
+		    font-family: verdana;
+		    font-size: 20px;
+		}
+		
+		.center {
+			width: 100%;
+			text-align: center;
+			align-items: center;
+			
+		}
+		
+		linkk {
+			color: white;
+		    text-align: center;
+		    font-size: 25pt;
+		}
+		
+		input[type=submit] {
+		    color: black;
+		    padding: 12px 20px;
+		    border: none;
+		    border-radius: 4px;
+		    cursor: pointer;
+		   
+		}
+		
+		.col-75 {
+		    text-align: center;
+			align-items: center;
+		    width: 100%;
+		    margin: 6px;
+		}
+
+
+		
+		.input_table {
+			margin-top:30px;
+			margin-bottom:10px;
+			margin-left:auto;
+			margin-right:auto;
+			border: 3px;
+			cellpadding: 3px;
+			border-collapse: collapse; /* Убираем двойные линии между ячейками */
+		}
+		
+		.input_table > tbody > tr > td {
+			border: 2px solid black; /* Параметры рамки */
+		}
+		
+		.input_table > tbody > tr > th {
+			background-color: #b8b8b8;
+			padding: 3px; /* Поля вокруг содержимого таблицы */
+			border: 2px solid black; /* Параметры рамки */
+			color: black; /* текст */	
+			opacity: 0.9; /* Полупрозрачность таблицы */
+	    	filter: alpha(Opacity=90); /* Для IE */
+		}
+		
+		
+		.input_table > caption {
+			background-color: #b8b8b8;
+			text-align: center;
+			color: black;
+			font-family: 'Times New Roman', Times, serif; /* Гарнитура текста */ 
+	    	font-size: 25pt; /* Размер шрифта */ 
+	    	opacity: 0.9; /* Полупрозрачность таблицы */
+	    	filter: alpha(Opacity=90); /* Для IE */
+		}
+		
+		
+		
+		
+		
+	
+		
+		
+		
+		
+		.output_table {
+			margin-top:30px;
+			margin-bottom:10px;
+			margin-left:auto;
+			margin-right:auto;
+			border: 3px;
+			cellpadding: 3px;
+			border-collapse: collapse; /* Убираем двойные линии между ячейками */
+		}
+		
+		.output_table > tbody > tr > td {
+			background-color: #ff80ff;
+			border: 2px solid black; /* Параметры рамки */
+			opacity: 0.7; /* Полупрозрачность таблицы */
+	    	filter: alpha(Opacity=70); /* Для IE */
+		}
+		
+		.output_table > tbody > tr > th {
+			background-color: #b8b8b8;
+			padding: 3px; /* Поля вокруг содержимого таблицы */
+			border: 2px solid black; /* Параметры рамки */
+			color: black; /* текст */	
+			opacity: 0.9; /* Полупрозрачность таблицы */
+	    	filter: alpha(Opacity=90); /* Для IE */
+		}
+		
+		
+		.output_table > caption {
+			background-color: #b8b8b8;
+			text-align: center;
+			color: black;
+			font-family: 'Times New Roman', Times, serif; /* Гарнитура текста */ 
+	    	font-size: 25pt; /* Размер шрифта */ 
+	    	opacity: 0.9; /* Полупрозрачность таблицы */
+	    	filter: alpha(Opacity=90); /* Для IE */
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
