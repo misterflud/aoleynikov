@@ -39,6 +39,9 @@ The next steps is project without web.xml.
 
 26.02.2018
 I deleted web.xml and adds config package with spring settings. Changes the pom.xml of crud3 (adds maven-war-plugin).   
+
+27.02.2018
+Spring opens a lot of tricks, but in the start I think to stop on changing of controller. Maybe in future I will use ORM instead JNDI and connection database.  
  
 ## Notes
 
@@ -50,8 +53,8 @@ Eclipse does't adds files in workspace folder "Server" and id creates errors whe
 26.02.2018
 Remember about maven -- it cann't show the problem in pom.xml. It creates strange situation when server starts with some files from project, but HTTP request doesn't work. When you delete the web.xml you should add in pom.xml maven-war-plugin.    
 
-
-
+27.02.2018
+I feels that Spring help me to create project and it becomes easier than using just servlets. 
 
 
 
