@@ -12,7 +12,7 @@
 <body>
 
     <div align="center">
-		<form action="authUser" method="post">
+		<form action="users" method="post">
         <table border="1" cellpadding="3">
             <caption>
             	<h2>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+<Resource name="jdbc/crud3"
+          auth="Container"
+          type="javax.sql.DataSource"
+          validationQuery="SELECT 1"
+          validationInterval="30000"
+          maxActive="100"
+          minIdle="10"
+          maxWait="1000"
+          initialSize="10"
+          jmxEnabled="true"
+          username="postgres"
+          password="postgres"
+          driverClassName="org.postgresql.Driver"
+          url="jdbc:postgresql://localhost:5432/server"/>
+</Context>

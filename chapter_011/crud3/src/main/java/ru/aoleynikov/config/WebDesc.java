@@ -16,7 +16,7 @@ public class WebDesc extends AbstractAnnotationConfigDispatcherServletInitialize
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] {"*.do"};
+		return new String[] {"/"};
 	}
 	
 }
