@@ -28,8 +28,8 @@
     		<input type="submit" name = "getUser" value="Get User"/>
 		</form>
 		
-		<form action="getAll" method="post">
-    		<input type="submit" name = "ShowAll" value="Show All users"/>
+		<form action="getUsers" method="post">
+    		<input type="submit" name = "showAll" value="Show All users"/>
 		</form>	
 		
 	</center>

@@ -25,7 +25,8 @@ The main difference with CRUD, CRUD2 is using Spring Framework. Maybe it will be
 
 - [x] Create simple application for Spring.
 - [x] Changes structure and deletes web.xml.
-- [ ] Changes structure of project for Spring.
+- [x] Changes structure of project for Spring.
+- [ ] Adds Filter.
 - [ ] Selects HTML pages or JSP.
 - [ ] Creates Spring beans.
 - [ ] Adds Structure in readme.md.
@@ -41,7 +42,11 @@ The next steps is project without web.xml.
 I deleted web.xml and adds config package with spring settings. Changes the pom.xml of crud3 (adds maven-war-plugin).   
 
 27.02.2018
-Spring opens a lot of tricks, but in the start I think to stop on changing of controller. Maybe in future I will use ORM instead JNDI and connection database.  
+Spring opens a lot of tricks, but in the start I think to stop on changing of controller. Maybe in future I will use ORM instead JNDI and connection database. 
+
+28.02.2018 
+Adds @RequestMap for each action (almost). next steps is session and filter.
+ 
  
 ## Notes
 
@@ -55,6 +60,9 @@ Remember about maven -- it cann't show the problem in pom.xml. It creates strang
 
 27.02.2018
 I feels that Spring help me to create project and it becomes easier than using just servlets. 
+
+28.02.2018
+Spring creates twice the controller, i don't know why. 
 
 
 

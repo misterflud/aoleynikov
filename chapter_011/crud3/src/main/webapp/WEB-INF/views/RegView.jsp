@@ -12,36 +12,36 @@
 <body>
 
     <div align="center">
-		<form action="users" method="post">
-        <table border="1" cellpadding="3">
-            <caption>
-            	<h2>
-            		Authorization
-            	</h2>
-            </caption>         
-            <tr>
-                <th>Login: </th>
-                <td>
-                	<input type="text" name="login" size="45"
-                			 
-                	/>
-                </td>
-            </tr>
-            <tr>
-                <th>Password: </th>
-                <td>
-                	<input type="text" name="password" size="45"
-                			 
-                	/>
-                </td>
-            </tr>
-
-            <tr>
-            	<td colspan="2" align="center">
-            		<input type="submit" value="Ok" />
-            	</td>
-            </tr>
-        </table>
+		<form action="start" method="post">
+	        <table border="1" cellpadding="3">
+	            <caption>
+	            	<h2>
+	            		Authorization
+	            	</h2>
+	            </caption>         
+	            <tr>
+	                <th>Login: </th>
+	                <td>
+	                	<input type="text" name="login" size="45"
+	                			 
+	                	/>
+	                </td>
+	            </tr>
+	            <tr>
+	                <th>Password: </th>
+	                <td>
+	                	<input type="text" name="password" size="45"
+	                			 
+	                	/>
+	                </td>
+	            </tr>
+	
+	            <tr>
+	            	<td colspan="2" align="center">
+	            		<input type="submit" value="Ok" />
+	            	</td>
+	            </tr>
+	        </table>
         </form>
     </div>
     
