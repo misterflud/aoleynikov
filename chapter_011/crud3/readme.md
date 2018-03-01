@@ -29,6 +29,7 @@ The main difference with CRUD, CRUD2 is using Spring Framework. Maybe it will be
 - [ ] Adds Filter.
 - [ ] Selects HTML pages or JSP.
 - [ ] Creates Spring beans.
+- [ ] Uses Hibernate (or something) instead JDBC.
 - [ ] Adds Structure in readme.md.
 
 ## Realisation
@@ -46,7 +47,9 @@ Spring opens a lot of tricks, but in the start I think to stop on changing of co
 
 28.02.2018 
 Adds @RequestMap for each action (almost). next steps is session and filter.
- 
+
+01.03.2018 
+ I changeed Servlet filter on HandlerInterceptorAdapter. 
  
 ## Notes
 

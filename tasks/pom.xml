@@ -14,5 +14,6 @@
         <module>mztoTask</module>
         <module>texuna</module>
     <module>serejcaProject</module>
+    <module>MemoryRegisters</module>
   </modules>
 </project>

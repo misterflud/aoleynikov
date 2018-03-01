@@ -2,14 +2,13 @@ package ru.aoleynikov.controller;
 
 
 
-import javax.imageio.event.IIOReadWarningListener;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ru.aoleynikov.model.User;
@@ -35,8 +34,8 @@ public class UsersController {
 	
 	@GetMapping(value = "/start")
     public String regStart(ModelMap model) {
-		System.out.println(b);
-		
+//		System.out.println(b);
+		System.out.println("dddddddd");
 		model.addAttribute("ad", "ad"); // добавили аттрибут ad со значением ad 
     	return "RegView";
     }
@@ -45,7 +44,7 @@ public class UsersController {
 	//@RequestParam(value="login", required = true) String login,
 	@PostMapping(value = "/start")
     public String regAuth(@RequestParam(value="login", required = true) String login, @RequestParam(value="password", required = true) String password, ModelMap model) {
-//		System.out.println("1");
+		System.out.println("fffffffffff");
 		AnonUser anonUser = new AnonUser(login, password);
 		Service service = new Service();
     	if (service.authUser(anonUser)) {
