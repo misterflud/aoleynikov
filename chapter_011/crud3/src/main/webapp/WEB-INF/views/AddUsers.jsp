@@ -13,7 +13,7 @@
 	<center>
 		<h1>User Management</h1>
         <h2>
-        	<a href="get">Get User or Users</a>
+        	<a href="users">Get User or Users</a>
         	&nbsp;&nbsp;&nbsp;
         	<a href="add">Add user</a>
         </h2>
