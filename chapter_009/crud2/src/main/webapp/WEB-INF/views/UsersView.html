@@ -15,7 +15,7 @@
 
 
 
-<script>
+	<script>
 				function get_table() {
 			        $.get("/crud2/getAll", function(responseJson) {   
 		            	$("#users tr:gt(0)").remove();
@@ -23,12 +23,54 @@
 			            	$('#users').append('<tr class = "output_tr" ><td>' + item.name + '</td><td>' + item.login + '</td><td>' + item.email + '</td><td>' + item.timeOfCreate + '</td><td>' + item.userRole.name + '</td></tr>');
 			            });
 			        });
-		        }
+		      }
 				
-				function alle() {
-	        		alert('sfsdfs');
-	        	}
-			</script>
+				function get_user() {
+					
+			     	$.post("/crud2/getUser", 
+			     		{
+				     		login : $('#l0').val()
+				     	},
+				     	function(responseJson) {   
+				     		$('#n1').val(responseJson.name);
+				     		$('#l1').val(responseJson.login);
+				     		$('#e1').val(responseJson.email);
+				     		$('#c1').val(responseJson.timeOfCreate);
+				     		$('#u1').val(responseJson.userRole.id);
+				     		
+			      });
+				}
+				
+				function editUser() {
+					$.post("/crud2/saveEdit", 
+							{
+								name : $('#n1').val(),
+								login : $('#l1').val(),
+								email : $('#e1').val(),
+								userRole : $('#u1').val()
+							}
+			      );					
+					
+				}
+				
+				function deleteUser() {
+					$.post("/crud2/deleteUser", 
+							{
+								name : $('#n1').val(),
+								login : $('#l1').val(),
+								email : $('#e1').val(),
+								userRole : $('#u1').val()
+							}
+			      );	
+					
+					$('#n1').val('');
+					$('#l1').val('');
+					$('#e1').val('');
+					$('#c1').val('');
+					$('#u1').val('');
+				}
+				
+	</script>
 </head>
 
 
@@ -44,21 +86,21 @@
 	</h2>
 
 	<div class="col-75">
-		<form action="/crud2/getUser" method="post">
-			Login: <input type="text" name="login" /> <input type="submit"
-				name="getUser" value="Get User" />
-		</form>
+		<div>
+			Login: <input type="text" id = 'l0' name="login" /> 
+			<button id="get_user" onclick="get_user()">Get user</button>
+		</div>
 
 		<button id="somebutton" onclick="get_table()">ShowAll</button>
 
-		<button id="s2" onclick="alle()">s2</button>
+
 
 	</div>
 
 
 
 
-	<form name="1" method="post">
+	
 		<div>
 			<table class="input_table">
 				<caption>User</caption>
@@ -75,26 +117,22 @@
 
 				</tr>
 				<tr>
-					<td><input type="text" name="name" size="20" value="" /></td>
-					<td><input type="text" name="login" size="20" value="" /> <!--type="hidden"-->
-					</td>
-					<td><input type="text" name="email" size="20" value="" /></td>
-					<td><input type="text" name="CreatedDate" size="20" value="" />
-					</td>
-					<td><input type="text" name="userRole" size="20" value="" /></td>
+					<td><input id = "n1" type="text" name="name" size="20" value="" /></td>
+					<td><input id = "l1"  type="text" name="login" size="20" value="" readonly="readonly"/> <!--type="hidden"--></td>
+					<td><input id = "e1"  type="text" name="email" size="20" value="" /></td>
+					<td><input id = "c1"  type="text" name="CreatedDate" size="20" value="" readonly="readonly" /></td>
+					<td><input id = "u1"  type="text" name="userRole" size="20" value="" /></td>
 
 
 
-					<td><input formaction="saveEdit" type="submit" value="Save" />
-					</td>
+					<td><button id="save" onclick="editUser()">Save</button></td>
 
-					<td><input formaction="deleteUser" type="submit"
-						value="Delete" /></td>
+					<td><button id="delete" onclick="deleteUser()">Delete</button></td>
 
 				</tr>
 			</table>
 		</div>
-	</form>
+	
 
 	<div>
 		<table class="output_table" id="users">

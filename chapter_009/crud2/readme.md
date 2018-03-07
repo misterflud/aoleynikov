@@ -77,6 +77,8 @@ Now all html are corrected, almost. Base all pages can open from html.   I am tr
 16.02.2018
 Something are adding tag in my html <tbody>. I a lot of time wasted to understand why specificity doesn't work..   
 
+07.03.2018
+Now almost  functional is work, next step is fixing css and html to create project is more beauty.
  
 ## Notes
 
@@ -105,7 +107,8 @@ I change jquery code and now it works.
 16.02.2018
 I understand main aim CSS, HTML, JavaScript, Jquery, but a lot of information inside each technology... It becomes to slow creation cite.
 
-
+07.03.2018
+Remember that comments in html and javascript are different and if you write <!-- --> in script tag in html page that doesn't work, because comments for javascript is /** **/.
 
 
 

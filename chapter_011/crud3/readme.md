@@ -49,7 +49,12 @@ Spring opens a lot of tricks, but in the start I think to stop on changing of co
 Adds @RequestMap for each action (almost). next steps is session and filter.
 
 01.03.2018 
- I changeed Servlet filter on HandlerInterceptorAdapter. 
+ I changed Servlet filter on HandlerInterceptorAdapter. 
+ 
+06.03.2018 
+Now CRUD is working, but in this application I can use the Spring in more cases. next step is ORM or using Spring for connection with database. 
+
+
  
 ## Notes
 

@@ -1,9 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>AddUsers</title>
-<link rel="stylesheet" type="text/css" href="resources/css/style1.css">
-</head>
+	<head>
+		<title>AddUsers</title>
+		<link rel="stylesheet" type="text/css" href="resources/css/style1.css">
+		<script type='text/javascript'
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+				function addUser() {
+					$.post("/crud2/addUser", 
+					{
+						name : $('#n').val(),
+						login : $('#l').val(),
+						email : $('#e').val(),
+						password : $('#p').val(),
+						role_id : $('#r').val()
+					});
+					$('#n').val(''),
+					$('#l').val(''),
+					$('#e').val(''),
+					$('#p').val(''),
+					$('#r').val('')
+				}
+		</script>
+	</head>
 <body>
 	<h1>Adds Managment</h1>
 	<h2 class="col-75">
@@ -16,29 +35,27 @@
 		<caption>Add New User</caption>
 		<tr>
 			<th>Name:</th>
-			<td><input type="text" name="name" size="45" /></td>
+			<td><input type="text" id="n" name="name" size="45" /></td>
 		</tr>
 		<tr>
 			<th>Login:</th>
-			<td><input type="text" name="login" size="45" /></td>
+			<td><input type="text" id="l" name="login" size="45" /></td>
 		</tr>
 		<tr>
 			<th>Email:</th>
-			<td><input type="text" name="email" size="45" /></td>
+			<td><input type="text" id="e" name="email" size="45" /></td>
 		</tr>
 		<tr>
 			<th>Password:</th>
-			<td><input type="text" name="password" size="45" /></td>
+			<td><input type="text" id="p" name="password" size="45" /></td>
 		</tr>
 		<tr>
 			<th>Role_id:</th>
-			<td><input type="text" name="role_id" size="45" /></td>
-		</tr>
-		<tr>
-			<td><input type="submit" value="Save" /></td>
+			<td><input type="text" id="r" name="role_id" size="45" /></td>
 		</tr>
 	</table>
-
+	
+	<button id="addUser" onclick="addUser()">Save</button>
 
 </body>
 </html>
