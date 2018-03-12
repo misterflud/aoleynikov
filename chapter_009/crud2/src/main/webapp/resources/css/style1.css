@@ -119,3 +119,11 @@ input[type=submit] {
 	opacity: 0.9; /* Полупрозрачность таблицы */
 	filter: alpha(Opacity = 90); /* Для IE */
 }
+
+.hider {
+	display: none;
+}
+
+
+
+

@@ -137,13 +137,16 @@ public class UsersController extends HttpServlet
 		{
 			isAdmin = true;
 		}
-		final String s = new Gson().toJson(service.get(userFromView));
-		//		request.setAttribute("sameUser", sameUser);
-		//		request.setAttribute("isAdmin", isAdmin);
+		final String json1 = new Gson().toJson(service.get(userFromView));
+		final String json2 = new Gson().toJson(sameUser);
+		final String json3 = new Gson().toJson(isAdmin);
+
+		final String jsonAll = "[" + json1 + "," + json2 + "," + json3 + "]";
+
 		try
 		{
-			System.out.println(s);
-			response.getWriter().write(s);
+			System.out.println(jsonAll);
+			response.getWriter().write(jsonAll);
 		}
 		catch (final IOException e)
 		{

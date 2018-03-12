@@ -59,8 +59,9 @@ The main difference with CRUD is absence the JSP and using just client languages
 - [x] Does successful connection between html, filter, servlet, server.
 - [x] Understands why html forms creates url without /crud2/ (root). Should adds "." before crud2.
 - [x] Creates connection between server and JavaScript (AJAX, JSON). 
-- [ ] Creates all logic on user page like in JSP.
-- [ ] Logic in DAO is the same like in crud, but service should be different.
+- [x] Creates all logic on user page like in JSP.
+- [x] Logic in DAO is the same like in crud, but service should be different.
+- [ ] Fixes CSS and Html.
 - [ ] Adds comments.
 
 ## Realisation
@@ -79,6 +80,9 @@ Something are adding tag in my html <tbody>. I a lot of time wasted to understan
 
 07.03.2018
 Now almost  functional is work, next step is fixing css and html to create project is more beauty.
+
+12.03.2018
+Crud is worked.
  
 ## Notes
 
