@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--все это можно сделать и с помощью аннотаций. Так же можно вставлять значения из других бинов динамически, с помощью SPEL-->
+    <bean id="messageRenderer" class="Message69.StandardOutMessageRenderer">
+      <property name="messageProvider" ref="messageProvider"/>
+    </bean>
+
+    <bean id="messageProvider" class="Message69.HelloWorldMessageProvider" p:message="12">
+
+    </bean>
+</beans>

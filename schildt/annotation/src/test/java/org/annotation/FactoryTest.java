@@ -6,8 +6,8 @@ public class FactoryTest{
 	
 	@Test
 	public void whenThen() {
-		FactoryRundomNumber<RandomTest> factoryRundomNumber = new FactoryRundomNumber();
-		RandomTest randomTest = factoryRundomNumber.getObject(new RandomTest());
+		FactoryRandomNumber<RandomTest> factoryRandomNumber = new FactoryRandomNumber();
+		RandomTest randomTest = factoryRandomNumber.getObject(new RandomTest());
 		
 		System.out.println(randomTest.a);
 		

@@ -6,7 +6,7 @@
     <artifactId>aoleynikov</artifactId>
     <version>1.0</version>
   </parent>
-  <groupId>ru.oleynikov</groupId>
+
   <artifactId>spring4book</artifactId>
   <version>1.0</version>
   <name>spring4book</name>
@@ -17,5 +17,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>chapter002_001</module>
+      <module>chapter003</module>
   </modules>
 </project>

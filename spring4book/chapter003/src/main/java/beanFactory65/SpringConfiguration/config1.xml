@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="oracle" name="wiseworm" class="beanFactory65.BookwormOracle"/>
+    <!--чтобы сканировался проект на наличие аннотаций и бины внедрялись, необходимо вписать спец тег: -->
+    <!--<context:component-scan base-package="beanFactory65" /> -->
+    <!--при чем можно гибко настроить какие именно пакеты сканировать -->
+<!--
+    <context:component-scan base-package="com.apress.prospring4.ch3.annotation" >
+        <context:exclude-filter type="assignaЫe"
+                                expression="com.example.NotAService"/>
+    </context:component-scan>
+    -->
+</beans>
