@@ -6,7 +6,7 @@ import org.springframework.util.StopWatch;
 public class LookupDemo {
     public static void main(String[] args) {
         GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
-        ctx.load("classpath:helper102/SpringConfiguration/config3.xml");
+        ctx.load("SpringConfiguration/config3.xml");
         ctx.refresh();
         DemoBean abstractBean = (DemoBean) ctx.getBean("abstractLookupBean");
         DemoBean standardBean = (DemoBean) ctx.getBean("standardLookupBean");

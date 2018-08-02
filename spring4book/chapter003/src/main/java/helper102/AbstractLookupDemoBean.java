@@ -5,6 +5,6 @@ public abstract class AbstractLookupDemoBean implements DemoBean {
 
     @Override
     public void someOperation() {
-
+        getMyHelper().doSomethingHelpful();
     }
 }
