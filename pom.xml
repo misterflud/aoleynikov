@@ -16,9 +16,9 @@
         <module>chapter_007</module>
         <module>chapter_008</module>
         <module>chapter_009</module>
-    <module>schildt</module>
-    <module>chapter_011</module>
-      <module>spring4book</module>
+        <module>schildt</module>
+        <module>chapter_011</module>
+        <module>spring4book</module>
   </modules>
 
     <dependencies>

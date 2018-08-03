@@ -18,5 +18,18 @@
   <modules>
     <module>chapter002_001</module>
       <module>chapter003</module>
+      <module>chapter004</module>
   </modules>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>4.3.14.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>4.3.7.RELEASE</version>
+    </dependency>
+  </dependencies>
 </project>
