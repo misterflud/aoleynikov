@@ -1,0 +1,5 @@
+import groovyConfiguretion195.Contact
+
+beans {
+    contact(Contact, firstName: 'Chris', lastName: 'Schaefer', age: 32)
+}
