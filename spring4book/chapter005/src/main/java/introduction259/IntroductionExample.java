@@ -9,7 +9,7 @@ import org.springframework.aop.framework.ProxyFactory;
 public class IntroductionExample {
     public static void main(String[] args) {
         TargetBean targetBean = new TargetBean();
-        targetBean.setName("Cris Schaefer");
+        targetBean.setName("Chris Schaefer");
 
         IntroductionAdvisor advisor = new IsModifiedAdvisor();
 
@@ -27,7 +27,7 @@ public class IntroductionExample {
 
         proxy.setName("Chris Schaefer");
         System.out.println(String.format("Has been modified?: %s", proxyInterface.isModified()));
-        proxy.setName("Chris Schaefer");
+        proxy.setName("Bla bla bla");
         System.out.println(String.format("Has been modified?: %s", proxyInterface.isModified()));
 
     }

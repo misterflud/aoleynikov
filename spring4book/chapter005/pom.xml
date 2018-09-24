@@ -10,11 +10,4 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chapter005</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>4.3.7.RELEASE</version>
-        </dependency>
-    </dependencies>
 </project>
