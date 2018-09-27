@@ -39,14 +39,7 @@
         </property>
     </bean>
 
-    <bean id="advice" class="proxyFactoryBeanExample265.MyAdvice"></bean>
-
-    <bean id="pointcut" class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
-        <property name="expression">
-            <value>execution(*foo*(..))</value>
-        </property>
-    </bean>
-
+    <bean id="advice" class="proxyFactoryBeanExample265.MyAdvice"/>
 
     <bean id="advisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
         <property name="advice" >
@@ -54,9 +47,7 @@
         </property>
         <property name="pointcut">
             <bean class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
-                <property name="expression">
-                    <value>execution(*foo*(..))</value>
-                </property>
+                <property name="expression" value="execution(*foo*(..))"/>
             </bean>
         </property>
     </bean>
