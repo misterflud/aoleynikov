@@ -15,5 +15,6 @@
         <module>texuna</module>
     <module>serejcaProject</module>
     <module>MemoryRegisters</module>
-  </modules>
+        <module>base64Coder</module>
+    </modules>
 </project>

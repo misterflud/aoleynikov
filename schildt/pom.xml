@@ -25,6 +25,6 @@
     <module>annotation</module>
     <module>multitreading</module>
     <module>generics</module>
-      <module>lambdas</module>
+    <module>lambdas</module>
     </modules>
 </project>
