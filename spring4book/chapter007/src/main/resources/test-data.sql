@@ -5,12 +5,12 @@ insert into contact(first_name, last_name, birth_date) values
 insert into contact(first_name, last_name, birth_date) values
     ('John', 'Smith', '1964-02-28');
 
-insert into contact_tel_detail(contact_id, tel_type, tel_number) values
-    (1, 'Mobile', '1234567890');
-insert into contact_tel_detail(contact_id, tel_type, tel_number) values
-    (1, 'Home', '1234567890');
-insert into contact_tel_detail(contact_id, tel_type, tel_number) values
-    (2, 'Mobile', '1234567890');
+insert into contact_tel_detail(contact_id, version, tel_type, tel_number) values
+    (1, '112', 'Mobile', '1234567890');
+insert into contact_tel_detail(contact_id, version, tel_type, tel_number) values
+    (1, '2123', 'Home', '1234567890');
+insert into contact_tel_detail(contact_id, version, tel_type, tel_number) values
+    (2, '311', 'Mobile', '1234567890');
 
 insert into hobby(hobby_id) values
     ('Swimming');

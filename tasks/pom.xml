@@ -16,5 +16,6 @@
     <module>serejcaProject</module>
     <module>MemoryRegisters</module>
         <module>base64Coder</module>
+        <module>jsonParser</module>
     </modules>
 </project>

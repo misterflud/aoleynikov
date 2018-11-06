@@ -15,6 +15,7 @@ create table hobby (
 create table contact_tel_detail (
     id serial primary key
     , contact_id int not null
+    , version int not null
     , tel_type varchar(20) not null
     , tel_number varchar(20) not null
     , unique (contact_id, tel_type)

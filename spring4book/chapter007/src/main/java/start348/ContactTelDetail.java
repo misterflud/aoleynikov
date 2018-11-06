@@ -75,6 +75,6 @@ public class ContactTelDetail implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Contact Tel Detail - Id: %s, Contact id: %s, Type: %s, Number: %s", id, telType, telNumber);
+        return String.format("Contact Tel Detail - Id: %s, Version: %s, Type: %s, Number: %s", id, version, telType, telNumber);
     }
 }

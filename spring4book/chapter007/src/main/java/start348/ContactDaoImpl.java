@@ -23,7 +23,7 @@ public class ContactDaoImpl implements ContactDao {
     @Override
     @Transactional(readOnly = true)
     public List<Contact> findAll() {
-        return sessionFactory.getCurrentSession().createQuery("from Contact c").list();
+        return sessionFactory.getCurrentSession().getNamedQuery("Contact.findAllWithDetail").list();
     }
 
     @Override
@@ -32,18 +32,22 @@ public class ContactDaoImpl implements ContactDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Contact findById(long id) {
-        return null;
+        return (Contact) sessionFactory.getCurrentSession().getNamedQuery("Contact.findById").setParameter("id", id).uniqueResult();
     }
 
     @Override
     public Contact save(Contact contact) {
-        return null;
+        sessionFactory.getCurrentSession().saveOrUpdate(contact);
+        LOG.info("Contact saved with id: " + contact.getId());
+        return contact;
     }
 
     @Override
     public void delete(Contact contact) {
-
+        sessionFactory.getCurrentSession().delete(contact);
+        LOG.info("Contact deleted with id: " + contact.getId());
     }
 
     public SessionFactory getSessionFactory() {
