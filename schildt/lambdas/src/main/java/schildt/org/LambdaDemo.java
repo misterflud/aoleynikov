@@ -9,9 +9,18 @@ public class LambdaDemo {
             System.out.println(randomNumber.getNumber());
         }
 
+        RandomNumberWithParameter number = (a) -> {
+            return (int) (Math.random() * a);
+        };
+        System.out.println(number.getNumber(30));
+
     }
 
     interface RandomNumber {
         int getNumber();
+    }
+
+    interface RandomNumberWithParameter {
+        int getNumber(int a);
     }
 }

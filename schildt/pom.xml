@@ -26,5 +26,8 @@
     <module>multitreading</module>
     <module>generics</module>
     <module>lambdas</module>
+        <module>optional</module>
+      <module>streams</module>
+        <module>classes</module>
     </modules>
 </project>
