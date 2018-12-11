@@ -1,10 +1,10 @@
 package schildt.org;
 
 public class LambdaDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         RandomNumber randomNumber;
         randomNumber = () -> (int) (Math.random() * 100);
-
+        new Object().wait();
         for (int i = 0; i < 10; i++) {
             System.out.println(randomNumber.getNumber());
         }
