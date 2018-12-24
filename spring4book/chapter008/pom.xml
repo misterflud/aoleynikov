@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>chapter007</artifactId>
+    <artifactId>chapter008</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -17,10 +17,6 @@
             <version>1.4.197</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.2.Final</version>
-        </dependency>
     </dependencies>
+
 </project>
